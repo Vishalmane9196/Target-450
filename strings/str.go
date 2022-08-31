@@ -88,3 +88,32 @@ func rotateString(s string, goal string) bool {
     
     return strings.Contains(goal+goal, s)
 }
+
+func isAnagram(s string, t string) bool {
+    
+    var lenS = len(s)
+    var lenT = len(t)
+    
+    if lenS != lenT {
+        return false
+    }
+    
+    //map to store each character and count number of it
+    var sm = make(map[string]int) 
+    
+    for _,v:=range s {
+        sm[string(v)]++
+    }
+    
+    for _,v:=range t {
+        sm[string(v)]--
+    }
+    
+    for _,v:=range s {
+        if sm[string(v)] != 0 {
+            return false
+        }
+    }
+    
+    return true
+}

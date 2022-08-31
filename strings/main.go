@@ -26,8 +26,12 @@ func main() {
 	// fmt.Println("res : ", res)
 
 
-	var s,t = "abcde","cdeab"
-	res := rotateString(s,t)
+	// var s,t = "abcde","cdeab"
+	// res := rotateString(s,t)
+	// fmt.Println("res : ", res)
+
+	var s,t = "anagram","nagaram"
+	res := isAnagram(s,t)
 	fmt.Println("res : ", res)
 
 }
