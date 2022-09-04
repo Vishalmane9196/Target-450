@@ -91,10 +91,10 @@ func (list *LinkedList) deleteAtEnd() {
 }
 
 // getLastNode method returns the last Node
-func (linkedList *LinkedList) getLastNode() *Node {
+func (list *LinkedList) getLastNode() *Node {
 	var tempNode *Node
 	var lastNode *Node
-	for tempNode = linkedList.headNode; tempNode != nil; tempNode = tempNode.nextNode {
+	for tempNode = list.headNode; tempNode != nil; tempNode = tempNode.nextNode {
 		if tempNode.nextNode == nil {
 			lastNode = tempNode
 		}
@@ -103,46 +103,46 @@ func (linkedList *LinkedList) getLastNode() *Node {
 }
 
 // getFirstNode method returns the first Node of linked list
-func (linkedList *LinkedList) getFirstNode() *Node {
-	return linkedList.headNode
+func (list *LinkedList) getFirstNode() *Node {
+	return list.headNode
 }
 
 // getNode method returns Node given parameter property
-func (linkedList *LinkedList) getNode(data int) *Node {
+func (list *LinkedList) getNode(data int) *Node {
 	var tempNode *Node
-	var nodeWith *Node
-	for tempNode = linkedList.headNode; tempNode != nil; tempNode = tempNode.nextNode {
+	var currNode *Node
+	for tempNode = list.headNode; tempNode != nil; tempNode = tempNode.nextNode {
 		if tempNode.property == data {
-			nodeWith = tempNode
+			currNode = tempNode
 			break
 		}
 	}
-	return nodeWith
+	return currNode
 }
 
 // getPreviousNode method returns 2nd last elment of given property
-func (linkedList *LinkedList) getPreviousNode(data int) *Node {
+func (list *LinkedList) getPreviousNode(data int) *Node {
 	var tempNode *Node
-	var nodeWith *Node
-	for tempNode = linkedList.headNode; tempNode.nextNode != nil; tempNode = tempNode.nextNode {
+	var PrevNode *Node
+	for tempNode = list.headNode; tempNode.nextNode != nil; tempNode = tempNode.nextNode {
 		if tempNode.nextNode.property == data {
-			nodeWith = tempNode
+			PrevNode = tempNode
 			break
 		}
 	}
-	return nodeWith
+	return PrevNode
 }
 
 // isListEmpty method return the linked list is empty or not
-func (l *LinkedList) isListEmpty() bool {
-	return l.headNode == nil
+func (list *LinkedList) isListEmpty() bool {
+	return list.headNode == nil
 }
 
 // printLinkedlist method iterates over LinkedList
-func (linkedList *LinkedList) printLinkedlist() {
+func (list *LinkedList) printLinkedlist() {
 	var node *Node
 	fmt.Printf(" [START]")
-	for node = linkedList.headNode; node != nil; node = node.nextNode {
+	for node = list.headNode; node != nil; node = node.nextNode {
 		fmt.Printf(" <-> [%v]", node.property)
 	}
 	fmt.Printf(" <-> [END]\n")
