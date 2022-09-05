@@ -19,6 +19,8 @@ func main() {
 	linkedList.removeAfterNode(4)
 	linkedList.deleteAtEnd()
 	linkedList.printLinkedlist()
-	fmt.Println("is list empty : ", linkedList.isListEmpty())
+	fmt.Println(" is list empty : ", linkedList.isListEmpty())
+	linkedList.getLength()
+	fmt.Println(" Linked list length  : ", linkedList.getLength())
 
 }

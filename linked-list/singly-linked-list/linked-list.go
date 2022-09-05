@@ -17,9 +17,8 @@ type LinkedList struct {
 
 // insertAtStart method will be used for isnerting node at starting position
 func (list *LinkedList) insertAtStart(property int) {
-	var newNode = &Node{}
-	newNode.property = property
-	newNode.nextNode = nil
+	var newNode = &Node{property, nil}
+	
 	if list.headNode != nil {
 		newNode.nextNode = list.headNode
 	}
@@ -28,10 +27,7 @@ func (list *LinkedList) insertAtStart(property int) {
 
 // insertAfter method  adds a node with nodeProperty after node with property
 func (list *LinkedList) insertAfter(nodeData int, newData int) {
-	var newNode = &Node{}
-	newNode.property = newData
-	newNode.nextNode = nil
-
+	var newNode = &Node{newData, nil}
 	var currNode *Node
 
 	currNode = list.getNode(nodeData)
@@ -43,13 +39,10 @@ func (list *LinkedList) insertAfter(nodeData int, newData int) {
 
 // inserAtEnd method adds the node with property to the end
 func (list *LinkedList) inserAtEnd(newData int) {
-	var node = &Node{}
-	node.property = newData
-	node.nextNode = nil
-
+	var node = &Node{newData, nil}
 	var lastNode *Node
-	lastNode = list.getLastNode()
 
+	lastNode = list.getLastNode()
 	if lastNode != nil {
 		lastNode.nextNode = node
 	}
@@ -65,13 +58,12 @@ func (list *LinkedList) deleteAtStart() {
 // removeNode method remove the data from linked list
 func (list *LinkedList) removeAfterNode(deleteData int) {
 	var deleteNode = &Node{}
-	var prevDeleteNode = &Node{}
+	var prevOfDeleteNode = &Node{}
 
 	deleteNode = list.getNode(deleteData)
-	prevDeleteNode = list.getPreviousNode(deleteData)
-
+	prevOfDeleteNode = list.getPreviousNode(deleteData)
 	if deleteNode != nil {
-		prevDeleteNode.nextNode = deleteNode.nextNode
+		prevOfDeleteNode.nextNode = deleteNode.nextNode
 		deleteNode.nextNode = nil
 	}
 }
@@ -83,7 +75,6 @@ func (list *LinkedList) deleteAtEnd() {
 
 	lastNode = list.getLastNode()
 	prevLastNode = list.getPreviousNode(lastNode.property)
-
 	if lastNode != nil {
 		prevLastNode.nextNode = nil
 		lastNode.nextNode = nil
@@ -94,6 +85,7 @@ func (list *LinkedList) deleteAtEnd() {
 func (list *LinkedList) getLastNode() *Node {
 	var tempNode *Node
 	var lastNode *Node
+	
 	for tempNode = list.headNode; tempNode != nil; tempNode = tempNode.nextNode {
 		if tempNode.nextNode == nil {
 			lastNode = tempNode
@@ -138,9 +130,20 @@ func (list *LinkedList) isListEmpty() bool {
 	return list.headNode == nil
 }
 
+func (list *LinkedList) getLength() int {
+   var travNode = &Node{}
+   var count int
+
+   for travNode = list.headNode; travNode != nil; travNode = travNode.nextNode {
+      count++
+   }
+   return count
+}
+
 // printLinkedlist method iterates over LinkedList
 func (list *LinkedList) printLinkedlist() {
 	var node *Node
+
 	fmt.Printf(" [START]")
 	for node = list.headNode; node != nil; node = node.nextNode {
 		fmt.Printf(" <-> [%v]", node.property)
