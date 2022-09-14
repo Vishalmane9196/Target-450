@@ -60,8 +60,16 @@ func main() {
 	// res := sort012s(arr)
 	// fmt.Println("res : ", res)
 
-	var arr = []int{2,7,11,15}
-	res := twoSum(arr, 9)
-	fmt.Println("res : ", res)
+	// var arr = []int{2,7,11,15}
+	// res := twoSum(arr, 9)
+	// fmt.Println("res : ", res)
 
+	// var arr = []int{5, 4, -1, 7, 8}
+	// var arr = []int{-2, 1, -3, 4, -1, 2, 1, -5, 4}
+	// res := maxSum(arr)
+	// fmt.Println("res : ", res)
+
+	var arr = []int{5, 4, -1, 7, 8}
+	res := maxSum(arr)
+	fmt.Println("res : ", res)
 }

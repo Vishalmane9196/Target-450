@@ -85,7 +85,7 @@ func (list *LinkedList) deleteAtEnd() {
 func (list *LinkedList) getLastNode() *Node {
 	var tempNode *Node
 	var lastNode *Node
-	
+
 	for tempNode = list.headNode; tempNode != nil; tempNode = tempNode.nextNode {
 		if tempNode.nextNode == nil {
 			lastNode = tempNode
@@ -149,4 +149,21 @@ func (list *LinkedList) printLinkedlist() {
 		fmt.Printf(" <-> [%v]", node.property)
 	}
 	fmt.Printf(" <-> [END]\n")
+}
+
+
+//not working
+func (list *LinkedList) reverseLinkedList() {
+
+	var prev *Node
+	var curr = list.headNode
+	for curr != nil {
+        //stored next pointer reference
+        tmp := curr.nextNode
+        //changed the next of current to prev
+        curr.nextNode = prev 
+        //shifted prev and curr poniter by 1 ahead
+        prev = curr
+        curr = tmp
+	}
 }

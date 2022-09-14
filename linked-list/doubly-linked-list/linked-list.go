@@ -168,3 +168,19 @@ func (list *LinkedList) NodeBetweenValues(firstNodeData, secondNodeData int) *No
 	}
 	return tempNode
 }
+
+//not working
+func (list *LinkedList) reverseLinkedList() {
+
+	var temp *Node
+	var curr *Node = list.headNode
+	for curr != nil {
+        //stored next pointer reference
+        temp = curr.prevNode
+        //changed the next of current to prev
+        curr.prevNode = curr.nextNode
+		curr.nextNode = temp 
+        //shifted prev and curr poniter by 1 ahead
+        curr = curr.prevNode
+	}
+}

@@ -17,5 +17,7 @@ func main() {
 	linkedList.delAtEnd()
 	linkedList.delNode(2)
 	linkedList.printLinkedList()
+	linkedList.reverseLinkedList()
+	linkedList.printLinkedList()
 	
 }
