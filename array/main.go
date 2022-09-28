@@ -12,18 +12,23 @@ func main() {
 	// fmt.Println("res : ", res)
 
 	// var arr = []int{1, 1, 2, 2, 2, 3, 3}
-	// removeDuplicates(arr)
+	// newArr, size := removeDuplicates(arr)
+	// fmt.Printf("newArr : %v size : %v\n", newArr, size)
 
 	// var arr = []int{1, 2, 3, 4, 5, 6}
-	// res := solve(arr)
-	// fmt.Println("res : ", res)
+	// res := leftRotateByOne(arr)
+	// fmt.Println("after rotating", res)
 
 	// var arr = []int{1, 2, 3, 4, 5, 6}
-	// res := rotateElement(arr, 2)
-	// fmt.Println("res : ", res)
+	// res := rotateElementToRightByKPosition(arr, 4)
+	// fmt.Println("after rotating :", res)
+
+	// var arr = []int{1, 2, 3, 4, 5, 6}
+	// res := rotateElementToLeftByKPosition(arr, 7)
+	// fmt.Println("after rotating :", res)
 
 	// var arr = []int{1, 0, 0, 4, 0, 6}
-	// res := zeroToEnd(arr)
+	// res := shiftZeroToEnd(arr)
 	// fmt.Println("res : ", res)
 
 	// var arr = []int{1, 0, 0, 4, 0, 6}
@@ -44,12 +49,11 @@ func main() {
 	// var k = 10
 	// var arr = []int	{7,1,6};
 	// var k = 7
-
 	// res := longsubArr(arr, k)
 	// fmt.Println("res : ", res)
 
-	// var arr = [][]int{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 34, 60,80}}
-	// res := sort2DArray(arr, 15)
+	// var arr = [][]int{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 34, 60, 80}}
+	// res := search2DArray(arr, 16)
 	// fmt.Println("res : ", res)
 
 	// var arr = []int{ 1, 2, 3,5,0 };
@@ -69,7 +73,55 @@ func main() {
 	// res := maxSum(arr)
 	// fmt.Println("res : ", res)
 
-	var arr = []int{5, 4, -1, 7, 8}
-	res := maxSum(arr)
-	fmt.Println("res : ", res)
+	// var arr = []int{5, 4, -1, 7, 8}
+	// res := maxSum(arr)
+	// fmt.Println("res : ", res)
+
+	//spiral matrix
+	// var arr = [][]int{
+	// 	{1, 2, 3, 4},
+	// 	{5, 6, 7, 8},
+	// 	{9, 10, 11, 12},
+	// 	{13, 14, 15, 16}}
+	// res := spiralTraversalPfMatrix(arr)
+	// fmt.Println("spiral matrix is : ", res)
+
+	//rotate 2d matrix by 90 degree
+	// var arr = [][]int{
+	// 	{1, 2, 3, 4},
+	// 	{5, 6, 7, 8},
+	// 	{9, 10, 11, 12},
+	// 	{13, 14, 15, 16}}
+	// // printMatrix(arr)
+	// res := rotateMatrixBy90(arr)
+	// printMatrix(res)
+	// fmt.Println("After rotating matrix is : ", printMatrix(res))
+
+	//buy and sell stock
+	// var arr = []int{7, 1, 5, 3, 6, 4}
+	// res := maxProfit(arr)
+	// fmt.Println("max profit : ", res)
+
+	// var arr = [][]int{{0, 1, 1, 1},
+	// 	{0, 0, 1, 1},
+	// 	{0, 1, 1, 1},
+	// 	{1, 1, 1, 1},
+	// 	{0, 0, 0, 0}}
+	// res := rowWithMax1s(arr)
+	// fmt.Println("rowWithMax1s  : ", res)
+
+	// var nums = []int{2, 2, 1}
+	// res := singleNumber(nums)
+	// fmt.Println("single number : ", res)
+
+	// var nums = []int{4, 5, 6, 7, 0, 1, 2, 3}
+	// var target = 7
+	// res := searchInSortedRotatedArray1(nums, target)
+	// fmt.Println("searchInSortedRotatedArray  : ", res)
+
+	var nums = []int{2, 5, 6, 0, 0, 1, 2}
+	var target = 0
+	res := searchInSortedRotatedArray2(nums, target)
+	fmt.Println("searchInSortedRotatedArray  : ", res)
+
 }

@@ -253,5 +253,76 @@ func printNode(Node *Node) {
 	} else {
 		fmt.Printf("Nil\n")
 	}
+}
 
+//[==============PROBLEMS====================]
+
+// Link: https://takeuforward.org/data-structure/maximum-depth-of-a-binary-tree/
+func maxDepth(node *Node) int {
+	if node == nil {
+		return 0
+	}
+	lh := maxDepth(node.leftNode)
+	rh := maxDepth(node.rightNode)
+
+	return 1 + maxi(lh, rh)
+}
+
+func maxi(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+// Link: https://takeuforward.org/data-structure/check-if-the-binary-tree-is-balanced-binary-tree/
+func isBalanced(root *Node) bool {
+	return dfsHeight(root) != -1
+}
+
+func dfsHeight(root *Node) int {
+	if root == nil {
+		return 0
+	}
+	leftHeight := dfsHeight(root.leftNode)
+	if leftHeight == -1 {
+		return -1
+	}
+	rightHeight := dfsHeight(root.leftNode)
+	if rightHeight == -1 {
+		return -1
+	}
+
+	if Abs(leftHeight-rightHeight) > 1 {
+		return -1
+	}
+	return maxi(leftHeight, rightHeight) + 1
+}
+
+func Abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
+}
+
+// Link: https://takeuforward.org/data-structure/calculate-the-diameter-of-a-binary-tree/
+func diameterOfBinaryTree(root *Node) int {
+	var diameter int
+	diameterOfTree(root, diameter)
+	return diameter
+}
+
+func diameterOfTree(node *Node, diameter int) int {
+	if node == nil {
+		return 0
+	}
+	lh := diameterOfTree(node.leftNode, diameter)
+	rh := diameterOfTree(node.rightNode, diameter)
+
+	if diameter > (lh + rh) {
+	} else {
+		diameter = lh + rh
+	}
+	return 1 + maxi(lh, rh)
 }

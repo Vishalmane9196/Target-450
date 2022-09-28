@@ -1,12 +1,14 @@
 package main
 
-import "fmt"
-
 func main() {
 
 	// input := "(()())(())"
 	// res := removeOutermostParenthesis(input)
 	// fmt.Println("res : ", res)
+
+	// input := "(1+(2*3)+((8)/4))+1"
+	// res := parenthesisDepth(input)
+	// fmt.Println("Depth of parenthesis  : ", res)
 
 	// input := "the sky is blue"
 	// res := reverseWords(input)
@@ -25,13 +27,11 @@ func main() {
 	// res := isIsomorphic(s,t)
 	// fmt.Println("res : ", res)
 
-
 	// var s,t = "abcde","cdeab"
 	// res := rotateString(s,t)
 	// fmt.Println("res : ", res)
 
-	var s,t = "anagram","nagaram"
-	res := isAnagram(s,t)
-	fmt.Println("res : ", res)
-
+	// var s, t = "anagram", "nagaram"
+	// res := isAnagram(s, t)
+	// fmt.Println("res : ", res)
 }

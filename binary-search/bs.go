@@ -39,6 +39,7 @@ func binarySearchRecurssive(arr []int, start, end, target int) int {
 	}
 }
 
+// Link: https://leetcode.com/problems/binary-search/
 func getbsIdx(arr []int, target int) int {
 	//find the occurnace of target and return its index
 	var s = 0
