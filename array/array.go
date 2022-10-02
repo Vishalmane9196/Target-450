@@ -1,8 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-//LinkL : https://takeuforward.org/data-structure/find-the-largest-element-in-an-array/
+// LinkL : https://takeuforward.org/data-structure/find-the-largest-element-in-an-array/
 func getLargest(arr []int) {
 
 	//approach 1
@@ -20,7 +22,7 @@ func getLargest(arr []int) {
 
 }
 
-//Link : https://takeuforward.org/data-structure/check-if-an-array-is-sorted/
+// Link : https://takeuforward.org/data-structure/check-if-an-array-is-sorted/
 func isSorted(arr []int, n int) bool {
 
 	//approach one
@@ -42,7 +44,7 @@ func isSorted(arr []int, n int) bool {
 	return true
 }
 
-//Link: https://takeuforward.org/data-structure/remove-duplicates-in-place-from-sorted-array/
+// Link: https://takeuforward.org/data-structure/remove-duplicates-in-place-from-sorted-array/
 func removeDuplicates(arr []int) ([]int, int) {
 
 	//approach 1
@@ -69,7 +71,7 @@ func removeDuplicates(arr []int) ([]int, int) {
 	return arr, i + 1
 }
 
-//Link: https://takeuforward.org/data-structure/left-rotate-the-array-by-one/
+// Link: https://takeuforward.org/data-structure/left-rotate-the-array-by-one/
 func leftRotateByOne(arr []int) []int {
 	fmt.Println("original array", arr)
 
@@ -95,7 +97,7 @@ func leftRotateByOne(arr []int) []int {
 	return arr
 }
 
-//Link: https://takeuforward.org/data-structure/rotate-array-by-k-elements/
+// Link: https://takeuforward.org/data-structure/rotate-array-by-k-elements/
 func rotateElementToRightByKPosition(arr []int, k int) []int {
 
 	fmt.Printf("original array : %v  Position : %v\n", arr, k)
@@ -121,7 +123,7 @@ func rotateElementToRightByKPosition(arr []int, k int) []int {
 	return arr
 }
 
-//Link: https://takeuforward.org/data-structure/rotate-array-by-k-elements/
+// Link: https://takeuforward.org/data-structure/rotate-array-by-k-elements/
 func rotateElementToLeftByKPosition(arr []int, k int) []int {
 
 	fmt.Printf("original array : %v  Position : %v\n", arr, k)
@@ -137,7 +139,7 @@ func rotateElementToLeftByKPosition(arr []int, k int) []int {
 	return arr
 }
 
-//helper function to rotateElementToRightByKPosition and rotateElementToLeftByKPosition
+// helper function to rotateElementToRightByKPosition and rotateElementToLeftByKPosition
 func reverse(arr *[]int, low, high int) {
 	for low <= high {
 		(*arr)[low], (*arr)[high] = (*arr)[high], (*arr)[low]
@@ -147,7 +149,7 @@ func reverse(arr *[]int, low, high int) {
 	fmt.Printf("arr : %v\n", arr)
 }
 
-//Link: https://takeuforward.org/data-structure/move-all-zeros-to-the-end-of-the-array/
+// Link: https://takeuforward.org/data-structure/move-all-zeros-to-the-end-of-the-array/
 func shiftZeroToEnd(arr []int) []int {
 	fmt.Println("original array : ", arr)
 
@@ -195,7 +197,7 @@ func shiftZeroToEnd(arr []int) []int {
 	return arr
 }
 
-//Link: https://takeuforward.org/data-structure/linear-search-in-c/
+// Link: https://takeuforward.org/data-structure/linear-search-in-c/
 func search(arr []int, searchNum int) int {
 
 	for i, v := range arr {
@@ -206,7 +208,7 @@ func search(arr []int, searchNum int) int {
 	return -1
 }
 
-//Link: https://takeuforward.org/data-structure/union-of-two-sorted-arrays/
+// Link: https://takeuforward.org/data-structure/union-of-two-sorted-arrays/
 func union(arr1, arr2 []int) []int {
 
 	//approach 1
@@ -252,7 +254,7 @@ func union(arr1, arr2 []int) []int {
 	//using two pointer
 }
 
-//Link: https://takeuforward.org/data-structure/intersection-of-two-sorted-arrays/
+// Link: https://takeuforward.org/data-structure/intersection-of-two-sorted-arrays/
 func intersection(arr1, arr2 []int) []int {
 
 	//approach 1
@@ -281,7 +283,7 @@ func intersection(arr1, arr2 []int) []int {
 	//using two pointer
 }
 
-//Link: https://takeuforward.org/data-structure/longest-subarray-with-given-sum-k/
+// Link: https://takeuforward.org/data-structure/longest-subarray-with-given-sum-k/
 func longsubArr(arr []int, k int) int {
 
 	//approach one
@@ -331,7 +333,7 @@ func max(x, y int) int {
 	}
 }
 
-//Link: https://takeuforward.org/data-structure/search-in-a-sorted-2d-matrix/
+// Link: https://takeuforward.org/data-structure/search-in-a-sorted-2d-matrix/
 func search2DArray(mat [][]int, target int) bool {
 
 	var m = len(mat)
@@ -359,7 +361,7 @@ func search2DArray(mat [][]int, target int) bool {
 	return false
 }
 
-//Link: https://www.geeksforgeeks.org/find-the-missing-number/
+// Link: https://www.geeksforgeeks.org/find-the-missing-number/
 func missingNumber(arr []int) int {
 	var sum int
 	for i := 0; i < len(arr); i++ {
@@ -373,7 +375,7 @@ func missingNumber(arr []int) int {
 	return missNo
 }
 
-//Link: https://takeuforward.org/data-structure/sort-an-array-of-0s-1s-and-2s/
+// Link: https://takeuforward.org/data-structure/sort-an-array-of-0s-1s-and-2s/
 func sort012s(arr []int) []int {
 
 	var low int = 0
@@ -399,7 +401,7 @@ func sort012s(arr []int) []int {
 	return arr
 }
 
-//Link: https://takeuforward.org/data-structure/two-sum-check-if-a-pair-with-given-sum-exists-in-array/
+// Link: https://takeuforward.org/data-structure/two-sum-check-if-a-pair-with-given-sum-exists-in-array/
 func twoSum(arr []int, target int) []int {
 	var res []int
 	var mp = make(map[int]int)
@@ -419,7 +421,7 @@ func twoSum(arr []int, target int) []int {
 	return res
 }
 
-//Link: https://takeuforward.org/data-structure/kadanes-algorithm-maximum-subarray-sum-in-an-array/
+// Link: https://takeuforward.org/data-structure/kadanes-algorithm-maximum-subarray-sum-in-an-array/
 func maxSum(nums []int) int {
 
 	var maxTillNow = nums[0]
@@ -436,7 +438,7 @@ func maxSum(nums []int) int {
 	return maxTillNow
 }
 
-//Link: https://takeuforward.org/data-structure/minimum-in-rotated-sorted-array/
+// Link: https://takeuforward.org/data-structure/minimum-in-rotated-sorted-array/
 func findMin(nums []int) int {
 
 	low, mid := 0, 0
@@ -454,7 +456,7 @@ func findMin(nums []int) int {
 	return nums[low]
 }
 
-//Link: https://takeuforward.org/data-structure/spiral-traversal-of-matrix/
+// Link: https://takeuforward.org/data-structure/spiral-traversal-of-matrix/
 func spiralTraversalPfMatrix(arr [][]int) []int {
 	var left = 0
 	var right = len(arr[0]) - 1
@@ -499,7 +501,7 @@ func spiralTraversalPfMatrix(arr [][]int) []int {
 	return res
 }
 
-//Link: https://takeuforward.org/data-structure/rotate-image-by-90-degree/
+// Link: https://takeuforward.org/data-structure/rotate-image-by-90-degree/
 func rotateMatrixBy90(arr [][]int) [][]int {
 
 	printMatrix(arr)
@@ -540,7 +542,7 @@ func printMatrix(arr [][]int) {
 	}
 }
 
-//Link: https://takeuforward.org/data-structure/stock-buy-and-sell/
+// Link: https://takeuforward.org/data-structure/stock-buy-and-sell/
 func maxProfit(prices []int) int {
 
 	var minSoFar = prices[0]
@@ -568,7 +570,7 @@ func maxi(a, b int) int {
 	return b
 }
 
-//Link: https://leetcode.com/problems/max-consecutive-ones/
+// Link: https://leetcode.com/problems/max-consecutive-ones/
 func findMaxConsecutiveOnes(nums []int) int {
 
 	count, max := 0, 0
@@ -586,8 +588,8 @@ func findMaxConsecutiveOnes(nums []int) int {
 	return max
 }
 
-//Link: https://practice.geeksforgeeks.org/problems/row-with-max-1s0023/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=row-with-max-1s
-//Link: https://medium.com/enjoy-algorithm/find-the-row-with-the-maximum-number-of-1s-3193b568c78
+// Link: https://practice.geeksforgeeks.org/problems/row-with-max-1s0023/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=row-with-max-1s
+// Link: https://medium.com/enjoy-algorithm/find-the-row-with-the-maximum-number-of-1s-3193b568c78
 func rowWithMax1s(arr [][]int) int {
 	max1, max1Row, cur := 0, 0, 0
 
@@ -605,7 +607,7 @@ func rowWithMax1s(arr [][]int) int {
 	return max1Row
 }
 
-//Link: https://leetcode.com/problems/single-number/
+// Link: https://leetcode.com/problems/single-number/
 func singleNumber(nums []int) int {
 
 	var ans int
@@ -616,8 +618,8 @@ func singleNumber(nums []int) int {
 	return ans
 }
 
-//Link: https://takeuforward.org/data-structure/search-element-in-a-rotated-sorted-array/
-//Link: https://leetcode.com/problems/search-in-rotated-sorted-array/
+// Link: https://takeuforward.org/data-structure/search-element-in-a-rotated-sorted-array/
+// Link: https://leetcode.com/problems/search-in-rotated-sorted-array/
 func searchInSortedRotatedArray1(arr []int, target int) int {
 	lo := 0
 	hi := len(arr) - 1
@@ -647,7 +649,7 @@ func searchInSortedRotatedArray1(arr []int, target int) int {
 	return -1
 }
 
-//Link: https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
+// Link: https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
 func searchInSortedRotatedArray2(nums []int, target int) bool {
 
 	lo := 0
@@ -675,4 +677,230 @@ func searchInSortedRotatedArray2(nums []int, target int) bool {
 		}
 	}
 	return false
+}
+
+// Link: https://takeuforward.org/data-structure/longest-consecutive-sequence-in-an-array/
+func longestConsecutive(arr []int) int {
+
+	//brute force
+	// if len(arr) == 0 {
+	// 	return 0
+	// }
+
+	// sort.Ints(arr)
+	// var ans = 1
+	// var prev = arr[0]
+	// var cur = 1
+
+	// for i := 1; i < len(arr); i++ {
+	// 	if arr[i] == prev+1 {
+	// 		cur++
+	// 	} else if arr[i] != prev {
+	// 		cur = 1
+	// 	}
+	// 	prev = arr[i]
+	// 	ans = maxi(ans, cur)
+	// }
+	// return ans
+
+	//optmised solution
+	set := make(map[int]bool)
+	for _, v := range arr {
+		set[v] = true
+	}
+	var longestStreak = 0
+
+	for i := 0; i < len(arr); i++ {
+		if _, exist := set[arr[i]-1]; !exist {
+			currentNum := arr[i]
+			currentStreak := 1
+
+			_, exist1 := set[currentNum+1]
+			for exist1 {
+				currentNum += 1
+				currentStreak += 1
+				_, exist1 = set[currentNum+1]
+			}
+			longestStreak = maxi(longestStreak, currentStreak)
+		}
+	}
+	return longestStreak
+}
+
+// Link: https://takeuforward.org/data-structure/set-matrix-zero/
+func setZeros(arr [][]int) [][]int {
+
+	//brute force
+	// row := len(arr)
+	// col := len(arr[0])
+
+	// for i := 0; i < row; i++ {
+	// 	for j := 0; j < col; j++ {
+
+	// 		if arr[i][j] == 0 {
+	// 			//make left row of current matrix element to -1
+	// 			idx := i - 1
+	// 			for idx >= 0 {
+	// 				if arr[idx][j] != 0 {
+	// 					arr[idx][j] = -1
+	// 				}
+	// 				idx--
+	// 			}
+	// 			//make right row of current matrix element to -1
+	// 			idx = i + 1
+	// 			for idx < row {
+	// 				if arr[idx][j] != 0 {
+	// 					arr[idx][j] = -1
+	// 				}
+	// 				idx++
+	// 			}
+
+	// 			//make upper column of current matrix element to -1
+	// 			idx = j - 1
+	// 			for idx >= 0 {
+	// 				if arr[i][idx] != 0 {
+	// 					arr[i][idx] = -1
+	// 				}
+	// 				idx--
+	// 			}
+
+	// 			//make lower column of current matrix element to -1
+	// 			idx = j + 1
+	// 			for idx < col {
+	// 				if arr[i][idx] != 0 {
+	// 					arr[i][idx] = -1
+	// 				}
+	// 				idx++
+	// 			}
+	// 		}
+
+	// 	}
+	// }
+
+	// for i := 0; i < row; i++ {
+	// 	for j := 0; j < col; j++ {
+	// 		if arr[i][j] <= 0 {
+	// 			arr[i][j] = 0
+	// 		}
+	// 	}
+	// }
+	// return arr
+
+	//optimised solution
+	// row := len(arr)
+	// col := len(arr[0])
+	// var rowArr = make([]int, row)
+	// var colArr = make([]int, col)
+
+	// for i, _ := range rowArr {
+	// 	rowArr[i] = -1
+	// }
+
+	// for i, _ := range colArr {
+	// 	colArr[i] = -1
+	// }
+
+	// for i := 0; i < row; i++ {
+	// 	for j := 0; j < col; j++ {
+	// 		if arr[i][j] == 0 {
+	// 			rowArr[i] = 0
+	// 			colArr[j] = 0
+	// 		}
+	// 	}
+	// }
+
+	// for i := 0; i < row; i++ {
+	// 	for j := 0; j < col; j++ {
+	// 		if rowArr[i] == 0 || colArr[j] == 0 {
+	// 			arr[i][j] = 0
+	// 		}
+	// 	}
+	// }
+	// return arr
+
+	//more optmised solution
+	row := len(arr)
+	col := len(arr[0])
+	col0 := 1
+
+	for i := 0; i < row; i++ {
+		//check whetherthe 0 is present in first column
+		if arr[i][0] == 0 {
+			col0 = 0
+		}
+		for j := 0; j < col; j++ {
+			if arr[i][j] == 0 {
+				//updated the first column and first row index to zero
+				arr[i][0] = 0
+				arr[0][j] = 0
+			}
+		}
+	}
+
+	//trvaersersing to arr backwardly
+	for i := row - 1; i >= 0; i-- {
+		for j := col - 1; j >= 0; j-- {
+			if arr[i][0] == 0 || arr[0][j] == 0 {
+				arr[i][j] = 0
+			}
+		}
+		if col0 == 0 {
+			arr[i][0] = 0
+		}
+	}
+	return arr
+}
+
+// Link: https://takeuforward.org/data-structure/leaders-in-an-array/
+func printLeaders(arr []int) []int {
+
+	//brute force
+	// var leaderArr = make([]int, 0)
+
+	// for i := 0; i < len(arr); i++ {
+	// 	leader := true
+	// 	for j := i + 1; j < len(arr); j++ {
+	// 		if arr[j] > arr[i] {
+	// 			leader = false
+	// 			break
+	// 		}
+	// 	}
+	// 	if leader {
+	// 		leaderArr = append(leaderArr, arr[i])
+	// 	}
+	// }
+	// return leaderArr
+
+	//optimised solution
+	var n = len(arr)
+	var leaderArr = make([]int, 0)
+	var max = arr[n-1]
+	leaderArr = append(leaderArr, max)
+
+	for i := n - 2; i >= 0; i-- {
+
+		if arr[i] > max {
+			leaderArr = append(leaderArr, arr[i])
+			max = arr[i]
+		}
+	}
+	return leaderArr
+}
+
+func pascalTraingle(numRows int) [][]int {
+
+	base := make([][]int, numRows)
+
+	for col := 0; col < numRows; col++ {
+		base[col] = make([]int, col+1)
+		base[col][0], base[col][col] = 1, 1
+	}
+	base[0][0] = 1
+
+	for row := 2; row < numRows; row++ {
+		for col := 1; col < len(base[row])-1; col++ {
+			base[row][col] = base[row-1][col-1] + base[row-1][col]
+		}
+	}
+	return base
 }

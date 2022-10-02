@@ -119,9 +119,27 @@ func main() {
 	// res := searchInSortedRotatedArray1(nums, target)
 	// fmt.Println("searchInSortedRotatedArray  : ", res)
 
-	var nums = []int{2, 5, 6, 0, 0, 1, 2}
-	var target = 0
-	res := searchInSortedRotatedArray2(nums, target)
-	fmt.Println("searchInSortedRotatedArray  : ", res)
+	// var nums = []int{2, 5, 6, 0, 0, 1, 2}
+	// var target = 0
+	// res := searchInSortedRotatedArray2(nums, target)
+	// fmt.Println("searchInSortedRotatedArray  : ", res)
+
+	// var nums = []int{100, 200, 1, 3, 2, 4}
+	// var nums = []int{9, 1, 4, 7, 3, -1, 0, 5, 8, -1, 6}
+	// res := longestConsecutive(nums)
+	// fmt.Println("longestConsecutive  : ", res)
+
+	// var arr = [][]int{{0, 1, 2, 0}, {3, 4, 5, 2}, {1, 3, 1, 5}}
+	// // printMatrix(arr)
+	// res := setZeros(arr)
+	// // fmt.Println(res)
+	// printMatrix(res)
+
+	// var arr = []int{4, 7, 1, 0}
+	// res := printLeaders(arr)
+	// fmt.Println("printLeaders  : ", res)
+
+	res := pascalTraingle(5)
+	fmt.Println(res)
 
 }

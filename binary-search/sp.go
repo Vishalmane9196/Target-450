@@ -1,5 +1,7 @@
 package main
 
+import "math"
+
 // func nthroot(n, m int) int {
 
 // 	var l = 1
@@ -151,4 +153,128 @@ func singleNonDuplicate(nums []int) int {
 		}
 	}
 	return nums[lo]
+}
+
+//Link: https://leetcode.com/problems/search-a-2d-matrix/
+func search2DMatrix(matrix [][]int, target int) bool {
+	var m = len(matrix)
+	var n = len(matrix[0])
+	var left = 0
+	var right = m*n - 1
+
+	if m == 0 {
+		return false
+	}
+
+	for left <= right {
+
+		var middle = left + ((right - left) / 2)
+		i, j := middle/n, middle%n
+
+		if matrix[i][j] == target {
+			return true
+		}
+		if matrix[i][j] < target {
+			left = middle + 1
+		}
+		if matrix[i][j] > target {
+			right = middle - 1
+		}
+	}
+	return false
+}
+
+//Link: https://leetcode.com/problems/find-a-peak-element-ii/description/
+func findPeakGrid(mat [][]int) []int {
+	startRow := 0
+	endRow := len(mat) - 1
+	res := make([]int, 0)
+
+	for endRow >= startRow {
+		middleRow := startRow + (endRow-startRow)/2
+		// fmt.Printf(" startRow  :  %v || middleRow :  %v || endRow : %v\n", startRow, middleRow, endRow)
+		// will get max element position for that row
+		rowmax := maxRowElementPosition(mat[middleRow], len(mat[middleRow])-1)
+
+		// middle row is the first row
+		if middleRow == 0 {
+			if mat[middleRow][rowmax] > mat[middleRow+1][rowmax] {
+				res = append(res, middleRow, rowmax)
+				return res
+			}
+		}
+
+		//middle row is the last row
+		if middleRow == len(mat)-1 {
+			if mat[middleRow][rowmax] > mat[middleRow-1][rowmax] {
+				res = append(res, middleRow, rowmax)
+				return res
+			}
+		}
+		//  checking max element of the row with it's upper and lower row
+		if mat[middleRow][rowmax] > mat[middleRow+1][rowmax] && mat[middleRow][rowmax] > mat[middleRow-1][rowmax] {
+			res = append(res, middleRow, rowmax)
+			return res
+		}
+		// if max is lesser than next rows same column element, will move startRow to the nextRow
+		if mat[middleRow][rowmax] < mat[middleRow+1][rowmax] {
+			startRow = middleRow + 1
+		} else { // otherwise move the endRow to current row -1
+			endRow = middleRow - 1
+		}
+
+	}
+	// we didn't find peak element in matrix
+	res = append(res, -1, -1)
+	return res
+}
+
+func maxRowElementPosition(arr []int, end int) int {
+	max := 0
+
+	for i := 0; i <= end; i++ {
+		if arr[i] > arr[max] {
+			max = i
+		}
+	}
+	return max
+}
+
+//Link: https://leetcode.com/problems/koko-eating-bananas/
+func minEatingSpeed(piles []int, h int) int {
+
+	low := 1
+	high := maxi(piles)
+
+	ans := 0
+	for low <= high {
+		mid := low + (high-low)/2
+		time := timefunc(mid, piles)
+
+		if time <= h {
+			ans = mid
+			high = mid - 1
+		} else {
+			low = mid + 1
+		}
+	}
+	return ans
+}
+
+func timefunc(mid int, arr []int) int {
+	sum := 0
+	for i := 0; i < len(arr); i++ {
+		sum += int(math.Ceil(float64(arr[i]) / float64(mid)))
+	}
+	return sum
+}
+
+func maxi(arr []int) int {
+	max := arr[0]
+	for _, v := range arr {
+		if v > max {
+			max = v
+		}
+	}
+	return max
 }

@@ -22,5 +22,11 @@ func main() {
 	fmt.Println("is balanced : ", isBalanced)
 	diameterOfTree := diameterOfTree(tree.rootNode, 0)
 	fmt.Println("diameterOfTree : ", diameterOfTree)
+	maxPathSum := maxPathSum(tree.rootNode)
+	fmt.Println("maxPathSum : ", maxPathSum)
+	levelOrder := levelOrder(tree.rootNode)
+	fmt.Println("levelOrder : ", levelOrder)
+	res := preorderTraversalIterative(tree.rootNode)
+	fmt.Println("preorderTraversalIterative : ", res)
 
 }

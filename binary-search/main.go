@@ -32,9 +32,23 @@ func main() {
 	// res := searchInsertPosition(arr, target)
 	// fmt.Printf("target %v is %v at index %v\n", target, arr[res], res)
 
-	var arr = []int{5, 7, 7, 8, 8, 10}
-	var target = 8
-	res := firstAndLastOccurance(arr, target)
-	fmt.Printf("the first and last occurance of %v is %v  \n", target, res)
+	// var arr = []int{5, 7, 7, 8, 8, 10}
+	// var target = 8
+	// res := firstAndLastOccurance(arr, target)
+	// fmt.Printf("the first and last occurance of %v is %v  \n", target, res)
+
+	// var arr = [][]int{{1, 3, 5, 7}, {10, 11, 16, 20}, {23, 30, 34, 60}}
+	// var target = 8
+	// res := search2DMatrix(arr, target)
+	// fmt.Printf(" search2DMatrix  : %v", res)
+
+	// var arr = [][]int{{10, 20, 15}, {21, 30, 14}, {7, 16, 32}}
+	// res := findPeakGrid(arr)
+	// fmt.Printf(" findPeakGrid  : %v\n", res)
+
+	var arr = []int{30, 11, 23, 4, 20}
+	hours := 5
+	res := minEatingSpeed(arr, hours)
+	fmt.Printf(" minEatingSpeed  : %v\n", res)
 
 }

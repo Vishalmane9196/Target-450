@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"sync"
 )
 
@@ -220,7 +221,7 @@ func stringify(Node *Node, level int) {
 	if Node != nil {
 		format := ""
 		for i := 0; i < level; i++ {
-			format += "     "
+			format += "      "
 		}
 		format += "**> "
 		level++
@@ -325,4 +326,121 @@ func diameterOfTree(node *Node, diameter int) int {
 		diameter = lh + rh
 	}
 	return 1 + maxi(lh, rh)
+}
+
+/**
+ * Definition for a binary tree node.
+ * type Node struct {
+ *     Val int
+ *     Left *Node
+ *     Right *Node
+ * }
+ */
+
+// Link: https://leetcode.com/problems/binary-tree-maximum-path-sum/
+// golabl varibale to store maximum sum
+var maxSum int
+
+func maxPathSum(root *Node) int {
+	//initialize to minimum Value
+	maxSum = math.MinInt32
+	find(root)
+	return maxSum
+}
+
+func find(root *Node) int {
+	//Base Condition
+	if root == nil {
+		return 0
+	}
+	//find the sum of left subtree
+	left := find(root.leftNode)
+	//find the sum of right sub tree
+	right := find(root.rightNode)
+	//find th maxsumpath between root and and it's subtree
+	temp := max(max(left, right)+root.value, root.value)
+	// find th maxpath between its subtree a including node itself
+	ans := max(temp, left+right+root.value)
+	// check th max between them
+	maxSum = max(maxSum, ans)
+	return temp
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+// Link: https://leetcode.com/problems/same-tree/
+func isSameTree(p *Node, q *Node) bool {
+
+	if p == nil || q == nil {
+		return p == q
+	}
+	return p.value == q.value && isSameTree(p.leftNode, q.leftNode) && isSameTree(p.rightNode, q.rightNode)
+}
+
+// Link: https://leetcode.com/problems/binary-tree-level-order-traversal/
+func levelOrder(root *Node) [][]int {
+	var result [][]int
+
+	if root == nil {
+		return result
+	}
+
+	var queue []*Node
+	queue = append(queue, root)
+
+	for len(queue) > 0 {
+		queueSize := len(queue)
+		var levelNodes []int
+
+		for i := 0; i < queueSize; i++ {
+			dequeuedElement := (queue)[0]
+			queue = queue[1:]
+
+			levelNodes = append(levelNodes, dequeuedElement.value)
+
+			if dequeuedElement.leftNode != nil {
+				queue = append(queue, dequeuedElement.leftNode)
+				// enqueue(&queue, dequeuedElement.Left)
+			}
+
+			if dequeuedElement.rightNode != nil {
+				queue = append(queue, dequeuedElement.rightNode)
+			}
+		}
+		result = append(result, levelNodes)
+	}
+	return result
+}
+
+// Link: https://leetcode.com/problems/binary-tree-preorder-traversal/
+func preorderTraversalIterative(root *Node) []int {
+
+	var res []int
+
+	if root == nil {
+		return res
+	}
+
+	var stack []*Node
+	stack = append(stack, root)
+
+	for len(stack) > 0 {
+		poppedElement := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		res = append(res, poppedElement.value)
+
+		if poppedElement.rightNode != nil {
+			stack = append(stack, poppedElement.rightNode)
+		}
+
+		if poppedElement.leftNode != nil {
+			stack = append(stack, poppedElement.leftNode)
+		}
+	}
+	return res
 }
