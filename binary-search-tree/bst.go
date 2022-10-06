@@ -396,3 +396,27 @@ func (this *BSTIterator) Next() int {
 func (this *BSTIterator) HasNext() bool {
 	return len(this.item) > 0
 }
+
+// Link: https://leetcode.com/problems/two-sum-iv-input-is-a-bst/
+type Res struct {
+	M map[int]uint8
+	K int
+}
+
+func findTarget(root *Node, k int) bool {
+	r := Res{M: make(map[int]uint8), K: k}
+	return r.dfs(root)
+}
+
+func (r *Res) dfs(node *Node) bool {
+
+	if node == nil {
+		return false
+	}
+	if _, ok := r.M[node.Val]; ok {
+		return true
+	}
+	r.M[r.K-node.Val]++
+
+	return r.dfs(node.Left) || r.dfs(node.Right)
+}

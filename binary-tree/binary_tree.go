@@ -3,9 +3,12 @@ package main
 import (
 	"fmt"
 	"math"
+	"sort"
+	"strconv"
 	"sync"
 )
 
+// binary tree implementation
 type Node struct {
 	key       int
 	value     int
@@ -13,21 +16,21 @@ type Node struct {
 	rightNode *Node
 }
 
-type BinarySearchTree struct {
+type BinaryTree struct {
 	rootNode *Node
 	lock     sync.RWMutex
 }
 
 // Insert inserts the Item t in the tree
-func (bst *BinarySearchTree) InsertElement(key int, value int) {
-	bst.lock.Lock()
-	defer bst.lock.Unlock()
+func (tree *BinaryTree) InsertElement(key int, value int) {
+	tree.lock.Lock()
+	defer tree.lock.Unlock()
 
-	var newNode = &Node{key, value, nil, nil}
-	if bst.rootNode == nil {
-		bst.rootNode = newNode
+	var newNode = &Node{key: key, value: value, leftNode: nil, rightNode: nil}
+	if tree.rootNode == nil {
+		tree.rootNode = newNode
 	} else {
-		insertNode(bst.rootNode, newNode)
+		insertNode(tree.rootNode, newNode)
 	}
 }
 
@@ -48,8 +51,54 @@ func insertNode(rootNode *Node, newNode *Node) {
 	}
 }
 
-// InOrderTraverseTree method
-func (tree *BinarySearchTree) InOrderTraverseTree() {
+// for printing binary tree
+func (tree BinaryTree) PrintBinaryTree() {
+
+	str := tree.toTreeString("", true, "", tree.rootNode)
+	fmt.Println("***************************************************************")
+	fmt.Println(str)
+	fmt.Println("***************************************************************")
+}
+
+func (tree BinaryTree) toTreeString(prefix string, top bool, str string, node *Node) string {
+
+	Left := new(Node)
+	Right := new(Node)
+
+	if node == nil {
+		return ""
+	}
+
+	Left = node.leftNode
+	Right = node.rightNode
+
+	if Right != nil {
+		temp := tree.path(top, ""+prefix, "│   ", "    ")
+		str = tree.toTreeString(temp, false, str, Right)
+	}
+
+	str = tree.path(top, str+prefix, "└──", "┌──")
+	str = str + " " + strconv.Itoa(node.value) + "\n"
+
+	if Left != nil {
+		temp := tree.path(top, ""+prefix, "    ", "│   ")
+		str = tree.toTreeString(temp, true, str, Left)
+	}
+	return str
+}
+
+func (tree BinaryTree) path(condition bool, str string, choice1 string, choice2 string) string {
+
+	if condition {
+		str += choice1
+	} else {
+		str += choice2
+	}
+	return str
+}
+
+// InOrderTraverseTree method(left-print-right)
+func (tree *BinaryTree) InOrderTraverseTree() {
 	tree.lock.RLock()
 	defer tree.lock.RUnlock()
 	fmt.Println("In-order traversal :  ")
@@ -65,8 +114,8 @@ func inOrderTraverseTree(Node *Node) {
 	}
 }
 
-// PreOrderTraverse method
-func (tree *BinarySearchTree) PreOrderTraverseTree() {
+// PreOrderTraverse method (print-left-right)
+func (tree *BinaryTree) PreOrderTraverseTree() {
 	tree.lock.Lock()
 	defer tree.lock.Unlock()
 	fmt.Println()
@@ -83,8 +132,8 @@ func preOrderTraverseTree(Node *Node) {
 	}
 }
 
-// PostOrderTraverseTree method
-func (tree *BinarySearchTree) PostOrderTraverseTree() {
+// PostOrderTraverseTree method (left-right-print)
+func (tree *BinaryTree) PostOrderTraverseTree() {
 	tree.lock.Lock()
 	defer tree.lock.Unlock()
 	fmt.Println()
@@ -102,7 +151,8 @@ func postOrderTraverseTree(Node *Node) {
 }
 
 // MinNode method
-func (tree *BinarySearchTree) MinNode() *int {
+// go to extreme left to find out min node
+func (tree *BinaryTree) MinNode() *int {
 	tree.lock.RLock()
 	defer tree.lock.RUnlock()
 
@@ -111,6 +161,8 @@ func (tree *BinarySearchTree) MinNode() *int {
 	if Node == nil {
 		return (*int)(nil)
 	}
+	//initiated an infinite loop
+	//break condition : node's left become nil
 	for {
 		if Node.leftNode == nil {
 			return &Node.value
@@ -120,7 +172,8 @@ func (tree *BinarySearchTree) MinNode() *int {
 }
 
 // MaxNode method
-func (tree *BinarySearchTree) MaxNode() *int {
+// go to extreme left to find out min node
+func (tree *BinaryTree) MaxNode() *int {
 	tree.lock.RLock()
 	defer tree.lock.RUnlock()
 	var Node *Node
@@ -128,6 +181,8 @@ func (tree *BinarySearchTree) MaxNode() *int {
 	if Node == nil {
 		return (*int)(nil)
 	}
+	//initiated an infinite loop
+	//break condition : node's right become nil
 	for {
 		if Node.rightNode == nil {
 			return &Node.value
@@ -137,7 +192,7 @@ func (tree *BinarySearchTree) MaxNode() *int {
 }
 
 // SearchNode method
-func (tree *BinarySearchTree) SearchNode(key int) bool {
+func (tree *BinaryTree) SearchNode(key int) bool {
 	tree.lock.RLock()
 	defer tree.lock.RUnlock()
 	return searchNode(tree.rootNode, key)
@@ -158,7 +213,7 @@ func searchNode(parentNode *Node, searchKey int) bool {
 }
 
 // RemoveNode method
-func (tree *BinarySearchTree) RemoveNode(deleteKey int) {
+func (tree *BinaryTree) RemoveNode(deleteKey int) {
 	tree.lock.Lock()
 	defer tree.lock.Unlock()
 	removeNode(tree.rootNode, deleteKey)
@@ -179,84 +234,322 @@ func removeNode(parentNode *Node, deleteKey int) *Node {
 		return parentNode
 	}
 
+	//case 1: both leaf node are nil
 	if parentNode.leftNode == nil && parentNode.rightNode == nil {
 		parentNode = nil
 		return nil
 	}
 
+	//case 2: right node is not nil
 	if parentNode.leftNode == nil {
 		parentNode = parentNode.rightNode
 		return parentNode
 	}
+	//case 3: left node is not nil
 	if parentNode.rightNode == nil {
 		Node := parentNode.leftNode
 		return Node
 	}
-	// var leftmostrightNode *Node
+
+	//case 4: both left and right node is present
+	//leftmostrightNode is the node which is greater than all the nodes of parent node and first element greater element than parent node
+	//this is the element we can keep in  place of deleted node inorder to satisfy the binary tree property
 	leftmostrightNode := parentNode.rightNode
 	for {
-
+		//check if first right node of parent is nil or not
+		//if that node is not nil then check it's left node nil or not
+		//once left node become nil break out of loop
 		if leftmostrightNode != nil && leftmostrightNode.leftNode != nil {
 			leftmostrightNode = leftmostrightNode.leftNode
 		} else {
 			break
 		}
 	}
+
+	//update the values of deleted node(parent node) with leftmostrightNode node
 	parentNode.key, parentNode.value = leftmostrightNode.key, leftmostrightNode.value
+	//delete the rightnode of parent node because it is still pointing to old binary structure
 	parentNode.rightNode = removeNode(parentNode.rightNode, parentNode.key)
 	return parentNode
 }
 
-// String method
-func (tree *BinarySearchTree) String() {
-	tree.lock.Lock()
-	defer tree.lock.Unlock()
-	fmt.Println("************************************************")
-	stringify(tree.rootNode, 0)
-	fmt.Println("************************************************")
-}
-
-// stringify method
-func stringify(Node *Node, level int) {
-	if Node != nil {
-		format := ""
-		for i := 0; i < level; i++ {
-			format += "      "
-		}
-		format += "**> "
-		level++
-		stringify(Node.leftNode, level)
-		fmt.Printf(format+"%d\n", Node.key)
-		stringify(Node.rightNode, level)
-	}
-}
-
-// print method
-func print(tree *BinarySearchTree) {
-	if tree != nil {
-
-		fmt.Println(" Value", tree.rootNode.value)
-		fmt.Printf("Root Tree Node")
-		printNode(tree.rootNode)
-	} else {
-		fmt.Printf("Nil\n")
-	}
-}
-
-// printNode method
-func printNode(Node *Node) {
-	if Node != nil {
-		fmt.Println(" Value", Node.value)
-		fmt.Printf("Node Left")
-		printNode(Node.leftNode)
-		fmt.Printf("Node Right")
-		printNode(Node.rightNode)
-	} else {
-		fmt.Printf("Nil\n")
-	}
-}
-
 //[==============PROBLEMS====================]
+
+// Link: https://leetcode.com/problems/binary-tree-level-order-traversal/
+func levelOrder(root *Node) [][]int {
+	//create 2d slice to store tree with levels
+	var result [][]int
+
+	if root == nil {
+		return result
+	}
+
+	//created a queue to store node
+	var queue []*Node
+	//append root to queue
+	queue = append(queue, root)
+
+	//initiated a infinite loop
+	//break condition: len(que) < 0
+	for len(queue) > 0 {
+		//store a queuesize because at runtime size of queue will change
+		queueSize := len(queue)
+		//slice to store the nodes from the level
+		var levelNodes []int
+
+		//iterate over all nodes till queuesize
+		for i := 0; i < queueSize; i++ {
+			//store the first node which will be popped
+			dequeuedElement := (queue)[0]
+			queue = queue[1:]
+
+			//append the opped element in levee=lNodes slice
+			levelNodes = append(levelNodes, dequeuedElement.value)
+
+			//if popped element has left node then push that node to queue
+			if dequeuedElement.leftNode != nil {
+				queue = append(queue, dequeuedElement.leftNode)
+				// enqueue(&queue, dequeuedElement.Left)
+			}
+			//if popped element has right node then push that node to queue
+			if dequeuedElement.rightNode != nil {
+				queue = append(queue, dequeuedElement.rightNode)
+			}
+		}
+		//push the levelorder slice in 2d slice
+		result = append(result, levelNodes)
+	}
+	return result
+}
+
+// Link: https://leetcode.com/problems/binary-tree-preorder-traversal/
+func preorderTraversalIterative(root *Node) []int {
+
+	//store the preorder traversal
+	var res []int
+
+	if root == nil {
+		return res
+	}
+
+	//stack to store the node
+	var stack []*Node
+	//append the root to stack
+	stack = append(stack, root)
+
+	//Initiated infinite loop
+	//break condition: len(stack) < 0
+	for len(stack) > 0 {
+		n := len(stack)
+		//pop the topmost element
+		poppedElement := stack[n-1]
+		stack = stack[:len(stack)-1]
+		//append opeed element to stack
+		res = append(res, poppedElement.value)
+
+		//append the right node of popped element in stack
+		if poppedElement.rightNode != nil {
+			stack = append(stack, poppedElement.rightNode)
+		}
+
+		//append the left node of popped element in stack
+		if poppedElement.leftNode != nil {
+			stack = append(stack, poppedElement.leftNode)
+		}
+	}
+	return res
+}
+
+// figure it out why it is not working
+// Link: https://leetcode.com/problems/binary-tree-preorder-traversal/
+func inorderTraversalIterative(root *Node) []int {
+
+	//store the preorder traversal
+	var res []int
+
+	if root == nil {
+		return res
+	}
+
+	//stack to store the node
+	var stack []*Node
+	var node *Node = root
+
+	fmt.Println(" stack length : ", len(stack))
+	fmt.Println("node outsid  : ", node)
+	//Initiated infinite loop
+	//break condition: len(stack) == 0
+	for node != nil || len(stack) > 0 {
+
+		fmt.Println(" stack length : ", len(stack))
+		fmt.Println("node inside  : ", node)
+		//if node is not nil then append the element and go to left
+		if node != nil {
+			stack = append(stack, node)
+			node = node.leftNode
+		} else {
+			// //if stack size become 0 then break
+			// if len(stack) == 0 {
+			// 	break
+			// }
+			fmt.Println(" stack  : ", stack)
+			fmt.Println(" stack kength : ", len(stack))
+
+			//store topmost element and pop that element from stack
+			n := len(stack)
+			topEle := stack[n-1]
+			stack = stack[:n-1]
+			fmt.Println("last element : ", topEle)
+			fmt.Println(" after stack  : ", stack)
+
+			//store the popped element in res slice and move to right
+			res = append(res, topEle.value)
+			fmt.Println("node : ", node)
+			fmt.Println("node's right : ", node.rightNode)
+			node = node.rightNode
+		}
+	}
+	return res
+}
+
+// Link: https://leetcode.com/problems/binary-tree-preorder-traversal/
+func postorderTraversalIterative(root *Node) []int {
+
+	//store the preorder traversal
+	var res []int
+
+	if root == nil {
+		return res
+	}
+
+	//stack to store the node
+	var stack1, stack2 []*Node
+	//append the root to stack
+	stack1 = append(stack1, root)
+
+	//Initiated infinite loop
+	//break condition: len(stack) < 0
+	for len(stack1) > 0 {
+		n := len(stack1)
+		//pop the topmost element
+		poppedElement := stack1[n-1]
+		stack1 = stack1[:len(stack1)-1]
+		stack2 = append(stack2, poppedElement)
+
+		//append the left node of popped element in stack
+		if poppedElement.leftNode != nil {
+			stack1 = append(stack1, poppedElement.leftNode)
+		}
+		//append the right node of popped element in stack
+		if poppedElement.rightNode != nil {
+			stack1 = append(stack1, poppedElement.rightNode)
+		}
+	}
+
+	for len(stack2) > 0 {
+		n := len(stack2)
+		res = append(res, stack2[n-1].value)
+		stack2 = stack2[:n-1]
+	}
+	return res
+}
+
+// Link: https://takeuforward.org/data-structure/post-order-traversal-of-binary-tree/
+// Link: https://leetcode.com/problems/binary-tree-postorder-traversal/
+func postOrderTraversalUsing1Stack(root *Node) []int {
+	//store the preorder traversal
+	var res []int
+
+	if root == nil {
+		return res
+	}
+
+	//stack to store the node
+	var stack []*Node
+	//append the root to stack
+	node := root
+
+	for node != nil || len(stack) > 0 {
+
+		if node != nil {
+			stack = append(stack, node)
+			node = node.leftNode
+		} else {
+			temp := stack[len(stack)-1].rightNode
+
+			if temp == nil {
+				temp = stack[len(stack)-1]
+				stack = stack[:len(stack)-1]
+
+				res = append(res, temp.value)
+
+				for len(stack) > 0 && temp == stack[len(stack)-1].rightNode {
+					temp = stack[len(stack)-1]
+					stack = stack[:len(stack)-1]
+					res = append(res, temp.value)
+				}
+			} else {
+				node = temp
+			}
+		}
+	}
+	return res
+}
+
+// Link: https://takeuforward.org/data-structure/preorder-inorder-postorder-traversals-in-one-traversal/
+type pair struct {
+	node *Node
+	num  int
+}
+
+func allTraversal(root *Node) ([]int, []int, []int) {
+	var preOrder []int
+	var inOrder []int
+	var postOrder []int
+
+	if root == nil {
+		return preOrder, inOrder, postOrder
+	}
+
+	//stack to store the node
+	var stack []pair
+	//append the root to stack
+	node := root
+
+	stack = append(stack, pair{node, 1})
+
+	for len(stack) > 0 {
+
+		it := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+
+		//case 1
+		if it.num == 1 {
+			preOrder = append(preOrder, it.node.value)
+			it.num++
+			stack = append(stack, it)
+
+			if it.node.leftNode != nil {
+				stack = append(stack, pair{it.node.leftNode, 1})
+			}
+		} else if it.num == 2 {
+			//case 2
+			inOrder = append(inOrder, it.node.value)
+			it.num++
+			stack = append(stack, it)
+
+			if it.node.rightNode != nil {
+				stack = append(stack, pair{it.node.rightNode, 1})
+			}
+		} else {
+			// case 3
+			postOrder = append(postOrder, it.node.value)
+		}
+	}
+
+	return preOrder, inOrder, postOrder
+
+}
 
 // Link: https://takeuforward.org/data-structure/maximum-depth-of-a-binary-tree/
 func maxDepth(node *Node) int {
@@ -310,32 +603,27 @@ func Abs(x int) int {
 // Link: https://takeuforward.org/data-structure/calculate-the-diameter-of-a-binary-tree/
 func diameterOfBinaryTree(root *Node) int {
 	var diameter int
-	diameterOfTree(root, diameter)
+
+	if root == nil {
+		return 0
+	}
+	if root.leftNode == nil && root.rightNode == nil {
+		return 0
+	}
+	diameterOfTree(root, &diameter)
 	return diameter
 }
 
-func diameterOfTree(node *Node, diameter int) int {
+func diameterOfTree(node *Node, diameter *int) int {
 	if node == nil {
 		return 0
 	}
 	lh := diameterOfTree(node.leftNode, diameter)
 	rh := diameterOfTree(node.rightNode, diameter)
 
-	if diameter > (lh + rh) {
-	} else {
-		diameter = lh + rh
-	}
+	*diameter = maxi(*diameter, lh+rh)
 	return 1 + maxi(lh, rh)
 }
-
-/**
- * Definition for a binary tree node.
- * type Node struct {
- *     Val int
- *     Left *Node
- *     Right *Node
- * }
- */
 
 // Link: https://leetcode.com/problems/binary-tree-maximum-path-sum/
 // golabl varibale to store maximum sum
@@ -382,65 +670,370 @@ func isSameTree(p *Node, q *Node) bool {
 	return p.value == q.value && isSameTree(p.leftNode, q.leftNode) && isSameTree(p.rightNode, q.rightNode)
 }
 
-// Link: https://leetcode.com/problems/binary-tree-level-order-traversal/
-func levelOrder(root *Node) [][]int {
-	var result [][]int
+// Link: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+func lowestCommonAncestor(root, p, q *Node) *Node {
 
 	if root == nil {
-		return result
+		return nil
 	}
-
-	var queue []*Node
-	queue = append(queue, root)
-
-	for len(queue) > 0 {
-		queueSize := len(queue)
-		var levelNodes []int
-
-		for i := 0; i < queueSize; i++ {
-			dequeuedElement := (queue)[0]
-			queue = queue[1:]
-
-			levelNodes = append(levelNodes, dequeuedElement.value)
-
-			if dequeuedElement.leftNode != nil {
-				queue = append(queue, dequeuedElement.leftNode)
-				// enqueue(&queue, dequeuedElement.Left)
-			}
-
-			if dequeuedElement.rightNode != nil {
-				queue = append(queue, dequeuedElement.rightNode)
-			}
-		}
-		result = append(result, levelNodes)
+	if root.value == p.value || root.value == q.value {
+		return root
 	}
-	return result
+	lcaLeft := lowestCommonAncestor(root.leftNode, p, q)
+	lcaRight := lowestCommonAncestor(root.rightNode, p, q)
+
+	if lcaLeft != nil && lcaRight != nil {
+		return root
+	}
+	if lcaLeft != nil {
+		return lcaLeft
+	}
+	return lcaRight
 }
 
-// Link: https://leetcode.com/problems/binary-tree-preorder-traversal/
-func preorderTraversalIterative(root *Node) []int {
+// Link: https://leetcode.com/problems/binary-tree-right-side-view/
+// to get the left view just change the left to right seq of rec
+func rightSideView(root *Node) []int {
+	var ans []int
+	var queue []*Node
 
-	var res []int
+	if root == nil {
+		return nil
+	}
+	queue = append(queue, root)
+	for len(queue) > 0 {
+		var helper []int
+		n := len(queue)
 
+		for i := 0; i < n; i++ {
+			node := queue[0]
+			queue = queue[1:]
+
+			helper = append(helper, node.value)
+			if node.leftNode != nil {
+				queue = append(queue, node.leftNode)
+			}
+			if node.rightNode != nil {
+				queue = append(queue, node.rightNode)
+			}
+		}
+		// fmt.Println("helper : ", helper)
+		ans = append(ans, helper[len(helper)-1])
+	}
+	return ans
+}
+
+// above solution in recursive form
+func rightSideViewRec(root *Node) []int {
+	var ans []int
+	rec(root, 0, &ans)
+	// fmt.Println("ans : ", ans)
+	return ans
+}
+
+func rec(root *Node, level int, ans *[]int) {
+
+	if root == nil {
+		return
+	}
+	if len(*ans) == level {
+		*ans = append(*ans, root.value)
+	}
+	rec(root.rightNode, level+1, ans)
+	rec(root.leftNode, level+1, ans)
+}
+
+// Link: https://www.geeksforgeeks.org/bottom-view-binary-tree/
+// Here we are checking if the line exist in map or not
+// if it does not exist then we are adding that line with node value
+// if it does exist we are update the map with corrosponding value
+func bottomView(root *Node) []int {
+	var ans []int
+	mp := map[int]int{}
+	var queue []pair
+	if root == nil {
+		return ans
+	}
+
+	queue = append(queue, pair{root, 0})
+	for len(queue) > 0 {
+		it := queue[0]
+		queue = queue[1:]
+		node := it.node
+		line := it.num
+
+		mp[line] = node.value
+
+		if node.leftNode != nil {
+			queue = append(queue, pair{node.leftNode, line - 1})
+		}
+		if node.rightNode != nil {
+			queue = append(queue, pair{node.rightNode, line + 1})
+		}
+	}
+
+	for _, v := range mp {
+		ans = append(ans, v)
+	}
+	//sort map
+	sort.Ints(ans)
+	// fmt.Println("ans : ", ans)
+	return ans
+}
+
+// Link: https://www.geeksforgeeks.org/bottom-view-binary-tree/
+// For top view the only change other than bottom view is that we are checking if the line exist in map or not
+// if it does not exist then we are adding that line with node value
+// if it does exist we don't have update the map with corrosponding value
+func topView(root *Node) []int {
+	var ans []int
+	mp := map[int]int{}
+	var queue []pair
+	if root == nil {
+		return ans
+	}
+
+	queue = append(queue, pair{root, 0})
+	for len(queue) > 0 {
+		it := queue[0]
+		queue = queue[1:]
+		node := it.node
+		line := it.num
+
+		if _, exist := mp[line]; !exist {
+			mp[line] = node.value
+		}
+
+		if node.leftNode != nil {
+			queue = append(queue, pair{node.leftNode, line - 1})
+		}
+		if node.rightNode != nil {
+			queue = append(queue, pair{node.rightNode, line + 1})
+		}
+	}
+
+	for _, v := range mp {
+		ans = append(ans, v)
+	}
+	//sort map
+	sort.Ints(ans)
+	// fmt.Println("ans : ", ans)
+	return ans
+}
+
+//Link:
+
+// Tuple to store each node's data such as column, row and value
+type Tuple struct {
+	col int
+	row int
+	val int
+}
+
+func verticalTraversal(root *Node) [][]int {
+	//nodes will consist of all nodes data with tuple atribute
+	nodes := dfs(root, 0, 0, []Tuple{})
+
+	// fmt.Println("nodes : ", nodes)
+	// Less function for lexicograplical order to sort the nodes based on columns ot each node
+	sort.Slice(nodes, func(i, j int) bool {
+		if nodes[i].col != nodes[j].col {
+			return nodes[i].col < nodes[j].col
+		} else if nodes[i].row != nodes[j].row {
+			return nodes[i].row < nodes[j].row
+		} else if nodes[i].val != nodes[j].val {
+			return nodes[i].val < nodes[j].val
+		} else {
+			return false
+		}
+	})
+	// fmt.Println("After sort nodes : ", nodes)
+
+	// Grouping sorted elements
+	ans := make([][]int, 0)
+	//This hack will be used to create new dynamic slice  for the first node
+	prev := nodes[0].col + 1
+	for _, node := range nodes {
+		//if prev column is not the same of current column then we will create new slice
+		if node.col != prev {
+			ans = append(ans, []int{})
+		}
+		//and append the node's value
+		ans[len(ans)-1] = append(ans[len(ans)-1], node.val)
+		//set prev node column as current node's columns
+		prev = node.col
+	}
+	return ans
+}
+
+// dfs will give us list of tiples which consist of the information about each node such as row, col and value
+func dfs(root *Node, row int, col int, nodes []Tuple) []Tuple {
+	if root == nil {
+		return nodes
+	}
+
+	nodes = append(nodes, Tuple{col, row, root.value})
+	nodes = dfs(root.leftNode, row+1, col-1, nodes)
+	nodes = dfs(root.rightNode, row+1, col+1, nodes)
+
+	return nodes
+}
+
+//try to create new solution with go approach
+
+// type pairN struct {
+// 	node *Node
+// 	pair pair
+// }
+
+// func vertTraversal(root *Node) []int {
+//  nodes := map[int]{}
+// }
+
+// Link: https://leetcode.com/problems/symmetric-tree/
+func isSymmetric(root *Node) bool {
+	return root == nil || helper(root.leftNode, root.rightNode)
+}
+
+func helper(left, right *Node) bool {
+
+	if left == nil || right == nil {
+		return left == right
+	}
+
+	if left.value != right.value {
+		return false
+	}
+	return helper(left.leftNode, right.rightNode) && helper(left.rightNode, right.leftNode)
+}
+
+// Link: https://takeuforward.org/data-structure/boundary-traversal-of-a-binary-tree/
+func printBoundary(root *Node) []int {
+	ans := make([]int, 0)
+	if isLeaf(root) == false {
+		ans = append(ans, root.value)
+	}
+	addLeftBoundary(root, &ans)
+	addLeaves(root, &ans)
+	addRightBoundary(root, &ans)
+	return ans
+}
+
+func addLeftBoundary(node *Node, ans *[]int) {
+	// fmt.Println("Inside addleft")
+	cur := node.leftNode
+	for cur != nil {
+		if isLeaf(cur) == false {
+			*ans = append(*ans, cur.value)
+		}
+
+		if cur.leftNode != nil {
+			cur = cur.leftNode
+		} else {
+			cur = cur.rightNode
+		}
+	}
+}
+
+func addLeaves(node *Node, ans *[]int) {
+	// fmt.Println("Inside add leaves")
+	if isLeaf(node) {
+		*ans = append(*ans, node.value)
+		return
+	}
+	if node.leftNode != nil {
+		addLeaves(node.leftNode, ans)
+	}
+	if node.rightNode != nil {
+		addLeaves(node.rightNode, ans)
+	}
+}
+
+func addRightBoundary(node *Node, ans *[]int) {
+	// fmt.Println("Inside add right ")
+	temp := make([]int, 0)
+	cur := node.rightNode
+
+	for cur != nil {
+		if isLeaf(cur) == false {
+			temp = append(temp, cur.value)
+		}
+		if cur.rightNode != nil {
+			cur = cur.rightNode
+		} else {
+			cur = cur.leftNode
+		}
+	}
+
+	for i := len(temp) - 1; i >= 0; i-- {
+		*ans = append(*ans, temp[i])
+	}
+}
+
+func isLeaf(node *Node) bool {
+	if node.leftNode == nil && node.rightNode == nil {
+		return true
+	}
+	return false
+}
+
+// Link: https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
+func zigzagLevelOrder(root *Node) [][]int {
+	res := make([][]int, 0)
 	if root == nil {
 		return res
 	}
 
-	var stack []*Node
-	stack = append(stack, root)
+	queue := make([]*Node, 0)
+	queue = append(queue, root)
+	var leftToRight = true
 
-	for len(stack) > 0 {
-		poppedElement := stack[len(stack)-1]
-		stack = stack[:len(stack)-1]
-		res = append(res, poppedElement.value)
+	for len(queue) > 0 {
 
-		if poppedElement.rightNode != nil {
-			stack = append(stack, poppedElement.rightNode)
+		n := len(queue)
+		var row = make([]int, n)
+
+		for i := 0; i < n; i++ {
+			node := queue[0]
+			queue = queue[1:]
+			var index int
+			if leftToRight {
+				index = i
+			} else {
+				index = n - 1 - i
+			}
+			// fmt.Println("index : ", index)
+			row[index] = node.value
+
+			if node.leftNode != nil {
+				queue = append(queue, node.leftNode)
+			}
+			if node.rightNode != nil {
+				queue = append(queue, node.rightNode)
+			}
 		}
-
-		if poppedElement.leftNode != nil {
-			stack = append(stack, poppedElement.leftNode)
-		}
+		leftToRight = !leftToRight
+		res = append(res, row)
 	}
 	return res
+}
+
+// Link: https://takeuforward.org/data-structure/print-root-to-node-path-in-a-binary-tree/
+func getPath(root *Node, ans *[]int, searchData int) bool {
+
+	if root == nil {
+		return false
+	}
+
+	*ans = append(*ans, root.value)
+	if root.value == searchData {
+		return true
+	}
+
+	if getPath(root.leftNode, ans, searchData) || getPath(root.rightNode, ans, searchData) {
+		return true
+	}
+
+	*ans = (*ans)[:len(*ans)-1]
+	return false
 }
