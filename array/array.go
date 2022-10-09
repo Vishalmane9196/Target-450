@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"math"
+	"sort"
 )
 
 // LinkL : https://takeuforward.org/data-structure/find-the-largest-element-in-an-array/
@@ -903,4 +905,41 @@ func pascalTraingle(numRows int) [][]int {
 		}
 	}
 	return base
+}
+
+// Link: https://leetcode.com/problems/3sum-closest/
+func threeSumClosest(nums []int, target int) int {
+	ans := 0
+	diff := math.MaxInt
+	// fmt.Println("diff : ", diff)
+	sort.Ints(nums)
+	// fmt.Println("nums : ", nums)
+	for i := 0; i < len(nums); i++ {
+		first := nums[i]
+		start := i + 1
+		end := len(nums) - 1
+
+		for start < end {
+			// fmt.Println("ans : ", ans)
+			if (first + nums[start] + nums[end]) == target {
+				return target
+			} else if Abs(first+nums[start]+nums[end]-target) < diff {
+				diff = Abs(first + nums[start] + nums[end] - target)
+				ans = first + nums[start] + nums[end]
+			}
+			if first+nums[start]+nums[end] > target {
+				end--
+			} else {
+				start++
+			}
+		}
+	}
+	return ans
+}
+
+func Abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
 }

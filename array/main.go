@@ -139,7 +139,11 @@ func main() {
 	// res := printLeaders(arr)
 	// fmt.Println("printLeaders  : ", res)
 
-	res := pascalTraingle(5)
+	// res := pascalTraingle(5)
+	// fmt.Println(res)
+
+	nums := []int{-1, 2, 1, -4}
+	res := threeSumClosest(nums, 1)
 	fmt.Println(res)
 
 }

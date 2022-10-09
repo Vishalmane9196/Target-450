@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func main() {
 
 	//dequeue implmentation
@@ -24,21 +22,23 @@ func main() {
 	// printDequeue(dq)
 
 	//Implementation of queue
-	st := Init()
-	st.enqueue(1)
-	st.enqueue(2)
-	st.enqueue(3)
-	st.enqueue(4)
-	st.enqueue(5)
-	st.printQueue()
-	fmt.Println(" Front : ", st.getFront())
-	fmt.Println(" Rear  : ", st.getRear())
-	fmt.Println(" size of stack : ", st.getSize())
-	st.dequeue()
-	st.dequeue()
-	st.dequeue()
-	st.dequeue()
-	st.dequeue()
-	st.printQueue()
+	// st := Init()
+	// st.enqueue(1)
+	// st.enqueue(2)
+	// st.enqueue(3)
+	// st.enqueue(4)
+	// st.enqueue(5)
+	// st.printQueue()
+	// fmt.Println(" Front : ", st.getFront())
+	// fmt.Println(" Rear  : ", st.getRear())
+	// fmt.Println(" size of stack : ", st.getSize())
+	// st.dequeue()
+	// st.dequeue()
+	// st.dequeue()
+	// st.dequeue()
+	// st.dequeue()
+	// st.printQueue()
+
+	queueUsingStack()
 
 }

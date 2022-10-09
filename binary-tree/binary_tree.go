@@ -360,7 +360,6 @@ func preorderTraversalIterative(root *Node) []int {
 	return res
 }
 
-// figure it out why it is not working
 // Link: https://leetcode.com/problems/binary-tree-preorder-traversal/
 func inorderTraversalIterative(root *Node) []int {
 
@@ -375,38 +374,23 @@ func inorderTraversalIterative(root *Node) []int {
 	var stack []*Node
 	var node *Node = root
 
-	fmt.Println(" stack length : ", len(stack))
-	fmt.Println("node outsid  : ", node)
 	//Initiated infinite loop
 	//break condition: len(stack) == 0
 	for node != nil || len(stack) > 0 {
 
-		fmt.Println(" stack length : ", len(stack))
-		fmt.Println("node inside  : ", node)
 		//if node is not nil then append the element and go to left
 		if node != nil {
 			stack = append(stack, node)
 			node = node.leftNode
 		} else {
-			// //if stack size become 0 then break
-			// if len(stack) == 0 {
-			// 	break
-			// }
-			fmt.Println(" stack  : ", stack)
-			fmt.Println(" stack kength : ", len(stack))
 
 			//store topmost element and pop that element from stack
-			n := len(stack)
-			topEle := stack[n-1]
-			stack = stack[:n-1]
-			fmt.Println("last element : ", topEle)
-			fmt.Println(" after stack  : ", stack)
+			lastEle := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
 
 			//store the popped element in res slice and move to right
-			res = append(res, topEle.value)
-			fmt.Println("node : ", node)
-			fmt.Println("node's right : ", node.rightNode)
-			node = node.rightNode
+			res = append(res, lastEle.value)
+			node = lastEle.rightNode
 		}
 	}
 	return res
@@ -1036,4 +1020,45 @@ func getPath(root *Node, ans *[]int, searchData int) bool {
 
 	*ans = (*ans)[:len(*ans)-1]
 	return false
+}
+
+// Link: https://leetcode.com/problems/maximum-width-of-binary-tree/
+func widthOfBinaryTree(root *Node) int {
+
+	var queue []pair
+	var ans = 0
+	if root == nil {
+		return 0
+	}
+
+	queue = append(queue, pair{root, 0})
+	for len(queue) > 0 {
+		n := len(queue)
+		curMin := queue[0].num
+		var leftMost, rightMost int
+
+		for i := 0; i < n; i++ {
+
+			p := queue[0]
+			cur_id := p.num - curMin
+			temp := p.node
+			queue = queue[1:]
+
+			if i == 0 {
+				leftMost = cur_id
+			}
+			if i == n-1 {
+				rightMost = cur_id
+			}
+
+			if temp.leftNode != nil {
+				queue = append(queue, pair{temp.leftNode, 2*cur_id + 1})
+			}
+			if temp.rightNode != nil {
+				queue = append(queue, pair{temp.rightNode, 2*cur_id + 2})
+			}
+		}
+		ans = maxi(ans, rightMost-leftMost+1)
+	}
+	return ans
 }

@@ -49,8 +49,8 @@ func main() {
 
 	//valid parenthesis
 	// res := isBalancedParenthesis("( )[ { } ( ) ]")
-	res := isBalancedParenthesis("[ ( )")
-	fmt.Println("is Balanced parenthesis : ", res)
+	// res := isBalancedParenthesis("[ ( )")
+	// fmt.Println("is Balanced parenthesis : ", res)
 
 	//inser element at bottom of stack
 	// pushBottom(s,9)
@@ -80,5 +80,41 @@ func main() {
 	// 	arr := []int{2,1,5,6,2,3}
 	// 	res:= largestRectangleArea(arr)
 	//   fmt.Println("res  : ",  res)
+
+	// mstackusingQueue()
+
+	// minStack()
+
+	// res := infixToPostfix("(p+q)*(m-n)")
+	// fmt.Println("InfixToPostfix   :  ", res)
+
+	// res := prefixToInfix("*-A/BC-/AKL")
+	// fmt.Println("prefixToInfix   :  ", res)
+
+	// res := prefixToPostfix("*+AB-CD")
+	// fmt.Println("prefixToPostfix   :  ", res)
+
+	// res := postfixToPrefix("ABC/-AK/L-*")
+	// fmt.Println("postfixToPrefix   :  ", res)
+
+	// res := postfixToInfix("ab*c+")
+	// fmt.Println("postfixToInfix   :  ", res)
+
+	// res := infixToPrefix("((a/b)+c)-(d+(e*f))")
+	// fmt.Println("infixToPrefix   :  ", res)
+
+	// nums := []int{5, 7, 1, 7, 6, 0}
+	// res := nextGreaterElements2(nums)
+	// fmt.Println("nextGreaterElements   :  ", res)
+
+	// nums1 := []int{4, 1, 2}
+	// nums2 := []int{1, 3, 4, 2}
+	// res := nextGreaterElement1(nums1, nums2)
+	// fmt.Println("nextGreaterElements   :  ", res)
+
+	// nums := []int{3, 1, 2, 4, 0, 1, 3, 2}
+	nums := []int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}
+	res := trap(nums)
+	fmt.Println("trap water   :  ", res)
 
 }

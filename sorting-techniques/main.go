@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func main() {
 
 	// var arr = []int{44, 11, 55, 22, 66, 33}
@@ -39,7 +37,7 @@ func main() {
 	// insertionSortRecurssive(arr, len(arr))
 	// fmt.Println("arr : ", arr)
 
-	var arr = []int{44, 11, 55, 22, 66, 33}
-	var res = quickSort(arr, 0, len(arr)-1)
-	fmt.Println("arr : ", res)
+	// var arr = []int{44, 11, 55, 22, 66, 33}
+	// var res = quickSort(arr, 0, len(arr)-1)
+	// fmt.Println("arr : ", res)
 }

@@ -78,6 +78,9 @@ func main() {
 
 	// var arr = make([]int, 0)
 	// getPath(tree.rootNode, &arr, 5)
-	// fmt.Println("zigzagLevelOrder : ", arr)
+	// fmt.Println("getPath : ", arr)
+
+	res := widthOfBinaryTree(tree.rootNode)
+	fmt.Println("widthOfBinaryTree : ", res)
 
 }

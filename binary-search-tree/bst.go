@@ -398,13 +398,15 @@ func (this *BSTIterator) HasNext() bool {
 }
 
 // Link: https://leetcode.com/problems/two-sum-iv-input-is-a-bst/
+
+// res tsore the the map of elment we require and target sum
 type Res struct {
-	M map[int]uint8
-	K int
+	nodeMap   map[int]int
+	targetSum int
 }
 
 func findTarget(root *Node, k int) bool {
-	r := Res{M: make(map[int]uint8), K: k}
+	r := Res{nodeMap: make(map[int]int), targetSum: k}
 	return r.dfs(root)
 }
 
@@ -413,10 +415,14 @@ func (r *Res) dfs(node *Node) bool {
 	if node == nil {
 		return false
 	}
-	if _, ok := r.M[node.Val]; ok {
+	//search if current node is present in map
+	//if it is present then return true
+	if _, ok := r.nodeMap[node.Val]; ok {
 		return true
 	}
-	r.M[r.K-node.Val]++
+	//if elment is not present then calculate the required node from target and current node
+	//add the required node in map
+	r.nodeMap[r.targetSum-node.Val]++
 
 	return r.dfs(node.Left) || r.dfs(node.Right)
 }
