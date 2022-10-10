@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func main() {
 
 	//stack Initialization and calling basic functions
@@ -113,8 +111,15 @@ func main() {
 	// fmt.Println("nextGreaterElements   :  ", res)
 
 	// nums := []int{3, 1, 2, 4, 0, 1, 3, 2}
-	nums := []int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}
-	res := trap(nums)
-	fmt.Println("trap water   :  ", res)
+	// nums := []int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}
+	// res := trap(nums)
+	// fmt.Println("trap water   :  ", res)
 
+	// nums := []int{5, 7, 1, 7, 6, 0}
+	// res := nextSmallerElements2(nums)
+	// fmt.Println("nextSmallerElements2   :  ", res)
+
+	// nums := []int{3, 4, 2, 7, 5, 8, 10, 6}
+	// res := nextGreaterElementCount(nums)
+	// fmt.Println("nextGreaterElementCount   :  ", res)
 }

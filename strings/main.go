@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func main() {
 
 	// input := "(()())(())"
@@ -34,4 +36,8 @@ func main() {
 	// var s, t = "anagram", "nagaram"
 	// res := isAnagram(s, t)
 	// fmt.Println("res : ", res)
+
+	res := breakPalindrome("abccba")
+	fmt.Println("res : ", res)
+
 }

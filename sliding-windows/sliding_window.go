@@ -81,3 +81,36 @@ func totalFruit(fruits []int) int {
 	}
 	return maximum
 }
+
+//Link: https://leetcode.com/problems/sliding-window-maximum/
+func maxSlidingWindow(nums []int, k int) []int {
+
+	n := len(nums)
+	dequeue := make([]int, 0) //to store elment in decreasing order
+	ans := make([]int, 0)     //stire the ans
+
+	i := 0
+	for i = 0; i < k; i++ {
+		//if len > 0 and last elment of deque is less than current elment of num
+		//that means current elment is an poterntial candidate so popping the top element of dequeue
+		for len(dequeue) > 0 && dequeue[len(dequeue)-1] < nums[i] {
+			dequeue = dequeue[:len(dequeue)-1]
+		}
+		//append element to qequeue
+		dequeue = append(dequeue, nums[i])
+	}
+
+	ans = append(ans, dequeue[0])
+	for ; i < n; i++ {
+		//check top elment of dequeue is in the range of current slidding window if not then remove that elment
+		if dequeue[0] == nums[i-k] {
+			dequeue = dequeue[1:]
+		}
+		for len(dequeue) > 0 && dequeue[len(dequeue)-1] < nums[i] {
+			dequeue = dequeue[:len(dequeue)-1]
+		}
+		dequeue = append(dequeue, nums[i])
+		ans = append(ans, dequeue[0])
+	}
+	return ans
+}

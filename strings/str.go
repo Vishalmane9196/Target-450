@@ -172,3 +172,23 @@ func isAnagram(s string, t string) bool {
 
 	return true
 }
+
+// Link: https://leetcode.com/problems/break-a-palindrome/
+func breakPalindrome(palindrome string) string {
+
+	n := len(palindrome)
+	//case 1: if string consist of only character
+	if n == 1 {
+		return ""
+	}
+
+	for i := 0; i < n/2; i++ {
+		if palindrome[i] != 'a' {
+			str := palindrome[:i] + "a" + palindrome[i+1:]
+			return str
+		}
+	}
+
+	str := palindrome[:n-1] + "b"
+	return str
+}

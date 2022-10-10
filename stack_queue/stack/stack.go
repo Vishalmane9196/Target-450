@@ -833,3 +833,61 @@ func mini(a, b int) int {
 	}
 	return a
 }
+
+// Link: https://www.geeksforgeeks.org/next-smaller-element/
+func nextSmallerElements2(nums []int) []int {
+	fmt.Println("nums   : ", nums)
+
+	n := len(nums)
+	nge := make([]int, n)
+	st := make([]int, 0)
+
+	for i := range nums {
+		nge[i] = -1
+	}
+	fmt.Println("nge  : ", nge)
+
+	for i := n - 1; i >= 0; i-- {
+
+		for len(st) > 0 && st[len(st)-1] >= nums[i%n] {
+			st = st[:len(st)-1]
+		}
+
+		if i < n {
+			if len(st) > 0 {
+				nge[i] = st[len(st)-1]
+			}
+		}
+		st = append(st, nums[i%n])
+	}
+	return nge
+}
+
+// ramaining
+// Link: https://leetcode.com/problems/next-greater-element-ii/
+func nextGreaterElementCount(nums []int) []int {
+	fmt.Println("nums   : ", nums)
+	n := len(nums)
+	nge := make([]int, n)
+	st := make([]int, 0)
+
+	for i := range nums {
+		nge[i] = 0
+	}
+	fmt.Println("nge  : ", nge)
+
+	for i := n - 1; i >= 0; i-- {
+
+		for len(st) > 0 && st[len(st)-1] > nums[i] {
+			st = st[:len(st)-1]
+		}
+
+		if i < n {
+			if len(st) > 0 {
+				nge[i] = len(st)
+			}
+		}
+		st = append(st, nums[i%n])
+	}
+	return nge
+}
