@@ -20,8 +20,26 @@ func main() {
 	// res := totalFruit(nums)
 	// fmt.Println("Fruit Into Baskets is :", res)
 
-	var nums = []int{12, 1, 78, 90, 57, 89, 56}
-	res := maxSlidingWindow(nums, 3)
-	fmt.Println("maxSlidingWindow :", res)
+	// var nums = []int{12, 1, 78, 90, 57, 89, 56}
+	// res := maxSlidingWindow(nums, 3)
+	// fmt.Println("maxSlidingWindow :", res)
+
+	// var nums = []int{1, 2, 3, 4, 5}
+	// var nums = []int{2, 1, 5, 0, 4, 6}
+	// var nums = []int{2, 1, 5, 0, 4, 6}
+	// res := increasingTriplet(nums)
+	// fmt.Println("increasingTriplet :", res)
+
+	// res := lengthOfLongestSubstring("pwwkew")
+	// fmt.Println("lengthOfLongestSubstring :", res)
+
+	// res := characterReplacement("ABAB", 2)
+	// res := characterReplacement("AAAA", 0)
+	// fmt.Println("characterReplacement :", res)
+
+	nums := []int{1, 1, 2, 1, 1}
+	target := 3
+	res := numberOfSubarrays(nums, target)
+	fmt.Println("numberOfSubarrays :", res)
 
 }

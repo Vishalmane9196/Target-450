@@ -58,7 +58,8 @@ func (c *LRUCache) Put(key, val int) {
 			},
 		}
 		//push the new node to list
-		ptr := c.l.PushFront(node)
+		pt
+		re
 		//add new node to map
 		c.m[key] = ptr
 	}

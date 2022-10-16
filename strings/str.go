@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -191,4 +192,136 @@ func breakPalindrome(palindrome string) string {
 
 	str := palindrome[:n-1] + "b"
 	return str
+}
+
+// Link: https://leetcode.com/problems/string-compression/
+func compress(chars []byte) int {
+
+	count := 1    // count of consecutive character
+	resIndex := 0 // index of result chars
+
+	//append the first character at first index
+	chars[resIndex] = chars[0]
+	for i := 1; i < len(chars); i++ {
+		//start from 1st index
+		if chars[resIndex] != chars[i] {
+			// new character
+			resIndex++
+			resIndex = resIndex + assignCount(chars[resIndex:], count)
+			// fmt.Printf("resIndex : %v  || chars[i]  :  %v \n", resIndex, chars[i])
+			chars[resIndex] = chars[i]
+			// fmt.Println("chars  : ", chars)
+			count = 1
+		} else {
+			// same character
+			count++
+		}
+	}
+	resIndex++
+	resIndex = resIndex + assignCount(chars[resIndex:], count)
+	// fmt.Println("resIndex   :", resIndex)
+	// fmt.Println("chars : ", chars)
+	chars = chars[:resIndex+1]
+	// fmt.Println("chars : ", chars)
+	return resIndex
+}
+
+// convert count to byte slice and assign it to target byte slice
+func assignCount(target []byte, count int) int {
+	if count == 1 {
+		// no need to assign
+		return 0
+	}
+	countStr := strconv.Itoa(count)
+	// fmt.Println("countstr : ", countStr)
+	for i, v := range countStr {
+		target[i] = byte(v)
+		// fmt.Println("tartget[i] : ", string(v))
+	}
+	// fmt.Println("countstr : ", countStr)
+	// fmt.Println("countstr len: ", len(countStr))
+	return len(countStr)
+}
+
+// Link: https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/
+func maxDepth(s string) int {
+	max, count := 0, 0
+
+	for _, v := range s {
+		if v == '(' {
+			count += 1
+			//set max to count for depth
+			if max < count {
+				max = count
+			}
+		}
+
+		if v == ')' {
+			count -= 1
+		}
+	}
+	return max
+}
+
+// Link: https://leetcode.com/problems/roman-to-integer/
+func romanToInt(s string) int {
+
+	romanMap := map[byte]int{'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+	result := romanMap[s[len(s)-1]]
+
+	for i := len(s) - 2; i >= 0; i-- {
+		if romanMap[s[i]] < romanMap[s[i+1]] {
+			result -= romanMap[s[i]]
+		} else {
+			result += romanMap[s[i]]
+		}
+	}
+	return result
+}
+
+// Link: https://www.geeksforgeeks.org/number-substrings-string/
+func subString(str string) int {
+	ans := 0
+	index := 0
+	strByte := []byte(str)
+	subStringHelper(strByte, index, "", &ans)
+	return ans
+
+}
+
+func subStringHelper(str []byte, index int, ans string, count *int) {
+
+	//base condition
+	if index == len(str) {
+		// fmt.Println("ans : ", ans)
+		*count = *count + 1
+		return
+	}
+
+	//include
+	subStringHelper(str, index+1, ans+string(str[index]), count)
+
+	//exclude
+	subStringHelper(str, index+1, ans, count)
+}
+
+// Link: https://leetcode.com/problems/sum-of-beauty-of-all-substrings/
+func beautySum(s string) int {
+	min, max := 1, 1
+	charMap := make(map[byte]int, 0)
+
+	for i := 0; i < len(s); i++ {
+		charMap[s[i]] = charMap[s[i]] + 1
+		if count, exist := charMap[s[i]]; exist {
+			fmt.Printf("  %v ===> %v  \n", s[i], charMap[s[i]])
+			if count > max {
+				max = count
+			}
+			if count < min {
+				min = count
+			}
+		}
+	}
+	fmt.Printf("min : %v  max: %v \n", min, max)
+	return max - min
 }

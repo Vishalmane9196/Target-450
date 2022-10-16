@@ -37,7 +37,30 @@ func main() {
 	// res := isAnagram(s, t)
 	// fmt.Println("res : ", res)
 
-	res := breakPalindrome("abccba")
-	fmt.Println("res : ", res)
+	// res := breakPalindrome("abccba")
+	// fmt.Println("res : ", res)
+
+	// str := []string{"a", "a", "b", "b", "c", "c", "c"}
+	// str := "abbbbbbbbbbbb"
+	// // str := "aabbccc"
+	// res := compress([]byte(str))
+	// fmt.Println("compress1 : ", res)
+
+	// str := "(1+(2*3)+((8)/4))+1"
+	// res := maxDepth(str)
+	// fmt.Println("MaxDepth : ", res)
+
+	// str := "III"
+	// str := "LVIII"
+	// res := romanToInt(str)
+	// fmt.Println("romanToInt : ", res)
+
+	// str := "abc"
+	// res := subString(str)
+	// fmt.Println("subString : ", res)
+
+	str := "aabcb"
+	res := beautySum(str)
+	fmt.Println("beautySum : ", res)
 
 }

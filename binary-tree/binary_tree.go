@@ -1062,3 +1062,40 @@ func widthOfBinaryTree(root *Node) int {
 	}
 	return ans
 }
+
+// Link: https://leetcode.com/problems/add-one-row-to-tree/
+func addOneRow(root *Node, val int, depth int) *Node {
+
+	if depth == 1 {
+		return &Node{val, val, root, nil}
+	}
+
+	queue := []*Node{}
+	queue = append(queue, root)
+	for len(queue) > 0 && depth != 1 {
+		size := len(queue)
+		depth -= 1
+
+		for i := 0; i < size; i++ {
+			node := queue[0]
+			queue = queue[1:]
+
+			if node.leftNode != nil {
+				queue = append(queue, node.leftNode)
+			}
+
+			if node.rightNode != nil {
+				queue = append(queue, node.rightNode)
+			}
+
+			if depth == 1 {
+				node.leftNode = &Node{val, val, node.leftNode, nil}
+				node.rightNode = &Node{val, val, nil, node.rightNode}
+			}
+		}
+		if depth == 1 {
+			break
+		}
+	}
+	return root
+}

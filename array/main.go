@@ -142,8 +142,12 @@ func main() {
 	// res := pascalTraingle(5)
 	// fmt.Println(res)
 
-	nums := []int{-1, 2, 1, -4}
-	res := threeSumClosest(nums, 1)
-	fmt.Println(res)
+	// nums := []int{-1, 2, 1, -4}
+	// res := threeSumClosest(nums, 1)
+	// fmt.Println(res)
+
+	nums := []int{3, 2, 3, 4}
+	res := largestPerimeter(nums)
+	fmt.Println("largestPerimeter   : ", res)
 
 }

@@ -80,7 +80,11 @@ func main() {
 	// getPath(tree.rootNode, &arr, 5)
 	// fmt.Println("getPath : ", arr)
 
-	res := widthOfBinaryTree(tree.rootNode)
-	fmt.Println("widthOfBinaryTree : ", res)
+	// res := widthOfBinaryTree(tree.rootNode)
+	// fmt.Println("widthOfBinaryTree : ", res)
+
+	// res := addOneRow(tree.rootNode, 1, 3)
+	// fmt.Println("addOneRow : ", res)
+	// tree.PrintBinaryTree()
 
 }

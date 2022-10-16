@@ -943,3 +943,17 @@ func Abs(x int) int {
 	}
 	return x
 }
+
+// Link: https://leetcode.com/problems/largest-perimeter-triangle/submissions/
+func largestPerimeter(nums []int) int {
+	peri := 0
+	sort.Ints(nums)
+	// fmt.Println("nums : ", nums)
+	for i := len(nums) - 1; i >= 2; i-- {
+		if nums[i-1]+nums[i-2] > nums[i] {
+			peri = nums[i] + nums[i-1] + nums[i-2]
+			break
+		}
+	}
+	return peri
+}
