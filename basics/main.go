@@ -67,7 +67,17 @@ func main() {
 	// res := armstrongNumebr(153)
 	// fmt.Printf("armstrongNumebr : %v\n", res)
 
-	res := printDivisors(36)
-	fmt.Printf("printDivisors : %v\n", res)
+	// res := printDivisors(36)
+	// fmt.Printf("printDivisors : %v\n", res)
+
+	// num1 := 4
+	// num2 := 8
+	// res := gcd(num1, num2)
+	// fmt.Printf("gcd : %v\n", res)
+
+	num := 11
+	res := isPrime(num)
+	ans := num != 1 && res == true
+	fmt.Printf("isPrime : %v\n", ans)
 
 }

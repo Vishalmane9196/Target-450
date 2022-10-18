@@ -325,3 +325,34 @@ func beautySum(s string) int {
 	fmt.Printf("min : %v  max: %v \n", min, max)
 	return max - min
 }
+
+// Link: https://leetcode.com/problems/count-and-say/
+func countAndSay(n int) string {
+
+	var ans string
+
+	for i := 0; i < n; i++ {
+		ans = countAndSayHelper(ans)
+	}
+	return ans
+}
+
+func countAndSayHelper(prevAns string) string {
+	if prevAns == "" {
+		return "1"
+	}
+	var ans strings.Builder
+	count := 1
+	for i := 1; i < len(prevAns); i++ {
+		if prevAns[i] == prevAns[i-1] {
+			count++
+		} else {
+			ans.WriteString(strconv.Itoa(count))
+			ans.WriteByte(prevAns[i-1])
+			count = 1
+		}
+	}
+	ans.WriteString(strconv.Itoa(count))
+	ans.WriteByte(prevAns[len(prevAns)-1])
+	return ans.String()
+}

@@ -1,18 +1,22 @@
 package main
 
-import "container/list"
+import (
+	"container/list"
+)
 
 type LRUCache struct {
-	cap int
-	l   *list.List
-	m   map[int]*list.Element
+	cap int                   // capacity
+	l   *list.List            // doubly linked list
+	m   map[int]*list.Element // hash table for checking if list node exists
 }
 
+// Pair is the value of a list node.
 type Pair struct {
 	key   int
 	value int
 }
 
+// Constructor initializes a new LRUCache.
 func Constructor(capacity int) LRUCache {
 	return LRUCache{
 		cap: capacity,
@@ -21,47 +25,46 @@ func Constructor(capacity int) LRUCache {
 	}
 }
 
+// Get a list node from the hash map.
 func (c *LRUCache) Get(key int) int {
-	if node, exist := c.m[key]; exist {
+	// check if list node exists
+	if node, ok := c.m[key]; ok {
 		val := node.Value.(*list.Element).Value.(Pair).value
-		//moved node to front
+		// move node to front
 		c.l.MoveToFront(node)
 		return val
 	}
 	return -1
 }
 
-func (c *LRUCache) Put(key, val int) {
-
-	//if node exist
-	if node, exist := c.m[key]; exist {
-		//move the node to front
+// Put key and value in the LRUCache
+func (c *LRUCache) Put(key int, value int) {
+	// check if list node exists
+	if node, ok := c.m[key]; ok {
+		// move the node to front
 		c.l.MoveToFront(node)
-
-		node.Value.(*list.Element).Value = Pair{key, val}
+		// update the value of a list node
+		node.Value.(*list.Element).Value = Pair{key: key, value: value}
 	} else {
-		//if node does not exist
-		//delete the node of list is full
+		// delete the last list node if the list is full
 		if c.l.Len() == c.cap {
-			//get the key you want to delete
+			// get the key that we want to delete
 			idx := c.l.Back().Value.(*list.Element).Value.(Pair).key
-			//delete node from map
+			// delete the node pointer in the hash map by key
 			delete(c.m, idx)
-			//remove the last node
+			// remove the last list node
 			c.l.Remove(c.l.Back())
 		}
-		//initialize node
+		// initialize a list node
 		node := &list.Element{
 			Value: Pair{
 				key:   key,
-				value: val,
+				value: value,
 			},
 		}
-		//push the new node to list
-		pt
-		re
-		//add new node to map
+		// push the new list node into the list
+		ptr := c.l.PushFront(node)
+		// save the node pointer in the hash map
 		c.m[key] = ptr
 	}
-
 }

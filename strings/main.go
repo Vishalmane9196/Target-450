@@ -59,8 +59,11 @@ func main() {
 	// res := subString(str)
 	// fmt.Println("subString : ", res)
 
-	str := "aabcb"
-	res := beautySum(str)
-	fmt.Println("beautySum : ", res)
+	// str := "aabcb"
+	// res := beautySum(str)
+	// fmt.Println("beautySum : ", res)
+
+	res := countAndSay(4)
+	fmt.Println("countAndSay : ", res)
 
 }

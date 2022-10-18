@@ -223,6 +223,7 @@ func isPalindromeNumber(x int) bool {
 	return x == reverseNumber
 }
 
+// Link:https://takeuforward.org/maths/check-if-a-number-is-armstrong-number-or-not/
 func armstrongNumebr(n int) bool {
 	originalno := n
 	count := 0
@@ -240,6 +241,7 @@ func armstrongNumebr(n int) bool {
 	return (sumofpower == originalno)
 }
 
+// Link: https://takeuforward.org/data-structure/print-all-divisors-of-a-given-number/
 func printDivisors(n int) []int {
 
 	//approach 1
@@ -262,5 +264,51 @@ func printDivisors(n int) []int {
 		}
 	}
 	return ans
+}
 
+// Link:https://takeuforward.org/data-structure/find-gcd-of-two-numbers/
+func gcd(num1, num2 int) int {
+
+	//approach 1
+	// min := mini(num1, num2)
+	// var ans int
+	// for i := 1; i <= min; i++ {
+
+	// 	if num1%i == 0 && num2%i == 0 {
+	// 		ans = i
+	// 	}
+	// }
+	// return ans
+
+	//approach 2
+	return gcdHelper(num1, num2)
+
+}
+
+func gcdHelper(a, b int) int {
+	if b == 0 {
+		return a
+	}
+	return gcdHelper(b, a%b)
+}
+
+// Link: https://takeuforward.org/data-structure/check-if-a-number-is-prime-or-not/
+func isPrime(num int) bool {
+
+	//approach 1
+	// for i := 2; i < num; i++ {
+	// 	if num%i == 0 {
+	// 		return false
+	// 	}
+	// }
+	// return true
+
+	// approach 2
+	for i := 2; i <= int(math.Sqrt(float64(num))); i++ {
+		fmt.Println("i : ", i)
+		if num%i == 0 {
+			return false
+		}
+	}
+	return true
 }
