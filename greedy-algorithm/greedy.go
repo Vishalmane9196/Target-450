@@ -107,3 +107,38 @@ func maxi(a, b int) int {
 	}
 	return b
 }
+
+func findContentChildren(greedArray []int, cookieSizeArray []int) int {
+
+	sort.Ints(greedArray)
+	sort.Ints(cookieSizeArray)
+
+	greedIndex := 0
+	sizeIndex := 0
+
+	for greedIndex < len(greedArray) && sizeIndex < len(cookieSizeArray) {
+
+		if cookieSizeArray[sizeIndex] >= greedArray[greedIndex] {
+			greedIndex++
+		}
+		sizeIndex++
+	}
+	return greedIndex
+}
+
+//Link: https://takeuforward.org/data-structure/find-minimum-number-of-coins/
+func minimumCoins(coinsArray []int, target int) int {
+
+	n := len(coinsArray)
+	count := 0
+	for i := n - 1; i >= 0; i-- {
+		for target >= coinsArray[i] {
+			target -= coinsArray[i]
+			count += 1
+		}
+		if target == 0 {
+			break
+		}
+	}
+	return count
+}
