@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+//Link: https://leetcode.com/problems/middle-of-the-linked-list/
 func (list *LinkedList) middleOfLinkedList() {
 	if list.headNode == nil || list.headNode.nextNode == nil {
 		fmt.Println("middle : ", list.headNode)
@@ -23,17 +24,65 @@ func (list *LinkedList) middleOfLinkedList() {
 		}
 		slow = slow.nextNode
 	}
-	fmt.Println("middle : ", slow)
+	fmt.Println("middle elment of linked list: ", slow.property)
 }
 
-func (list *LinkedList) detectCycle() {
+//Link: https://leetcode.com/problems/linked-list-cycle/
+func (list *LinkedList) hasCycle() bool {
 
+	/*
+		approach 1 - Hashing Approach:
+		Traverse the list one by one and keep putting the node addresses in a Hash Table. At any point, if NULL is reached then return false,
+		and if the next of the current nodes points to any of the previously stored nodes in  Hash then return true.
+	*/
+
+	/*
+		Solution 2: 	Have a visited flag with each node.
+		Approach: This solution requires modifications to the basic linked list data structure.
+		Traverse the linked list and keep marking visited nodes.
+		If you see a visited node again then there is a loop.
+	*/
+
+	/*
+		Solution 3: Floyd’s Cycle-Finding Algorithm
+		Traverse linked list using two pointers.
+		Move one pointer(slow) by one and another pointer(fast) by two.
+		If these pointers meet at the same node then there is a loop. If pointers do not meet then linked list doesn’t have a loop.
+	*/
+
+	//check first two nodes of linked list empty or not
 	if list.headNode == nil || list.headNode.nextNode == nil {
-		fmt.Println("there is no cycle in linked list")
-		return
+		return false
 	}
 
-	// floyd algo for cycle detection
+	//set slow and fast pointer to first elment of linked list
+	var slow *Node = list.headNode
+	var fast *Node = list.headNode
+
+	for slow != nil && fast != nil {
+		fast = fast.nextNode
+
+		if fast != nil {
+			fast = fast.nextNode
+		}
+		slow = slow.nextNode
+
+		/* floyd algo for cycle detection
+		At one point slow and fast will become equal if linked list has cycle present in it
+		*/
+		if slow == fast {
+			return true
+		}
+	}
+	return false
+}
+
+func (list *LinkedList) detectCycleNode() int {
+
+	if list.headNode == nil || list.headNode.nextNode == nil {
+		return -1
+	}
+
 	var slow *Node = list.headNode
 	var fast *Node = list.headNode
 
@@ -46,12 +95,10 @@ func (list *LinkedList) detectCycle() {
 		slow = slow.nextNode
 
 		if slow == fast {
-			fmt.Println("there is cycle in linked list")
-			return
+			return slow.property
 		}
 	}
-	fmt.Println("there is no cycle in linked list")
-	return
+	return -1
 }
 
 //Implement stack using linked list
@@ -74,6 +121,7 @@ func (s *stackLinkedList) IsEmpty() bool {
 	return s.size == 0
 }
 
+// Top return the head value
 func (s *stackLinkedList) Top() int {
 	if s.IsEmpty() {
 		fmt.Println("stack is empty")
@@ -82,11 +130,14 @@ func (s *stackLinkedList) Top() int {
 	return s.head.property
 }
 
+//Push create new node and keep head in new node's next pointer
+//like a pushfront operation
 func (s *stackLinkedList) Push(x int) {
 	s.head = &Node{x, s.head}
 	s.size++
 }
 
+//Pop move head to head's next and decrease size by 1
 func (s *stackLinkedList) Pop() (int, bool) {
 	if s.IsEmpty() {
 		fmt.Println("stack is empty")
@@ -96,6 +147,16 @@ func (s *stackLinkedList) Pop() (int, bool) {
 	s.head = s.head.nextNode
 	s.size--
 	return poppedElement, true
+}
+
+func (s *stackLinkedList) PrintStack() {
+	if !s.IsEmpty() {
+		fmt.Printf("[START]")
+		for trav := s.head; trav != nil; trav = trav.nextNode {
+			fmt.Printf(" <-> [%v]", trav.property)
+		}
+		fmt.Printf(" <-> [END]\n")
+	}
 }
 
 func stackUsingLinkedList() {
@@ -108,13 +169,12 @@ func stackUsingLinkedList() {
 	st.Push(5)
 	fmt.Println(" top : ", st.Top())
 	popEle, _ := st.Pop()
-	fmt.Println(" top : ", st.Top())
 	fmt.Printf(" popped element : %v  \n", popEle)
+	fmt.Println(" top : ", st.Top())
 	fmt.Println(" isEmpty : ", st.IsEmpty())
-	fmt.Println("stack : ", st)
+	st.PrintStack()
 }
 
-//
 //Implement queue using linked list
 //Link: https://www.educative.io/answers/how-to-implement-a-stack-using-a-linked-list-in-go
 //Link: https://takeuforward.org/data-structure/implement-stack-using-linked-list/
@@ -143,21 +203,29 @@ func (s *queueLinkedList) Top() int {
 	return s.head.property
 }
 
+//Push create new node and add the newly created node in last node's nextnode
+//if list is empty then first pushed node will become head node
+//like a pushback operation
 func (s *queueLinkedList) Push(x int) {
+
+	//if list is empty then set new node as head node and increase size by 1
 	if s.size == 0 {
 		s.head = &Node{x, nil}
 		s.size++
 	} else {
+		//temp variable store the last node of list
 		temp := s.head
 		for temp.nextNode != nil {
 			temp = temp.nextNode
 		}
+		//set the last node's next poniter to newly created node and increase size by 1
 		var newNode = &Node{x, nil}
 		temp.nextNode = newNode
 		s.size++
 	}
 }
 
+//Pop move head to head's next and decrease size by 1
 func (s *queueLinkedList) Pop() (int, bool) {
 	if s.IsEmpty() {
 		fmt.Println("stack is empty")
@@ -169,6 +237,16 @@ func (s *queueLinkedList) Pop() (int, bool) {
 	return poppedElement, true
 }
 
+func (s *queueLinkedList) PrintQueue() {
+	if !s.IsEmpty() {
+		fmt.Printf("[START]")
+		for trav := s.head; trav != nil; trav = trav.nextNode {
+			fmt.Printf(" <-> [%v]", trav.property)
+		}
+		fmt.Printf(" <-> [END]\n")
+	}
+}
+
 func queueUsingLinkedList() {
 
 	q := QConstructor()
@@ -177,18 +255,11 @@ func queueUsingLinkedList() {
 	q.Push(3)
 	q.Push(4)
 	q.Push(5)
+	q.PrintQueue()
 	fmt.Println(" top : ", q.Top())
 	popEle, _ := q.Pop()
 	fmt.Printf(" popped element : %v  \n", popEle)
 	fmt.Println(" top : ", q.Top())
 	fmt.Println(" isEmpty : ", q.IsEmpty())
-	popEle, _ = q.Pop()
-	fmt.Printf(" popped element : %v  \n", popEle)
-	popEle, _ = q.Pop()
-	fmt.Printf(" popped element : %v  \n", popEle)
-	popEle, _ = q.Pop()
-	fmt.Printf(" popped element : %v  \n", popEle)
-	fmt.Println(" top : ", q.Top())
-	fmt.Println("stack : ", q)
-
+	q.PrintQueue()
 }
