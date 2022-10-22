@@ -146,8 +146,21 @@ func main() {
 	// res := threeSumClosest(nums, 1)
 	// fmt.Println(res)
 
-	nums := []int{3, 2, 3, 4}
-	res := largestPerimeter(nums)
-	fmt.Println("largestPerimeter   : ", res)
+	// nums := []int{3, 2, 3, 4}
+	// res := largestPerimeter(nums)
+	// fmt.Println("largestPerimeter   : ", res)
+
+	// nums := []int{1, 2, 3, 1}
+	// res := containsDuplicate1(nums)
+	// fmt.Println("containsDuplicate1   : ", res)
+
+	// nums := []int{1, 2, 3, 1}
+	// rangeLimit := 3
+	// nums := []int{1, 2, 3, 1, 2, 3}
+	// rangeLimit := 2
+	nums := []int{1, 0, 1, 1}
+	rangeLimit := 1
+	res := containsDuplicate2(nums, rangeLimit)
+	fmt.Println("containsDuplicate2   : ", res)
 
 }

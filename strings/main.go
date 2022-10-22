@@ -55,6 +55,10 @@ func main() {
 	// res := romanToInt(str)
 	// fmt.Println("romanToInt : ", res)
 
+	// number := 12
+	// res := IntToRoman(number)
+	// fmt.Println("IntToRoman : ", res)
+
 	// str := "abc"
 	// res := subString(str)
 	// fmt.Println("subString : ", res)
@@ -63,7 +67,14 @@ func main() {
 	// res := beautySum(str)
 	// fmt.Println("beautySum : ", res)
 
-	res := countAndSay(4)
-	fmt.Println("countAndSay : ", res)
+	// res := countAndSay(4)
+	// fmt.Println("countAndSay : ", res)
+
+	var (
+		s = "ADOBECODEBANC"
+		t = "ABC"
+	)
+	res := minWindow(s, t)
+	fmt.Println("minWindow : ", res)
 
 }

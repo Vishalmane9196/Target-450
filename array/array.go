@@ -957,3 +957,45 @@ func largestPerimeter(nums []int) int {
 	}
 	return peri
 }
+
+// Link: https://leetcode.com/problems/contains-duplicate/
+func containsDuplicate1(nums []int) bool {
+	numsMap := make(map[int]bool, 0)
+
+	for i := 0; i < len(nums); i++ {
+		_, exist := numsMap[nums[i]]
+		if exist {
+			return true
+		}
+		if !exist {
+			numsMap[nums[i]] = true
+		}
+	}
+	return false
+}
+
+// Link: https://leetcode.com/problems/contains-duplicate-ii/
+func containsDuplicate2(nums []int, limit int) bool {
+	//for storing lement and it's index
+	numsMap := make(map[int]int, 0)
+
+	if len(nums) > 1 {
+		numsMap[nums[0]] = 0
+	}
+	var ans bool
+	for i := 1; i < len(nums); i++ {
+		val, exist := numsMap[nums[i]]
+		if exist {
+			if i-val <= limit {
+				ans = true
+			} else {
+				//update the elment with lastest index
+				numsMap[nums[i]] = i
+			}
+		}
+		if !exist {
+			numsMap[nums[i]] = i
+		}
+	}
+	return ans
+}

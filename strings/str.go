@@ -279,6 +279,26 @@ func romanToInt(s string) int {
 	return result
 }
 
+// Link: https://leetcode.com/problems/integer-to-roman/
+func IntToRoman(num int) string {
+
+	symbol := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
+	value := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
+
+	result := ""
+
+	for num > 0 {
+		for i := range value {
+			if num >= value[i] {
+				result += symbol[i]
+				num -= value[i]
+				break
+			}
+		}
+	}
+	return result
+}
+
 // Link: https://www.geeksforgeeks.org/number-substrings-string/
 func subString(str string) int {
 	ans := 0
@@ -355,4 +375,50 @@ func countAndSayHelper(prevAns string) string {
 	ans.WriteString(strconv.Itoa(count))
 	ans.WriteByte(prevAns[len(prevAns)-1])
 	return ans.String()
+}
+
+// Link: https://leetcode.com/problems/minimum-window-substring/
+func minWindow(s string, t string) string {
+
+	var (
+		rem        = 0
+		counter    = make(map[byte]int)
+		ret        = string(make([]byte, len(s)))
+		start, end = 0, 0
+	)
+
+	for i := range t {
+		rem++
+		counter[t[i]]++
+	}
+	if rem > len(s) {
+		return ""
+	}
+
+	for end < len(s) {
+		if v, ok := counter[s[end]]; ok {
+			if v > 0 {
+				rem--
+			}
+			counter[s[end]]--
+		}
+		for rem <= 0 {
+			if len(ret) >= len(s[start:end+1]) {
+				ret = s[start : end+1]
+			}
+			if _, ok := counter[s[start]]; ok {
+				counter[s[start]]++
+				if counter[s[start]] > 0 {
+					rem++
+				}
+			}
+			start++
+		}
+		end++
+	}
+
+	if ret == string(make([]byte, len(s))) {
+		return ""
+	}
+	return ret
 }
