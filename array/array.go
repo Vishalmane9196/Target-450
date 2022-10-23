@@ -999,3 +999,25 @@ func containsDuplicate2(nums []int, limit int) bool {
 	}
 	return ans
 }
+
+// Link: https://leetcode.com/problems/set-mismatch/
+func findErrorNums(nums []int) []int {
+
+	n := len(nums)
+	found := make([]bool, n+1)
+	repeatedNum := 0
+	runningSum := 0
+	desiredSum := (n * (n + 1)) / 2
+	for _, val := range nums {
+		if found[val] {
+			if repeatedNum == 0 {
+				repeatedNum = val
+			}
+		} else {
+			found[val] = true
+			runningSum += val
+		}
+	}
+	missingNum := desiredSum - runningSum
+	return []int{repeatedNum, missingNum}
+}
