@@ -6,8 +6,8 @@ import (
 
 // Node class
 type Node struct {
-	property     int
-	nextNode     *Node
+	property int
+	nextNode *Node
 	prevNode *Node
 }
 
@@ -17,7 +17,7 @@ type LinkedList struct {
 	// tailNode *Node
 }
 
-//insertAtStart list.method will be used for isnerting node at starting position
+// insertAtStart list.method will be used for isnerting node at starting position
 func (list *LinkedList) insertAtStart(property int) {
 	var newNode = &Node{property, nil, nil}
 
@@ -28,25 +28,22 @@ func (list *LinkedList) insertAtStart(property int) {
 	list.headNode = newNode
 }
 
-//inserAtEnd method adds the node with property to the end
+// inserAtEnd method adds the node with property to the end
 func (list *LinkedList) inserAtEnd(property int) {
 	var newNode = &Node{property, nil, nil}
 
-	var lastNode = &Node{}
-	lastNode = list.getLastNode()
-
+	lastNode := list.getLastNode()
 	if lastNode != nil {
 		lastNode.nextNode = newNode
 		newNode.prevNode = lastNode
 	}
 }
 
-//insert_after method  adds a node with nodeProperty after node with property
+// insert_after method  adds a node with nodeProperty after node with property
 func (list *LinkedList) insertAfter(existingData int, newData int) {
 	var newNode = &Node{newData, nil, nil}
-	var dataNode *Node
 
-	dataNode = list.getNode(existingData)
+	dataNode := list.getNode(existingData)
 	if dataNode != nil {
 		newNode.nextNode = dataNode.nextNode
 		newNode.prevNode = dataNode
@@ -55,52 +52,48 @@ func (list *LinkedList) insertAfter(existingData int, newData int) {
 	}
 }
 
-func (list *LinkedList) delAtStart(){
+func (list *LinkedList) delAtStart() {
 
 	if list.headNode == nil {
-       fmt.Println("The List is empty")
-	}else{
-        if list.headNode.nextNode == nil {
+		fmt.Println("The List is empty")
+	} else {
+		if list.headNode.nextNode == nil {
 			list.headNode = nil
-		}else{
+		} else {
 			list.headNode = list.headNode.nextNode
 			list.headNode.prevNode = nil
-		}	
+		}
 	}
 }
 
-func (list *LinkedList) delAtEnd(){
-  var lastNode = &Node{}
-  lastNode = list.getLastNode()
-
-  if lastNode != nil {
-	lastNode.prevNode.nextNode = nil
-	lastNode.nextNode = nil
-  }
+func (list *LinkedList) delAtEnd() {
+	lastNode := list.getLastNode()
+	if lastNode != nil {
+		lastNode.prevNode.nextNode = nil
+		lastNode.nextNode = nil
+	}
 }
 
-//remove_data method remove the data from linked list
-func (list *LinkedList) delNode(data int){
-	 var deleteNode = &Node{}
+// remove_data method remove the data from linked list
+func (list *LinkedList) delNode(data int) {
 
-	 deleteNode = list.getNode(data)
-	 if deleteNode != nil {
+	deleteNode := list.getNode(data)
+	if deleteNode != nil {
 		deleteNode.prevNode.nextNode = deleteNode.nextNode
 		deleteNode.nextNode.prevNode = deleteNode.prevNode
-	 }
+	}
 }
 
-//getFirstNode method returns the first Node of linked list
+// getFirstNode method returns the first Node of linked list
 func (list *LinkedList) getFirstNode() *Node {
-  return list.headNode
+	return list.headNode
 }
 
-//getLastNode method returns the last Node
+// getLastNode method returns the last Node
 func (list *LinkedList) getLastNode() *Node {
-	var travNode *Node
 	var lastNode *Node
 
-	for travNode = list.headNode; travNode != nil; travNode = travNode.nextNode {
+	for travNode := list.headNode; travNode != nil; travNode = travNode.nextNode {
 		if travNode.nextNode == nil {
 			lastNode = travNode
 		}
@@ -108,12 +101,11 @@ func (list *LinkedList) getLastNode() *Node {
 	return lastNode
 }
 
-//getNode method returns Node given parameter property
+// getNode method returns Node given parameter property
 func (list *LinkedList) getNode(data int) *Node {
 	var tempNode *Node
-	var travNode *Node
 
-	for travNode = list.headNode; travNode != nil; travNode = travNode.nextNode {
+	for travNode := list.headNode; travNode != nil; travNode = travNode.nextNode {
 		if travNode.property == data {
 			tempNode = travNode
 			break
@@ -122,11 +114,11 @@ func (list *LinkedList) getNode(data int) *Node {
 	return tempNode
 }
 
-//getprevNode method returns 2nd last elment of given property
+// getprevNode method returns 2nd last elment of given property
 func (list *LinkedList) getPreviousNode(data int) *Node {
 	var tempNode *Node
-	var travNode *Node
-	for travNode = list.headNode; travNode.nextNode!= nil; travNode = travNode.nextNode {
+
+	for travNode := list.headNode; travNode.nextNode != nil; travNode = travNode.nextNode {
 		if tempNode.nextNode.property == data {
 			tempNode = travNode
 			break
@@ -135,12 +127,11 @@ func (list *LinkedList) getPreviousNode(data int) *Node {
 	return tempNode
 }
 
-//IterateList method of LinkedList
+// IterateList method of LinkedList
 func (list *LinkedList) printLinkedList() {
-	var travNode *Node
 
 	fmt.Printf(" [START]")
-	travNode = list.headNode
+	travNode := list.headNode
 	for travNode != nil {
 		fmt.Printf(" <-> [%v]", travNode.property)
 		travNode = travNode.nextNode
@@ -148,17 +139,16 @@ func (list *LinkedList) printLinkedList() {
 	fmt.Printf(" <-> [END]\n")
 }
 
-//isListEmpty method return the linked list is empty or not
-func(list *LinkedList) isListEmpty() bool {
+// isListEmpty method return the linked list is empty or not
+func (list *LinkedList) isListEmpty() bool {
 	return list.headNode == nil
 }
 
-//NodeBetweenValues method of LinkedList
+// NodeBetweenValues method of LinkedList
 func (list *LinkedList) NodeBetweenValues(firstNodeData, secondNodeData int) *Node {
-	var travNode *Node
 	var tempNode *Node
 
-	for travNode = list.headNode; travNode != nil; travNode = travNode.nextNode {
+	for travNode := list.headNode; travNode != nil; travNode = travNode.nextNode {
 		if travNode.prevNode != nil && travNode.nextNode != nil {
 			if travNode.prevNode.property == firstNodeData && travNode.nextNode.property == secondNodeData {
 				tempNode = travNode
@@ -169,18 +159,29 @@ func (list *LinkedList) NodeBetweenValues(firstNodeData, secondNodeData int) *No
 	return tempNode
 }
 
-//not working
-func (list *LinkedList) reverseLinkedList() {
+// printLLByNode print linked list when node is given
+func (node *Node) printLLByNode() {
 
-	var temp *Node
+	fmt.Printf(" [START]")
+	for node := node; node != nil; node = node.nextNode {
+		fmt.Printf(" <-> [%v]", node.property)
+	}
+	fmt.Printf(" <-> [END]\n")
+}
+
+// remaining
+func (list *LinkedList) reverseLinkedList() *Node {
+
+	var prev *Node
 	var curr *Node = list.headNode
 	for curr != nil {
-        //stored next pointer reference
-        temp = curr.prevNode
-        //changed the next of current to prev
-        curr.prevNode = curr.nextNode
-		curr.nextNode = temp 
-        //shifted prev and curr poniter by 1 ahead
-        curr = curr.prevNode
+		//stored next pointer reference
+		temp := curr.prevNode
+		//changed the next of current to prev
+		curr.prevNode = curr.nextNode
+		curr.nextNode = temp
+		//shifted prev and curr poniter by 1 ahead
+		curr = curr.prevNode
 	}
+	return prev
 }
