@@ -6,7 +6,7 @@ import (
 	"sort"
 )
 
-// LinkL : https://takeuforward.org/data-structure/find-the-largest-element-in-an-array/
+// Link : https://takeuforward.org/data-structure/find-the-largest-element-in-an-array/
 func getLargest(arr []int) {
 
 	//approach 1
@@ -1020,4 +1020,30 @@ func findErrorNums(nums []int) []int {
 	}
 	missingNum := desiredSum - runningSum
 	return []int{repeatedNum, missingNum}
+}
+
+// Link: https://www.geeksforgeeks.org/find-index-first-1-sorted-array-0s-1s/
+func indexOfFirstOne(arr []int, low, high int) int {
+	/*
+		approach 1
+		Traverse the array from left to right and return the index of first ‘1’.
+		If 1’s are not present in the array, then print “-1”
+	*/
+
+	//approach 2 - binary search
+	for low <= high {
+		mid := low + ((high - low) / 2)
+		// if true, then 'mid' is the index of first '1'
+		if arr[mid] == 1 && (mid == 0 || arr[mid-1] == 0) {
+			return mid
+		} else if arr[mid] == 1 {
+			// first '1' lies to the left of 'mid'
+			high = mid - 1
+		} else {
+			// first '1' lies to the right of 'mid'
+			low = mid + 1
+		}
+	}
+	// 1's are not present in the array
+	return -1
 }

@@ -165,8 +165,13 @@ func main() {
 
 	// nums := []int{1, 2, 2, 4}
 	// nums := []int{1, 1}
-	nums := []int{2, 2}
-	res := findErrorNums(nums)
-	fmt.Println("findErrorNums   : ", res)
+	// nums := []int{2, 2}
+	// res := findErrorNums(nums)
+	// fmt.Println("findErrorNums   : ", res)
+
+	nums := []int{0, 0, 0, 0, 0, 0, 1, 1, 1, 1}
+	n := len(nums)
+	res := indexOfFirstOne(nums, 0, n-1)
+	fmt.Println("indexOfFirstOne   : ", res)
 
 }
