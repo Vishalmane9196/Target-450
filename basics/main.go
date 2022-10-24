@@ -11,6 +11,10 @@ func main() {
 	// res := Frequency(arr)
 	// fmt.Println("frequency : ", res)
 
+	str := "leetcode"
+	res := FrequencyOfCharacters(str)
+	fmt.Println("FrequencyOfCharacters : ", res)
+
 	// arr := []int{1, 2, 3, 1, 5, 2, 3, 1}
 	// res := lowestHighestFrequency(arr)
 	// fmt.Printf(" max : %v  min: %v \n", res[0], res[1])
@@ -75,9 +79,9 @@ func main() {
 	// res := gcd(num1, num2)
 	// fmt.Printf("gcd : %v\n", res)
 
-	num := 11
-	res := isPrime(num)
-	ans := num != 1 && res == true
-	fmt.Printf("isPrime : %v\n", ans)
+	// num := 11
+	// res := isPrime(num)
+	// ans := num != 1 && res == true
+	// fmt.Printf("isPrime : %v\n", ans)
 
 }

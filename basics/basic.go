@@ -12,10 +12,39 @@ import (
 
 // Link:https://takeuforward.org/data-structure/count-frequency-of-each-element-in-the-array/
 func Frequency(arr []int) map[int]int {
+	fmt.Println("arr : ", arr)
 
+	//approach 1
+	// var freMap = map[int]int{}
+	// for i := 0; i < len(arr); i++ {
+	// 	freMap[arr[i]]++
+	// }
+	// return freMap
+
+	//approach 2
 	var freMap = map[int]int{}
 	for i := 0; i < len(arr); i++ {
-		freMap[arr[i]]++
+		if freMap[arr[i]] == 0 {
+			freMap[arr[i]] = 1
+		} else {
+			freMap[arr[i]]++
+		}
+	}
+	return freMap
+}
+
+// Link:https://takeuforward.org/data-structure/count-frequency-of-each-element-in-the-array/
+func FrequencyOfCharacters(str string) map[string]int {
+	fmt.Println("str : ", str)
+
+	//approach 1
+	var freMap = map[string]int{}
+	for i := 0; i < len(str); i++ {
+		if freMap[string(str[i])] == 0 {
+			freMap[string(str[i])] = 1
+		} else {
+			freMap[string(str[i])]++
+		}
 	}
 	return freMap
 }
@@ -168,7 +197,14 @@ func isPalindrome(s string) bool {
 }
 
 // Link: https://leetcode.com/problems/check-if-the-sentence-is-pangram/
+// pangram sentence is the sentense which contains all the letters from english alphabet at least once
 func checkIfPangram(sentence string) bool {
+
+	n := len(sentence)
+
+	if n < 26 {
+		return false
+	}
 
 	charCount := [26]int{}
 	for i, _ := range charCount {
