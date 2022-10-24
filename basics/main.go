@@ -50,15 +50,17 @@ func main() {
 	// reverseArray(&arr, 0, len(arr)-1)
 	// fmt.Printf(" reverseArray : %v\n", arr)
 
+	/********String Problems********/
 	// str := "A man, a plan, a canal: Panama"
-	// res := isPalindrome(str)
-	// fmt.Printf(" isPalindrome : %v\n", res)
+	// res := isPalindromeString(str)
+	// fmt.Printf(" isPalindromeString : %v\n", res)
 
 	// str := "thequickbrownfoxjumpsoverthelazydog"
 	// str := "leetcode"
 	// res := checkIfPangram(str)
 	// fmt.Printf(" checkIfPangram : %v\n", res)
 
+	/**********Math Problems**********/
 	// res := countDigit(123)
 	// fmt.Printf("countDigit : %v\n", res)
 

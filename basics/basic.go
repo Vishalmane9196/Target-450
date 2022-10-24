@@ -7,9 +7,7 @@ import (
 	"unicode"
 )
 
-/**************************************************/
-//Problems on hashing
-
+/***************Hashing Problems************/\
 // Link:https://takeuforward.org/data-structure/count-frequency-of-each-element-in-the-array/
 func Frequency(arr []int) map[int]int {
 	fmt.Println("arr : ", arr)
@@ -100,10 +98,8 @@ func getMaximumDiff(arr []int) int {
 	return max - min
 }
 
-/**************************************************/
-//Problems on recurssion
-
-// Link: Understand recursion by print something N times
+/*********** Recurssion Problems*************/
+// question: Understand recursion by print something N times
 func printNTimes(n int) {
 	if n == 0 {
 		return
@@ -114,7 +110,7 @@ func printNTimes(n int) {
 	printNTimes(n - 1)
 }
 
-// Link: Print 1 to N using recursion
+// question: Print 1 to N using recursion
 func print1ToN(index, n int) {
 	if index == n {
 		return
@@ -124,13 +120,12 @@ func print1ToN(index, n int) {
 	print1ToN(index+1, n)
 }
 
-// Link: printNTo1
+// question: Print N to 1 using recursion
 func printNTo1(index, n int) {
 	if index == 0 {
 		return
 	}
 	fmt.Printf("%v ", index)
-
 	printNTo1(index-1, n)
 }
 
@@ -145,7 +140,7 @@ func sumOfN(index, n int, sum *int) {
 	sumOfN(index+1, n, sum)
 }
 
-// Factorial of N numbers
+// question: Factorial of N numbers
 func factorial(n int, ans *int) int {
 	if n <= 1 {
 		return 1
@@ -165,6 +160,7 @@ func reverseArray(arr *[]int, i, j int) {
 	reverseArray(arr, i+1, j-1)
 }
 
+// question: fibonacci number 
 func fib(n int) int {
 
 	if n <= 1 {
@@ -173,8 +169,9 @@ func fib(n int) int {
 	return fib(n-1) + fib(n-2)
 }
 
+/***********String Problems*************/
 // Link: https://leetcode.com/problems/valid-palindrome/
-func isPalindrome(s string) bool {
+func isPalindromeString(s string) bool {
 
 	leftIndex, rightIndex := 0, len(s)-1
 
@@ -194,7 +191,7 @@ func isPalindrome(s string) bool {
 		}
 	}
 	return true
-}
+}	
 
 // Link: https://leetcode.com/problems/check-if-the-sentence-is-pangram/
 // pangram sentence is the sentense which contains all the letters from english alphabet at least once
@@ -223,8 +220,7 @@ func checkIfPangram(sentence string) bool {
 	return true
 }
 
-/**************************************************/
-//Problems on Math
+/**********Math Problems**********/
 func countDigit(number int) int {
 	count := 0
 	for number != 0 {
