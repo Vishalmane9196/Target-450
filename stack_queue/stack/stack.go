@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-// Link: https://takeuforward.org/data-structure/implement-queue-using-array/
+// Link: https://takeuforward.org/data-structure/implement-stack-using-array/
 type Stack struct {
 	arr []int
 }
@@ -22,7 +22,7 @@ func (s *Stack) getLength() int {
 	return len(s.arr)
 }
 
-func print(s *Stack) {
+func printStack(s *Stack) {
 	fmt.Printf("[Bottom] <-> ")
 	for i := 0; i < len(s.arr); i++ {
 		fmt.Printf("[%v] <-> ", s.arr[i])
@@ -38,6 +38,46 @@ func pop(s *Stack) {
 func top(s *Stack) int {
 	top := s.arr[len(s.arr)-1]
 	return top
+}
+
+// implement 2 stack in one array
+// push1 inserts value to arr from front
+// check at least one space is avaliable for insertion of elment in an array
+func push1(arr *[5]int, s *Stack, val int, top1, top2 *int) {
+	if *top2-*top1 > 1 {
+		*top1++
+		arr[*top1] = val
+	} else {
+		fmt.Println("Don't have space to store push element push1")
+	}
+}
+
+func push2(arr *[5]int, s *Stack, val int, top1, top2 *int) {
+	if *top2-*top1 > 1 {
+		*top2--
+		arr[*top2] = val
+	} else {
+		fmt.Println("Don't have space to store push element in push2")
+	}
+}
+
+// pop1 removes elment from an array and decrease top1 by 1
+func pop1(arr *[5]int, s *Stack, val int, top1, top2 *int) {
+	if *top1 != -1 {
+		arr[*top1] = 0
+		*top1--
+	} else {
+		fmt.Println("No element in pop1")
+	}
+}
+
+func pop2(arr *[5]int, s *Stack, val int, top1, top2 *int) {
+	if *top2 != len(arr) {
+		arr[*top2] = 0
+		*top2++
+	} else {
+		fmt.Println("No element in pop2")
+	}
 }
 
 // Link: https://takeuforward.org/data-structure/check-for-balanced-parentheses/
@@ -71,61 +111,24 @@ func isBalancedParenthesis(str string) bool {
 	return len(stack) == 0
 }
 
-// implement 2 stack using array
-func push1(arr *[5]int, s *Stack, val int, top1, top2 *int) {
-	if *top2-*top1 > 1 {
-		*top1++
-		arr[*top1] = val
-	} else {
-		fmt.Println("Don't have space to store push element push1")
+// link: https://www.geeksforgeeks.org/reverse-a-string-in-c-cpp-different-methods/#:~:text=The%20reversing%20of%20a%20string,Using%20'inbuilt'%20reverse%20function
+func reverseString(str string, ans *string, index int) {
+
+	if index == len(str) {
+		return
 	}
+	reverseString(str, ans, index+1)
+	*ans += string(str[index])
+
 }
 
-func push2(arr *[5]int, s *Stack, val int, top1, top2 *int) {
-	if *top2-*top1 > 1 {
-		*top2--
-		arr[*top2] = val
-	} else {
-		fmt.Println("Don't have space to store push element in push2")
-	}
-}
-
-func pop1(arr *[5]int, s *Stack, val int, top1, top2 *int) {
-	if *top1 != -1 {
-		arr[*top1] = 0
-		*top1--
-	} else {
-		fmt.Println("No element in pop1")
-	}
-}
-
-func pop2(arr *[5]int, s *Stack, val int, top1, top2 *int) {
-	if *top2 != len(arr) {
-		arr[*top2] = 0
-		*top2++
-	} else {
-		fmt.Println("No element in pop2")
-	}
-}
-
-//reverse stack
-// func reverseStack(str string){
-
-// 	 var ans []rune
-// 	for _,v:=range str{
-// 		fmt.Println(" v   : ", v)
-// 		ans = append(ans, v)
-// 	}
-// 	fmt.Println("reverse string : ", string(ans))
-// }
-
-// delete middle element
+// Link: https://www.geeksforgeeks.org/delete-middle-element-stack/#:~:text=Delete%20the%20middle%20element%20of%20a%20stack%20using%20recursion%3A&text=Pop%20the%20element%20from%20the,popped%20before%20the%20recursive%20call.
 func deleteMiddle(s *Stack, stackLen int) {
 	var count int = 0
-	solve(s, count, stackLen)
+	deleteMiddleHelper(s, count, stackLen)
 }
 
-func solve(s *Stack, count, stackLen int) {
+func deleteMiddleHelper(s *Stack, count, stackLen int) {
 
 	if count == stackLen/2 {
 		pop(s)
@@ -136,12 +139,12 @@ func solve(s *Stack, count, stackLen int) {
 	pop(s)
 	//recurssive call
 	count++
-	solve(s, count, stackLen)
+	deleteMiddleHelper(s, count, stackLen)
 
 	push(s, num)
 }
 
-// pushbottom code logic
+// Link: https://www.geeksforgeeks.org/program-to-insert-an-element-at-the-bottom-of-a-stack/
 func pushBottom(s *Stack, val int) {
 
 	//base case
@@ -162,7 +165,7 @@ func pushBottom(s *Stack, val int) {
 // reverse stack using recurssion
 func reverseStack(s *Stack) {
 
-	//base
+	//base case
 	if isEmpty(s) {
 		return
 	}
@@ -243,6 +246,7 @@ func isRedundantBraces(str string) bool {
 		}
 	}
 	return false
+
 	//  for _,v:=range str{
 	// 	if v == '(' || v == '+' || v== '-' || v== '*' || v== '/' {
 	// 			stack = append(stack, v)
@@ -411,9 +415,9 @@ func max(a, b int) int {
 
 // Link: https://leetcode.com/problems/implement-stack-using-queues/
 type MyStack struct {
-	q1    []int
-	q2    []int
-	front int //store the topmost elment of stack
+	q1  []int
+	q2  []int
+	top int //store the topmost elment of stack
 }
 
 // create a new MyStack object and return it
@@ -423,20 +427,21 @@ func Constructor() MyStack {
 
 // push fuctionality of stack
 func (this *MyStack) Push(x int) {
-	//check is q2 is empty, if empty then push all element of q1 to q2 one by one
+	//check is q2 is empty, if empty then push all element from front of q1 to last of q2 one by one
 	if len(this.q2) == 0 {
-		for len(this.q1) > 0 {
-			var num int = this.q1[0]
+		for len(this.q1) != 0 {
+			num := this.q1[0]
 			this.q1 = this.q1[1:]
 			this.q2 = append(this.q2, num)
 		}
 	}
 	//set the front and and append new element in queue q1
 	if len(this.q1) == 0 {
-		this.front = x
+		this.top = x
 	}
 	this.q1 = append(this.q1, x)
-	//after adding new element to queue q1 add all prev elment in queue 1 from queue q1
+	//after adding new element to queue q1
+	//add all element of queue 1 to queue queue 1
 	for len(this.q2) > 0 {
 		this.q1 = append(this.q1, this.q2[0])
 		this.q2 = this.q2[1:]
@@ -445,7 +450,7 @@ func (this *MyStack) Push(x int) {
 
 func (this *MyStack) Pop() int {
 	if len(this.q1) == 0 {
-		return this.front
+		return this.top
 	}
 	var num int = this.q1[0]
 	this.q1 = this.q1[1:]
@@ -456,7 +461,7 @@ func (this *MyStack) Top() int {
 	if len(this.q1) > 0 {
 		return this.q1[0]
 	}
-	return this.front
+	return this.top
 }
 
 func (this *MyStack) Empty() bool {

@@ -2,17 +2,13 @@ package main
 
 import "fmt"
 
-type dequeue struct {
+type Dequeue struct {
 	arr   []int
 	front int
 	rear  int
 }
 
-//addfirst/last
-//getfirst/last
-//removefirst/last
-
-func addFirst(q *dequeue, val int) {
+func (q *Dequeue) addFirst(val int) {
 	if len(q.arr) == 0 {
 		q.rear = val
 	}
@@ -28,7 +24,7 @@ func addFirst(q *dequeue, val int) {
 	q.front = q.arr[0]
 }
 
-func addLast(q *dequeue, val int) {
+func (q *Dequeue) addLast(val int) {
 	if len(q.arr) == 0 {
 		q.front = val
 	}
@@ -38,48 +34,48 @@ func addLast(q *dequeue, val int) {
 
 }
 
-func getFirst (q *dequeue) int {
+func (q *Dequeue) getFirst() int {
 
-  if len(q.arr) == 0 {
+	if len(q.arr) == 0 {
 		return -1
 	}
 	return q.front
 }
 
-func getLast (q *dequeue) int {
+func (q *Dequeue) getLast() int {
 
-  if len(q.arr) == 0 {
+	if len(q.arr) == 0 {
 		return -1
-	} 
+	}
 	return q.rear
 }
 
-func removeFirst(q *dequeue) int{
+func (q *Dequeue) removeFirst() int {
 	if len(q.arr) == 0 {
 		return -1
 	}
-  var num = q.arr[0]
+	var num = q.arr[0]
 	q.arr = q.arr[1:]
 	q.front = q.arr[0]
-	
+
 	return num
 }
 
-func removeLast(q *dequeue) int{
+func (q *Dequeue) removeLast() int {
 	if len(q.arr) == 0 {
 		return -1
 	}
-  var num = q.arr[len(q.arr)-1]
+	var num = q.arr[len(q.arr)-1]
 	q.arr = q.arr[:len(q.arr)-1]
 	q.rear = q.arr[len(q.arr)-1]
-	
+
 	return num
 }
 
-func printDequeue(q *dequeue) {
+func (q *Dequeue) printDequeue() {
 
 	fmt.Printf("[BEG] <-> ")
-	for _,v:=range q.arr {
+	for _, v := range q.arr {
 		fmt.Printf("[%d] <-> ", v)
 	}
 	fmt.Printf("[END]\n")
