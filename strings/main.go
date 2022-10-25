@@ -70,11 +70,20 @@ func main() {
 	// res := countAndSay(4)
 	// fmt.Println("countAndSay : ", res)
 
+	// var (
+	// 	s = "ADOBECODEBANC"
+	// 	t = "ABC"
+	// )
+	// res := minWindow(s, t)
+	// fmt.Println("minWindow : ", res)
+
 	var (
-		s = "ADOBECODEBANC"
-		t = "ABC"
+		// word1 = []string{"a", "cb"}
+		// word2 = []string{"ab", "c"}
+		word1 = []string{"abc", "d", "defg"}
+		word2 = []string{"abcddefg"}
 	)
-	res := minWindow(s, t)
-	fmt.Println("minWindow : ", res)
+	res := arrayStringsAreEqual(word1, word2)
+	fmt.Println("arrayStringsAreEqual : ", res)
 
 }

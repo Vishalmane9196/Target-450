@@ -422,3 +422,30 @@ func minWindow(s string, t string) string {
 	}
 	return ret
 }
+
+// Link: https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/
+func arrayStringsAreEqual(word1 []string, word2 []string) bool {
+
+	completeWord1 := ""
+	completeWord2 := ""
+	if len(word1) > 1 {
+		completeWord1 = concat(word1)
+	} else {
+		completeWord1 = word1[0]
+	}
+
+	if len(word2) > 1 {
+		completeWord2 = concat(word2)
+	} else {
+		completeWord2 = word2[0]
+	}
+	return completeWord1 == completeWord2
+}
+
+func concat(arr []string) string {
+	res := ""
+	for i := 0; i < len(arr); i++ {
+		res += arr[i]
+	}
+	return res
+}
