@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 
-	//binary tree implementationand demo
+	/********Binary tree implementation***********/
 	var tree *BinaryTree = &BinaryTree{}
 	tree.InsertElement(8, 8)
 	tree.InsertElement(3, 3)
@@ -19,8 +19,14 @@ func main() {
 	fmt.Println()
 	tree.PrintBinaryTree()
 	fmt.Println()
-	// tree.RemoveNode(10)
-	// tree.PrintBinaryTree()
+	tree.RemoveNode(10)
+	tree.PrintBinaryTree()
+
+	/***********Problems***********/
+
+	// levelOrder := levelOrder(tree.rootNode)
+	// fmt.Println("levelOrder : ", levelOrder)
+
 	// fmt.Println(" postorder : ", postorderTraversalIterative(tree.rootNode))
 	// fmt.Println(" inorder : ", inorderTraversalIterative(tree.rootNode))
 	// fmt.Println(" postorder : ", postOrderTraversalUsing1Stack(tree.rootNode))
@@ -28,10 +34,6 @@ func main() {
 
 	// pre, in, post := allTraversal(tree.rootNode)
 	// fmt.Printf(" preOrder : %v \n inOrder : %v \n postOrder : %v \n ", pre, in, post)
-
-	//problems
-	// levelOrder := levelOrder(tree.rootNode)
-	// fmt.Println("levelOrder : ", levelOrder)
 
 	// fmt.Println(" Min node of tree : ", *tree.MinNode())
 	// fmt.Println(" Max node of tree : ", *tree.MaxNode())
