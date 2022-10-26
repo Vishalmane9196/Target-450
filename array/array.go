@@ -1047,3 +1047,23 @@ func indexOfFirstOne(arr []int, low, high int) int {
 	// 1's are not present in the array
 	return -1
 }
+
+// Link: https://leetcode.com/problems/continuous-subarray-sum/
+func checkSubarraySum(nums []int, k int) bool {
+
+	m := map[int]int{0: 0}
+	currentSum := 0
+
+	for i, v := range nums {
+
+		currentSum += v
+		if remainderIndex, ok := m[currentSum%k]; ok {
+			if i > remainderIndex {
+				return true
+			}
+		} else {
+			m[currentSum%k] = i + 1
+		}
+	}
+	return false
+}
