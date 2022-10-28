@@ -1067,3 +1067,21 @@ func checkSubarraySum(nums []int, k int) bool {
 	}
 	return false
 }
+
+// Link: https://leetcode.com/problems/kth-largest-element-in-an-array/
+func findKthLargest(nums []int, k int) int {
+	m := len(nums)
+
+	//sorted the array
+	for i := 0; i < m; i++ {
+		for j := i + 1; j < m; j++ {
+			if nums[i] > nums[j] {
+				temp := nums[i]
+				nums[i] = nums[j]
+				nums[j] = temp
+			}
+		}
+	}
+	//return (m-k)th elment
+	return nums[m-k]
+}

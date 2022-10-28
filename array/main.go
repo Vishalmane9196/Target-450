@@ -174,9 +174,14 @@ func main() {
 	// res := indexOfFirstOne(nums, 0, n-1)
 	// fmt.Println("indexOfFirstOne   : ", res)
 
-	nums := []int{23, 2, 4, 6, 7}
+	// nums := []int{23, 2, 4, 6, 7}
+	// k := 2
+	// res := checkSubarraySum(nums, k)
+	// fmt.Println("checkSubarraySum   : ", res)
+
+	nums := []int{3, 2, 1, 5, 6, 4}
 	k := 2
-	res := checkSubarraySum(nums, k)
-	fmt.Println("checkSubarraySum   : ", res)
+	res := findKthLargest(nums, k)
+	fmt.Println("findKthLargest   : ", res)
 
 }
