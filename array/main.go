@@ -179,9 +179,13 @@ func main() {
 	// res := checkSubarraySum(nums, k)
 	// fmt.Println("checkSubarraySum   : ", res)
 
-	nums := []int{3, 2, 1, 5, 6, 4}
-	k := 2
-	res := findKthLargest(nums, k)
-	fmt.Println("findKthLargest   : ", res)
+	// nums := []int{3, 2, 1, 5, 6, 4}
+	// k := 2
+	// res := findKthLargest(nums, k)
+	// fmt.Println("findKthLargest   : ", res)
+
+	arr := []int{1, 2, 3}
+	res := permute(arr)
+	fmt.Println("permute : ", res)
 
 }

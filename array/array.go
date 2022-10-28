@@ -1085,3 +1085,27 @@ func findKthLargest(nums []int, k int) int {
 	//return (m-k)th elment
 	return nums[m-k]
 }
+
+// Link: https://leetcode.com/problems/permutations/
+func permute(nums []int) [][]int {
+	index := 0
+	ans := make([][]int, 0)
+	permuteHelper(nums, &ans, index)
+	return ans
+}
+
+func permuteHelper(arr []int, ans *[][]int, index int) {
+	//base condition
+	if index == len(arr) {
+		temp := []int{}
+		temp = append(temp, arr...)
+		*ans = append(*ans, temp)
+		return
+	}
+
+	for i := index; i < len(arr); i++ {
+		arr[index], arr[i] = arr[i], arr[index]
+		permuteHelper(arr, ans, index+1)
+		arr[index], arr[i] = arr[i], arr[index]
+	}
+}
