@@ -77,13 +77,17 @@ func main() {
 	// res := minWindow(s, t)
 	// fmt.Println("minWindow : ", res)
 
-	var (
-		// word1 = []string{"a", "cb"}
-		// word2 = []string{"ab", "c"}
-		word1 = []string{"abc", "d", "defg"}
-		word2 = []string{"abcddefg"}
-	)
-	res := arrayStringsAreEqual(word1, word2)
+	// var (
+	// 	// word1 = []string{"a", "cb"}
+	// 	// word2 = []string{"ab", "c"}
+	// 	word1 = []string{"abc", "d", "defg"}
+	// 	word2 = []string{"abcddefg"}
+	// )
+	// res := arrayStringsAreEqual(word1, word2)
+	// fmt.Println("arrayStringsAreEqual : ", res)
+
+	strs := []string{"eat", "tea", "tan", "ate", "nat", "bat"}
+	res := groupAnagrams(strs)
 	fmt.Println("arrayStringsAreEqual : ", res)
 
 }
