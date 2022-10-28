@@ -63,6 +63,14 @@ func main() {
 	// res := subString(str)
 	// fmt.Println("subString : ", res)
 
+	// str := "abc"
+	// res := allStringPermutations(str)
+	// fmt.Println("allStringPermutations : ", res)
+
+	arr := []int{1, 2, 3}
+	res := permute(arr)
+	fmt.Println("permute : ", res)
+
 	// str := "aabcb"
 	// res := beautySum(str)
 	// fmt.Println("beautySum : ", res)
@@ -86,8 +94,8 @@ func main() {
 	// res := arrayStringsAreEqual(word1, word2)
 	// fmt.Println("arrayStringsAreEqual : ", res)
 
-	strs := []string{"eat", "tea", "tan", "ate", "nat", "bat"}
-	res := groupAnagrams(strs)
-	fmt.Println("arrayStringsAreEqual : ", res)
+	// strs := []string{"eat", "tea", "tan", "ate", "nat", "bat"}
+	// res := groupAnagrams(strs)
+	// fmt.Println("arrayStringsAreEqual : ", res)
 
 }

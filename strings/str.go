@@ -299,6 +299,30 @@ func IntToRoman(num int) string {
 	return result
 }
 
+// Link: https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
+func allStringPermutations(str string) []string {
+	index := 0
+	ans := make([]string, 0)
+	strByte := []byte(str)
+	allStringPermutationsHelper(strByte, &ans, index)
+	return ans
+}
+
+func allStringPermutationsHelper(str []byte, ans *[]string, index int) {
+	//base condition
+	if index == len(str) {
+		*ans = append(*ans, string(str))
+		// fmt.Println("str : ", string(str))
+		return
+	}
+
+	for i := index; i < len(str); i++ {
+		str[index], str[i] = str[i], str[index]
+		allStringPermutationsHelper(str, ans, index+1)
+		str[index], str[i] = str[i], str[index]
+	}
+}
+
 // Link: https://www.geeksforgeeks.org/number-substrings-string/
 func subString(str string) int {
 	ans := 0
@@ -313,7 +337,7 @@ func subStringHelper(str []byte, index int, ans string, count *int) {
 
 	//base condition
 	if index == len(str) {
-		// fmt.Println("ans : ", ans)
+		fmt.Println("ans : ", ans)
 		*count = *count + 1
 		return
 	}
