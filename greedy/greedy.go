@@ -1,6 +1,8 @@
 package main
 
-import "sort"
+import (
+	"sort"
+)
 
 //Link: https://takeuforward.org/data-structure/n-meetings-in-one-room/
 
@@ -68,7 +70,7 @@ func candyStore(arr []int, n, k int) []int {
 
 //Link: https://practice.geeksforgeeks.org/problems/check-if-it-is-possible-to-survive-on-island4922/1
 
-//Link: https://leetcode.com/problems/jump-game/
+// Link: https://leetcode.com/problems/jump-game/
 func canJump(nums []int) bool {
 
 	n := len(nums)
@@ -82,7 +84,7 @@ func canJump(nums []int) bool {
 	return index == 0
 }
 
-//Link: https://leetcode.com/problems/jump-game-ii/
+// Link: https://leetcode.com/problems/jump-game-ii/
 func jump(nums []int) int {
 
 	var jump = 0
@@ -126,7 +128,7 @@ func findContentChildren(greedArray []int, cookieSizeArray []int) int {
 	return greedIndex
 }
 
-//Link: https://takeuforward.org/data-structure/find-minimum-number-of-coins/
+// Link: https://takeuforward.org/data-structure/find-minimum-number-of-coins/
 func minimumCoins(coinsArray []int, target int) int {
 
 	n := len(coinsArray)
@@ -141,4 +143,39 @@ func minimumCoins(coinsArray []int, target int) int {
 		}
 	}
 	return count
+}
+
+// Link: https://leetcode.com/problems/earliest-possible-day-of-full-bloom/
+func earliestFullBloom(plantTime []int, growTime []int) int {
+	t := times{plantTime, growTime}
+	// fmt.Println("t :", t)
+	sort.Sort(t)
+	// fmt.Println("t :", t)
+
+	res, curDay := 0, 0
+	// fmt.Printf("currDay : %v \n", curDay)
+	for i, v := range plantTime {
+		res = maxi(res, curDay+v+growTime[i])
+		curDay += plantTime[i]
+		// fmt.Printf("  ptime : %v <-> currDay : %v  <-> max : %v\n", v, curDay, res)
+	}
+	return res
+}
+
+type times struct {
+	plant []int
+	grow  []int
+}
+
+func (t times) Len() int {
+	return len(t.grow)
+}
+
+func (t times) Less(i, j int) bool {
+	return t.grow[i] > t.grow[j]
+}
+
+func (t times) Swap(i, j int) {
+	t.grow[i], t.grow[j] = t.grow[j], t.grow[i]
+	t.plant[i], t.plant[j] = t.plant[j], t.plant[i]
 }

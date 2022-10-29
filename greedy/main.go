@@ -23,8 +23,13 @@ func main() {
 	// res := findContentChildren(greedArray, cookieSizeArray)
 	// fmt.Println("findContentChildren : ", res)
 
-	coins := []int{1, 2, 5, 10, 20, 50, 100, 500, 1000}
-	res := minimumCoins(coins, 70)
-	fmt.Println("minimumCoins : ", res)
+	// coins := []int{1, 2, 5, 10, 20, 50, 100, 500, 1000}
+	// res := minimumCoins(coins, 70)
+	// fmt.Println("minimumCoins : ", res)
+
+	plantTime := []int{1, 4, 3}
+	growTime := []int{2, 3, 1}
+	res := earliestFullBloom(plantTime, growTime)
+	fmt.Println("earliestFullBloom : ", res)
 
 }
