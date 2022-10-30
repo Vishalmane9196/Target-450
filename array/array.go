@@ -1099,7 +1099,7 @@ func permuteHelper(arr []int, ans *[][]int, index int) {
 	if index == len(arr) {
 		temp := []int{}
 		temp = append(temp, arr...)
-		*ans = append(*ans, temp)
+		*ans = append(*ans, [][]int{temp}...)
 		return
 	}
 
