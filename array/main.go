@@ -184,8 +184,13 @@ func main() {
 	// res := findKthLargest(nums, k)
 	// fmt.Println("findKthLargest   : ", res)
 
-	arr := []int{1, 2, 3}
-	res := permute(arr)
-	fmt.Println("permute : ", res)
+	// arr := []int{1, 2, 3}
+	// res := permute(arr)
+	// fmt.Println("permute : ", res)
+
+	// matrix := [][]int{{1, 2, 3, 4}, {5, 1, 2, 3}, {9, 5, 1, 2}}
+	matrix := [][]int{{18}, {66}}
+	res := isToeplitzMatrix(matrix)
+	fmt.Println("isToeplitzMatrix : ", res)
 
 }
