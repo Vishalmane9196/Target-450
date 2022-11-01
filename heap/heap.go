@@ -260,6 +260,13 @@ func heapSort(arr []int, n int) []int {
 	return arr
 }
 
+// Link: https://leetcode.com/problems/kth-largest-element-in-an-array/
+func findKthLargest(nums []int, k int) int {
+	res := heapSort(nums, len(nums))
+	fmt.Println("res : ", res)
+	return res[k-1]
+}
+
 // Link:https://leetcode.com/problems/top-k-frequent-words/
 type wordFreq struct {
 	word      string
@@ -318,13 +325,6 @@ func topKFrequentWord(words []string, k int) []string {
 	}
 
 	return ans
-}
-
-// Link: https://leetcode.com/problems/kth-largest-element-in-an-array/
-func findKthLargest(nums []int, k int) int {
-	res := heapSort(nums, len(nums))
-	fmt.Println("res : ", res)
-	return res[k-1]
 }
 
 // Link: https://leetcode.com/problems/top-k-frequent-elements/
