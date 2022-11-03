@@ -67,9 +67,9 @@ func main() {
 	// res := allStringPermutations(str)
 	// fmt.Println("allStringPermutations : ", res)
 
-	arr := []int{1, 2, 3}
-	res := permute(arr)
-	fmt.Println("permute : ", res)
+	// arr := []int{1, 2, 3}
+	// res := permute(arr)
+	// fmt.Println("permute : ", res)
 
 	// str := "aabcb"
 	// res := beautySum(str)
@@ -97,5 +97,9 @@ func main() {
 	// strs := []string{"eat", "tea", "tan", "ate", "nat", "bat"}
 	// res := groupAnagrams(strs)
 	// fmt.Println("arrayStringsAreEqual : ", res)
+
+	strs := []string{"ab", "ty", "yt", "lc", "cl", "ab"}
+	res := longestPalindrome(strs)
+	fmt.Println("longestPalindrome : ", res)
 
 }
