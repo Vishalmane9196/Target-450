@@ -98,8 +98,12 @@ func main() {
 	// res := groupAnagrams(strs)
 	// fmt.Println("arrayStringsAreEqual : ", res)
 
-	strs := []string{"ab", "ty", "yt", "lc", "cl", "ab"}
-	res := longestPalindrome(strs)
-	fmt.Println("longestPalindrome : ", res)
+	// strs := []string{"ab", "ty", "yt", "lc", "cl", "ab"}
+	// res := longestPalindrome(strs)
+	// fmt.Println("longestPalindrome : ", res)
+
+	strs := "leetcode"
+	res := reverseVowels(strs)
+	fmt.Println("reverseVowels : ", res)
 
 }
