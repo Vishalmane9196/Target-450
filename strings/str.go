@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -559,4 +561,28 @@ func reverseVowels(s string) string {
 		}
 	}
 	return string(r)
+}
+
+// Link: https://leetcode.com/problems/orderly-queue/
+func orderlyQueue(s string, k int) string {
+	ans := ""
+	sB := []byte(s)
+	if k == 1 {
+		sBmin := make([]byte, len(sB))
+		copy(sBmin, sB)
+		// when k is equal to 1, we run through every possibility, looking for the order that has the smallest lexigraphical value.
+		for range s {
+			if bytes.Compare(sB, sBmin) < 0 {
+				copy(sBmin, sB)
+			}
+			sB = append(sB[1:], sB[0])
+		}
+		ans = string(sBmin)
+	} else {
+		sort.Slice(sB, func(a, b int) bool {
+			return sB[a] < sB[b]
+		})
+		ans = string(sB)
+	}
+	return ans
 }

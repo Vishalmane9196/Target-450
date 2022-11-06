@@ -102,8 +102,13 @@ func main() {
 	// res := longestPalindrome(strs)
 	// fmt.Println("longestPalindrome : ", res)
 
-	strs := "leetcode"
-	res := reverseVowels(strs)
-	fmt.Println("reverseVowels : ", res)
+	// strs := "leetcode"
+	// res := reverseVowels(strs)
+	// fmt.Println("reverseVowels : ", res)
+
+	strs := "baaca"
+	k := 3
+	res := orderlyQueue(strs, k)
+	fmt.Println("orderlyQueue : ", res)
 
 }
