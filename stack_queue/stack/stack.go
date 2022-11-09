@@ -896,3 +896,22 @@ func nextGreaterElementCount(nums []int) []int {
 	}
 	return nge
 }
+
+// Link:https://leetcode.com/problems/online-stock-span/
+type StockSpanner struct {
+	stack [][2]int
+}
+
+func StockSpannerConstructor() StockSpanner {
+	return StockSpanner{stack: [][2]int{}}
+}
+
+func (this *StockSpanner) Next(price int) int {
+	s, cur := &this.stack, 1
+	for len(*s) > 0 && (*s)[len(*s)-1][0] <= price {
+		cur += (*s)[len(*s)-1][1]
+		*s = (*s)[:len(*s)-1]
+	}
+	*s = append(*s, [2]int{price, cur})
+	return cur
+}

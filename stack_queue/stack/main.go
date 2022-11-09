@@ -5,14 +5,14 @@ import "fmt"
 func main() {
 
 	/*****stack implementation******/
-	var s = &Stack{}
-	fmt.Println("isEmpty  : ", isEmpty(s))
-	push(s, 5)
-	push(s, 4)
-	push(s, 3)
-	push(s, 2)
-	push(s, 1)
-	printStack(s)
+	// var s = &Stack{}
+	// fmt.Println("isEmpty  : ", isEmpty(s))
+	// push(s, 5)
+	// push(s, 4)
+	// push(s, 3)
+	// push(s, 2)
+	// push(s, 1)
+	// printStack(s)
 	// pop(s)
 	// fmt.Println("After pop()")
 	// printStack(s)
@@ -50,8 +50,8 @@ func main() {
 	// fmt.Println("after pushing new elment to bootom of stack")
 	// printStack(s)
 
-	reverseStack(s)
-	print(s)
+	// reverseStack(s)
+	// print(s)
 
 	//need to implement it again not working
 	// sortStack(s)
@@ -117,4 +117,14 @@ func main() {
 	// nums := []int{3, 4, 2, 7, 5, 8, 10, 6}
 	// res := nextGreaterElementCount(nums)
 	// fmt.Println("nextGreaterElementCount   :  ", res)
+
+	obj := StockSpannerConstructor()
+	price := []int{100, 80, 60, 70, 60, 75, 85}
+	res := make([]int, 0)
+
+	for i := range price {
+		param_1 := obj.Next(price[i])
+		res = append(res, param_1)
+	}
+	fmt.Println("nextGreaterElementCount   :  ", res)
 }
