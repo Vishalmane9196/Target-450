@@ -106,9 +106,13 @@ func main() {
 	// res := reverseVowels(strs)
 	// fmt.Println("reverseVowels : ", res)
 
-	strs := "baaca"
-	k := 3
-	res := orderlyQueue(strs, k)
-	fmt.Println("orderlyQueue : ", res)
+	// strs := "baaca"
+	// k := 3
+	// res := orderlyQueue(strs, k)
+	// fmt.Println("orderlyQueue : ", res)
+
+	strs := "leEeetcode"
+	res := makeGood(strs)
+	fmt.Println("makeGood : ", res)
 
 }
