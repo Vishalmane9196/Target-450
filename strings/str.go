@@ -614,3 +614,30 @@ func makeGood(s string) string {
 	}
 	return string(ans)
 }
+
+func removeDuplicates(s string) string {
+
+	if len(s) <= 1 {
+		return s
+	}
+
+	ans := make([]byte, 0)
+
+	//push first elment in stack
+	ans = append(ans, s[0])
+	for i := 1; i < len(s); i++ {
+		var topElement byte
+		if len(ans) == 0 {
+			topElement = 0
+		} else {
+			topElement = ans[len(ans)-1]
+		}
+		//pop the top element if we found same elment in stack as of s string otherwise append current element
+		if topElement == s[i] {
+			ans = ans[:len(ans)-1]
+		} else {
+			ans = append(ans, s[i])
+		}
+	}
+	return string(ans)
+}

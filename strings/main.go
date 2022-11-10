@@ -111,8 +111,12 @@ func main() {
 	// res := orderlyQueue(strs, k)
 	// fmt.Println("orderlyQueue : ", res)
 
-	strs := "leEeetcode"
-	res := makeGood(strs)
+	// strs := "leEeetcode"
+	// res := makeGood(strs)
+	// fmt.Println("makeGood : ", res)
+
+	strs := "abbaca"
+	res := removeDuplicates(strs)
 	fmt.Println("makeGood : ", res)
 
 }
