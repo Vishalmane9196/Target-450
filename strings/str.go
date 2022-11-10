@@ -587,6 +587,7 @@ func orderlyQueue(s string, k int) string {
 	return ans
 }
 
+// Link: https://leetcode.com/problems/make-the-string-great/
 func makeGood(s string) string {
 
 	if len(s) <= 1 {
@@ -615,6 +616,7 @@ func makeGood(s string) string {
 	return string(ans)
 }
 
+// Link: https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
 func removeDuplicates(s string) string {
 
 	if len(s) <= 1 {
