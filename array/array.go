@@ -47,6 +47,7 @@ func isSorted(arr []int, n int) bool {
 }
 
 // Link: https://takeuforward.org/data-structure/remove-duplicates-in-place-from-sorted-array/
+// Link: https://leetcode.com/problems/remove-duplicates-from-sorted-array/
 func removeDuplicates(arr []int) ([]int, int) {
 
 	//approach 1
