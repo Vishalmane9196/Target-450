@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func main() {
 
 	/********Max Heap implementation*******/
@@ -69,8 +67,16 @@ func main() {
 
 	// arr := []int{3, 2, 1, 5, 6, 4}
 	// k := 2
-	arr := []int{3, 2, 3, 1, 2, 4, 5, 5, 6}
-	k := 4
-	res := findKthLargest(arr, k)
-	fmt.Println("findKthLargest : ", res)
+	// arr := []int{3, 2, 3, 1, 2, 4, 5, 5, 6}
+	// k := 4
+	// res := findKthLargest(arr, k)
+	// fmt.Println("findKthLargest : ", res)
+
+	obj := Constructor()
+	obj.AddNum(1)
+	obj.AddNum(2)
+	obj.FindMedian()
+	obj.AddNum(3)
+	obj.FindMedian()
+
 }

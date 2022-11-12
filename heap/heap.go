@@ -384,3 +384,92 @@ func topKFrequent(nums []int, k int) []int {
 	}
 	return ans
 }
+
+// Link: https://leetcode.com/problems/find-median-from-data-stream/
+// type MedianFinder struct {
+// 	maxHeap *MaxHeap
+// 	minHeap *MinHeap
+// }
+
+// // max heap + min heap
+// func Constructor() MedianFinder {
+// 	maxHeap := make(MaxHeap, 0)
+// 	heap.Init(&maxHeap)
+
+// 	minHeap := make(MinHeap, 0)
+// 	heap.Init(&minHeap)
+
+// 	return MedianFinder{
+// 		maxHeap: &maxHeap,
+// 		minHeap: &minHeap,
+// 	}
+// }
+
+// func (this *MedianFinder) AddNum(num int) {
+// 	if len(*this.maxHeap) == 0 || num > (*this.maxHeap)[0] {
+// 		heap.Push(this.minHeap, num)
+// 	} else {
+// 		heap.Push(this.maxHeap, num)
+// 	}
+
+// 	if len(*this.maxHeap) > len(*this.minHeap) && len(*this.maxHeap)-len(*this.minHeap) >= 2 {
+// 		v := heap.Pop(this.maxHeap)
+// 		heap.Push(this.minHeap, v)
+// 	}
+
+// 	if len(*this.minHeap) > len(*this.maxHeap) && len(*this.minHeap)-len(*this.maxHeap) >= 2 {
+// 		v := heap.Pop(this.minHeap)
+// 		heap.Push(this.maxHeap, v)
+// 	}
+// }
+
+// func (this *MedianFinder) FindMedian() float64 {
+// 	if (len(*this.maxHeap)+len(*this.minHeap))%2 == 1 {
+// 		if len(*this.maxHeap) > len(*this.minHeap) {
+// 			return float64((*this.maxHeap)[0])
+// 		} else {
+// 			return float64((*this.minHeap)[0])
+// 		}
+// 	} else {
+// 		small := (*this.maxHeap)[0]
+// 		large := (*this.minHeap)[0]
+// 		return (float64(small) + float64(large)) / 2
+// 	}
+
+// }
+
+// type MinHeap []int
+
+// func (h MinHeap) Len() int           { return len(h) }
+// func (h MinHeap) Less(i, j int) bool { return h[i] < h[j] }
+// func (h MinHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+// func (h *MinHeap) Push(x interface{}) {
+// 	*h = append(*h, x.(int))
+// }
+
+// func (h *MinHeap) Pop() interface{} {
+// 	old := *h
+// 	n := len(old)
+// 	x := old[n-1]
+// 	*h = old[0 : n-1]
+// 	return x
+// }
+
+// type MaxHeap []int
+
+// func (h MaxHeap) Len() int           { return len(h) }
+// func (h MaxHeap) Less(i, j int) bool { return h[i] > h[j] }
+// func (h MaxHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+// func (h *MaxHeap) Push(x interface{}) {
+// 	*h = append(*h, x.(int))
+// }
+
+// func (h *MaxHeap) Pop() interface{} {
+// 	old := *h
+// 	n := len(old)
+// 	x := old[n-1]
+// 	*h = old[0 : n-1]
+// 	return x
+// }
