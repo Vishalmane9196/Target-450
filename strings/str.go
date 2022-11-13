@@ -52,31 +52,43 @@ func removeOutermostParenthesis(str string) string {
 }
 
 // Link: https://takeuforward.org/data-structure/reverse-words-in-a-string/
+// Link: https://leetcode.com/problems/reverse-words-in-a-string/
 func reverseWords(words string) string {
 
 	//Brute force
 	//create stack , append each word to it and while popping elment from stack just add space between them
-	// stack := make([]string, 0)
-	// resultString := ""
-	// str := strings.Split(words, " ")
-	// for _, v := range str {
-	// 	stack = append(stack, v)
-	// }
+	stack := make([]string, 0)
+	resultString := ""
+	words1 := strings.TrimSpace(words)
+	str := strings.Split(words1, " ")
+	for i, v := range str {
+		fmt.Printf(" %v ===>%v\n", i, v)
+		if v == "" {
+			continue
+		} else {
+			stack = append(stack, v)
+		}
+	}
 
-	// for i := len(stack) - 1; i >= 0; i-- {
-	// 	resultString = resultString + " " + stack[i]
-	// }
-	// return resultString
+	fmt.Println("stack : ", stack)
+	for i := len(stack) - 1; i >= 0; i-- {
+		if len(stack) == i+1 {
+			resultString = stack[i]
+		} else {
+			resultString = resultString + " " + stack[i]
+		}
+	}
+	return resultString
 
 	//another approach
 	//here we have added each word from sentence in slice and by using 2 pointer we are just swapping from left to right
-	str := strings.TrimSpace(words)
-	word := strings.Fields(str)
+	// str := strings.TrimSpace(words)
+	// word := strings.Fields(str)
 
-	for i, j := 0, len(word)-1; i < j; i, j = i+1, j-1 {
-		word[i], word[j] = word[j], word[i]
-	}
-	return strings.Join(word, " ")
+	// for i, j := 0, len(word)-1; i < j; i, j = i+1, j-1 {
+	// 	word[i], word[j] = word[j], word[i]
+	// }
+	// return strings.Join(word, " ")
 }
 
 // Link: https://leetcode.com/problems/largest-odd-number-in-string/

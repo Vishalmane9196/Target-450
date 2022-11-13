@@ -13,8 +13,10 @@ func main() {
 	// fmt.Println("Depth of parenthesis  : ", res)
 
 	// input := "the sky is blue"
-	// res := reverseWords(input)
-	// fmt.Println("res : ", res)
+	// input := "  hello world  "
+	input := "example   good a"
+	res := reverseWords(input)
+	fmt.Println("res : ", res)
 
 	// input := "34564"
 	// res := largestOddNumber(input)
@@ -115,8 +117,8 @@ func main() {
 	// res := makeGood(strs)
 	// fmt.Println("makeGood : ", res)
 
-	strs := "abbaca"
-	res := removeDuplicates(strs)
-	fmt.Println("makeGood : ", res)
+	// strs := "abbaca"
+	// res := removeDuplicates(strs)
+	// fmt.Println("makeGood : ", res)
 
 }
