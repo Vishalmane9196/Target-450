@@ -44,7 +44,6 @@ func main() {
 
 	g := &graph{}
 	var V = []int{1, 2, 3, 4, 5, 6}
-	// var E = []Edge{{1, 2}}
 	var E = []edge{{1, 2}, {1, 6}, {2, 6}, {2, 5}, {2, 3}, {3, 4}, {3, 6}, {3, 5}, {4, 5}, {5, 6}}
 
 	g = create_graph()
@@ -66,7 +65,7 @@ func main() {
 
 	//TODO:
 	// fmt.Println("After BFS")
-	// bfs(g, 1)
+	// bfs(g, 3)
 
 	destroy_graph(g)
 }
@@ -378,7 +377,7 @@ func q_get_node(pv_node *vnode) *queue_node {
 
 func prio_enqueue(prio_queue *queue_node, pv_node *vnode) {
 	//insert at end
-	fmt.Println("arr data : ", pv_node.v)
+	// fmt.Println("arr data : ", pv_node.v)
 	q_generic_insert(prio_queue.q_prev, q_get_node(pv_node), prio_queue)
 }
 
@@ -452,13 +451,11 @@ func bfs(g *graph, v int) {
 	pv_node.color = 2
 	p_queue := create_prio_queue()
 	prio_enqueue(p_queue, pv_node)
-
 	fmt.Printf("[START] <-> ")
 
 	for is_prio_queue_empty(p_queue) != true {
 		pv := &vnode{}
 		prio_dequeue_min(p_queue, &pv)
-
 		fmt.Printf("[%v]<->", pv.v)
 
 		for ph_run := pv.ph_head_node.h_next; ph_run != pv.ph_head_node; ph_run = ph_run.h_next {
@@ -469,11 +466,8 @@ func bfs(g *graph, v int) {
 				prio_enqueue(p_queue, pv_h_in_vlist)
 			}
 		}
-
 		pv.color = 3
-
 	}
-
 	fmt.Printf("[END]\n")
 	destroy_prio_queue(p_queue)
 }
