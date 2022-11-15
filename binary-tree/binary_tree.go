@@ -1090,3 +1090,35 @@ func addOneRow(root *Node, val int, depth int) *Node {
 	}
 	return root
 }
+
+// Link: https://leetcode.com/problems/count-complete-tree-nodes/
+func countNodes(root *Node) int {
+
+	var res int
+
+	if root == nil {
+		return res
+	}
+
+	var stack []*Node
+	stack = append(stack, root)
+
+	for len(stack) > 0 {
+		n := len(stack)
+		//pop the topmost element
+		poppedElement := stack[n-1]
+		stack = stack[:len(stack)-1]
+		res += 1
+
+		//append the right node of popped element in stack
+		if poppedElement.rightNode != nil {
+			stack = append(stack, poppedElement.rightNode)
+		}
+
+		//append the left node of popped element in stack
+		if poppedElement.leftNode != nil {
+			stack = append(stack, poppedElement.leftNode)
+		}
+	}
+	return res
+}

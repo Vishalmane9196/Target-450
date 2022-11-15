@@ -89,4 +89,8 @@ func main() {
 	// fmt.Println("addOneRow : ", res)
 	// tree.PrintBinaryTree()
 
+	res := countNodes(tree.rootNode)
+	fmt.Println("countNodes : ", res)
+	tree.PrintBinaryTree()
+
 }
