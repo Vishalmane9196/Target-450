@@ -61,3 +61,14 @@ func min(a, b int) int {
 	}
 	return b
 }
+
+//Link: https://leetcode.com/problems/ugly-number/
+func isUgly(n int) bool {
+	arr := [...]int{2, 3, 5}
+	for _, v := range arr {
+		for n >= v && n%v == 0 {
+			n /= v
+		}
+	}
+	return n == 1
+}
