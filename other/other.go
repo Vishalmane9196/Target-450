@@ -1,5 +1,7 @@
 package main
 
+import "strconv"
+
 //Link: https://leetcode.com/problems/maximum-69-number/
 func maximum69Number(num int) int {
 	var nums []int
@@ -71,4 +73,30 @@ func isUgly(n int) bool {
 		}
 	}
 	return n == 1
+}
+
+//Link: https://leetcode.com/problems/valid-sudoku/
+func isValidSudoku(board [][]byte) bool {
+	rMap, cMap, boxMap := make(map[string]byte), make(map[string]byte), make(map[string]byte)
+
+	for i := 0; i < 9; i++ {
+		for j := 0; j < 9; j++ {
+			if "." == string(board[i][j]) {
+				continue
+			}
+
+			_, row := rMap[strconv.Itoa(i)+string(board[i][j])]
+			_, col := cMap[strconv.Itoa(j)+string(board[i][j])]
+			_, box := boxMap[strconv.Itoa(i/3)+strconv.Itoa(j/3)+string(board[i][j])]
+
+			if row || col || box {
+				return false
+			}
+
+			rMap[strconv.Itoa(i)+string(board[i][j])] = 1
+			cMap[strconv.Itoa(j)+string(board[i][j])] = 1
+			boxMap[strconv.Itoa(i/3)+strconv.Itoa(j/3)+string(board[i][j])] = 1
+		}
+	}
+	return true
 }
