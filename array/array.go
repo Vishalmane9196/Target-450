@@ -1122,3 +1122,28 @@ func isToeplitzMatrix(matrix [][]int) bool {
 	}
 	return true
 }
+
+// Link: https://leetcode.com/problems/sum-of-subarray-minimums/
+// Link: https://www.youtube.com/watch?v=fDeZNRNmm1Y&ab_channel=SuperCode
+func sumSubarrayMins(arr []int) int {
+	const mod int = 1e9 + 7
+
+	sum := 0
+
+	arrMin := append([]int{math.MinInt}, arr...)
+	arrMin = append(arrMin, math.MinInt)
+	stack := []int{}
+	for i := range arrMin {
+		for len(stack) > 0 && arrMin[stack[len(stack)-1]] > arrMin[i] {
+			index := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+
+			l, r := stack[len(stack)-1], i
+			min := (index - l) * (r - index) * arrMin[index]
+			sum += min
+		}
+		stack = append(stack, i)
+	}
+
+	return sum % mod
+}
