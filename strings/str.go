@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"math"
 	"sort"
 	"strconv"
 	"strings"
@@ -46,6 +47,77 @@ func removeOutermostParenthesis(str string) string {
 			depth++
 		} else {
 			depth--
+		}
+	}
+	return sb.String()
+}
+
+// palindrome problem
+func isPalindrome(str string) bool {
+	n := len(str)
+	for i := 0; i < n/2; i++ {
+		if str[i] != str[n-i-1] {
+			return false
+		}
+	}
+	return true
+}
+
+// getShortestPath
+func getShortestPath(str string) float64 {
+
+	x, y := 0, 0
+	for _, v := range str {
+		if v == 'E' {
+			x++
+		} else if v == 'W' {
+			x--
+		} else if v == 'S' {
+			y--
+		} else {
+			y++
+		}
+	}
+
+	x1 := float64(x * x)
+	y1 := float64(y * y)
+	return math.Sqrt(x1 + y1)
+}
+
+// toUpperCase
+func toUpperCase(str string) string {
+
+	var sb strings.Builder
+	ch := strings.ToUpper(string(str[0]))
+	sb.WriteString(ch)
+
+	for i := 1; i < len(str); i++ {
+		if str[i] == ' ' && i < len(str)-1 {
+			sb.WriteByte(str[i])
+			i++
+			sb.WriteString(strings.ToUpper(string(str[i])))
+		} else {
+			sb.WriteByte(str[i])
+		}
+	}
+	return sb.String()
+}
+
+// compressString
+func compressString(str string) string {
+	var sb strings.Builder
+
+	for i := 0; i < len(str); i++ {
+		count := 1
+		for i < len(str)-1 && str[i] == str[i+1] {
+			count++
+			i++
+		}
+
+		sb.WriteByte(str[i])
+		if count > 1 {
+			stringCount := strconv.Itoa(count)
+			sb.WriteString(stringCount)
 		}
 	}
 	return sb.String()

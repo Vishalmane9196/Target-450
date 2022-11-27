@@ -12,11 +12,27 @@ func main() {
 	// res := parenthesisDepth(input)
 	// fmt.Println("Depth of parenthesis  : ", res)
 
+	// word := "racepar"
+	// res := isPalindrome(word)
+	// fmt.Println("isPalindrome : ", res)
+
+	// directions := "WNEENESENNNE"
+	// res := getShortestPath(directions)
+	// fmt.Println("getShortestPath : ", res)
+
+	// sentence := "hi i am vishal"
+	// res := toUpperCase(sentence)
+	// fmt.Println("toUpperCase : ", res)
+
+	sentence := "aaaaabbccccdd"
+	res := compressString(sentence)
+	fmt.Println("compressString : ", res)
+
 	// input := "the sky is blue"
 	// input := "  hello world  "
-	input := "example   good a"
-	res := reverseWords(input)
-	fmt.Println("res : ", res)
+	// input := "example   good a"
+	// res := reverseWords(input)
+	// fmt.Println("res : ", res)
 
 	// input := "34564"
 	// res := largestOddNumber(input)
@@ -44,7 +60,7 @@ func main() {
 
 	// str := []string{"a", "a", "b", "b", "c", "c", "c"}
 	// str := "abbbbbbbbbbbb"
-	// // str := "aabbccc"
+	// str := "aabbccc"
 	// res := compress([]byte(str))
 	// fmt.Println("compress1 : ", res)
 
