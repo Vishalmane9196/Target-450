@@ -1147,3 +1147,61 @@ func sumSubarrayMins(arr []int) int {
 
 	return sum % mod
 }
+
+/* Link : https://takeuforward.org/data-structure/find-second-smallest-and-second-largest-element-in-an-array/
+1st approach : sort the array and return 2nd first and last number
+2nd approach : 1st interation --> find small and large number
+               2nd iteration ---> find second_small and second large number
+
+		if(arr[i]<second_small && arr[i]!=small)
+            second_small=arr[i];
+        if(arr[i]>second_large && arr[i]!=large)
+            second_large=arr[i];
+
+3rd approach:
+If the current element is smaller than ‘small’, then we update second_small and small variables
+Else if the current element is smaller than ‘second_small’ then we update the variable ‘second_small’
+Once we traverse the entire array, we would find the second smallest element in the variable second_small.
+*/
+
+func secondSmallest(arr []int, n int) int {
+	if n < 2 {
+		return -1
+	}
+	small := math.MaxInt
+	second_small := math.MaxInt
+	for i := 0; i < n; i++ {
+		if arr[i] < small {
+			second_small = small
+			small = arr[i]
+		} else if arr[i] < second_small && arr[i] != small {
+			second_small = arr[i]
+		}
+	}
+	return second_small
+}
+func secondLargest(arr []int, n int) int {
+	if n < 2 {
+		return -1
+	}
+	large := math.MinInt
+	second_large := math.MinInt
+	for i := 0; i < n; i++ {
+		if arr[i] > large {
+			second_large = large
+			large = arr[i]
+		} else if arr[i] > second_large && arr[i] != large {
+			second_large = arr[i]
+		}
+	}
+	return second_large
+}
+
+func findSecondLargetstSmallest(arr []int) (int, int) {
+
+	length := len(arr)
+	sS := secondSmallest(arr, length)
+	sL := secondLargest(arr, length)
+
+	return sS, sL
+}
