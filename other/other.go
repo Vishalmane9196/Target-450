@@ -1,8 +1,11 @@
 package main
 
-import "strconv"
+import (
+	"math/rand"
+	"strconv"
+)
 
-//Link: https://leetcode.com/problems/maximum-69-number/
+// Link: https://leetcode.com/problems/maximum-69-number/
 func maximum69Number(num int) int {
 	var nums []int
 	for num != 0 {
@@ -23,7 +26,7 @@ func maximum69Number(num int) int {
 	return ans
 }
 
-//Link: https://leetcode.com/problems/rectangle-area/
+// Link: https://leetcode.com/problems/rectangle-area/
 func computeArea(ax1 int, ay1 int, ax2 int, ay2 int, bx1 int, by1 int, bx2 int, by2 int) int {
 
 	first := area(ax1, ay1, ax2, ay2)
@@ -64,7 +67,7 @@ func min(a, b int) int {
 	return b
 }
 
-//Link: https://leetcode.com/problems/ugly-number/
+// Link: https://leetcode.com/problems/ugly-number/
 func isUgly(n int) bool {
 	arr := [...]int{2, 3, 5}
 	for _, v := range arr {
@@ -75,7 +78,7 @@ func isUgly(n int) bool {
 	return n == 1
 }
 
-//Link: https://leetcode.com/problems/valid-sudoku/
+// Link: https://leetcode.com/problems/valid-sudoku/
 func isValidSudoku(board [][]byte) bool {
 	rMap, cMap, boxMap := make(map[string]byte), make(map[string]byte), make(map[string]byte)
 
@@ -99,4 +102,50 @@ func isValidSudoku(board [][]byte) bool {
 		}
 	}
 	return true
+}
+
+// Link: https://leetcode.com/problems/insert-delete-getrandom-o1/
+type RandomizedSet struct {
+	elementMap  map[int]int //store the lement and its corrosponding index of lementlist
+	elementlist []int       //store all the elments from list
+}
+
+func Constructor() RandomizedSet {
+	elementMap := make(map[int]int)
+	elementlist := make([]int, 0)
+	return RandomizedSet{elementMap, elementlist}
+}
+
+func (this *RandomizedSet) Insert(val int) bool {
+	//checked if val exist in map or not
+	if _, ok := this.elementMap[val]; ok {
+		return false
+	}
+	//if val is not present then add the value in map and list
+	this.elementMap[val] = len(this.elementlist)
+	this.elementlist = append(this.elementlist, val)
+	return true
+}
+
+func (this *RandomizedSet) Remove(val int) bool {
+	//check if value present in map or not
+	if _, ok := this.elementMap[val]; !ok {
+		return false
+	}
+	//fetch the current length of list and index of val from map
+	listLength, valIndex := len(this.elementlist), this.elementMap[val]
+	//swap the both fetched values
+	this.elementlist[valIndex], this.elementlist[listLength-1] = this.elementlist[listLength-1], this.elementlist[valIndex]
+	//update the correct index for val
+	this.elementMap[this.elementlist[valIndex]] = valIndex
+	//remove the val from list
+	this.elementlist = this.elementlist[:listLength-1]
+	//remove the val from map
+	delete(this.elementMap, val)
+	return true
+}
+
+func (this *RandomizedSet) GetRandom() int {
+	i := rand.Intn(len(this.elementlist))
+	return this.elementlist[i]
 }
