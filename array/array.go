@@ -1205,3 +1205,31 @@ func findSecondLargetstSmallest(arr []int) (int, int) {
 
 	return sS, sL
 }
+
+// Link: https://leetcode.com/problems/unique-number-of-occurrences/
+func uniqueOccurrences(arr []int) bool {
+
+	ans := make([]int, 0)
+
+	sort.Ints(arr)
+	for i := 0; i < len(arr); {
+		count := 1
+		for j := i + 1; j < len(arr); j++ {
+			if arr[i] == arr[j] {
+				count++
+			} else {
+				break
+			}
+		}
+		ans = append(ans, count)
+		i = i + count
+	}
+
+	sort.Ints(ans)
+	for i := 0; i < len(ans)-1; i++ {
+		if ans[i] == ans[i+1] {
+			return false
+		}
+	}
+	return true
+}

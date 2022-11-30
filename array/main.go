@@ -11,9 +11,9 @@ func main() {
 	// res := isSorted(arr, len(arr))
 	// fmt.Println("res : ", res)
 
-	var arr = []int{1, 2, 4, 7, 7, 5}
-	small, large := findSecondLargetstSmallest(arr)
-	fmt.Printf("2nd Smallest : %v \n2nd largest : %v ", small, large)
+	// var arr = []int{1, 2, 4, 7, 7, 5}
+	// small, large := findSecondLargetstSmallest(arr)
+	// fmt.Printf("2nd Smallest : %v \n2nd largest : %v ", small, large)
 
 	// var arr = []int{1, 1, 2, 2, 2, 3, 3}
 	// newArr, size := removeDuplicates(arr)
@@ -196,5 +196,10 @@ func main() {
 	// matrix := [][]int{{18}, {66}}
 	// res := isToeplitzMatrix(matrix)
 	// fmt.Println("isToeplitzMatrix : ", res)
+
+	// nums := []int{1, 2, 2, 1, 1, 3}
+	nums := []int{1, 2}
+	res := uniqueOccurrences(nums)
+	fmt.Println("uniqueOccurrences   : ", res)
 
 }
