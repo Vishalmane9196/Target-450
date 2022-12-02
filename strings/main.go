@@ -24,9 +24,9 @@ func main() {
 	// res := toUpperCase(sentence)
 	// fmt.Println("toUpperCase : ", res)
 
-	sentence := "aaaaabbccccdd"
-	res := compressString(sentence)
-	fmt.Println("compressString : ", res)
+	// sentence := "aaaaabbccccdd"
+	// res := compressString(sentence)
+	// fmt.Println("compressString : ", res)
 
 	// input := "the sky is blue"
 	// input := "  hello world  "
@@ -136,5 +136,16 @@ func main() {
 	// strs := "abbaca"
 	// res := removeDuplicates(strs)
 	// fmt.Println("makeGood : ", res)
+
+	// strs := "book"
+	// strs := "Ieai"
+	// strs := "textbook"
+	// res := halvesAreAlike(strs)
+	// fmt.Println("halvesAreAlike : ", res)
+
+	word1 := "abc"
+	word2 := "bca"
+	res := closeStrings(word1, word2)
+	fmt.Println("closeStrings : ", res)
 
 }
