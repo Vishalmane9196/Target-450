@@ -794,3 +794,31 @@ func closeStrings(word1 string, word2 string) bool {
 
 	return true
 }
+
+// Link: https://leetcode.com/problems/sort-characters-by-frequency/
+type runeFreq struct {
+	r   rune
+	cnt int
+}
+
+func frequencySort(s string) string {
+
+	freq := make([]runeFreq, 128)
+	for _, r := range s {
+		freq[r-'0'].cnt++
+		freq[r-'0'].r = r
+	}
+
+	sort.Slice(freq, func(i, j int) bool {
+		if freq[i].cnt == freq[j].cnt {
+			return freq[i].r < freq[j].r
+		}
+		return freq[i].cnt > freq[j].cnt
+	})
+	sb := strings.Builder{}
+	for _, fr := range freq {
+		sb.WriteString(strings.Repeat(string(fr.r), fr.cnt))
+	}
+
+	return sb.String()
+}

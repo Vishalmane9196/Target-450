@@ -143,9 +143,13 @@ func main() {
 	// res := halvesAreAlike(strs)
 	// fmt.Println("halvesAreAlike : ", res)
 
-	word1 := "abc"
-	word2 := "bca"
-	res := closeStrings(word1, word2)
-	fmt.Println("closeStrings : ", res)
+	// word1 := "abc"
+	// word2 := "bca"
+	// res := closeStrings(word1, word2)
+	// fmt.Println("closeStrings : ", res)
+
+	word := "tree"
+	res := frequencySort(word)
+	fmt.Println("frequencySort : ", res)
 
 }
