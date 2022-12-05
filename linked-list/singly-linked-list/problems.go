@@ -3,20 +3,17 @@ package main
 import "fmt"
 
 //Link: https://leetcode.com/problems/middle-of-the-linked-list/
-func (list *LinkedList) middleOfLinkedList() {
+func (list *LinkedList) middleOfLinkedList() *Node {
 	if list.headNode == nil || list.headNode.nextNode == nil {
-		fmt.Println("middle : ", list.headNode)
-		return
+		return list.headNode
 	}
 
 	if list.headNode.nextNode.nextNode == nil {
-		fmt.Println("middle : ", list.headNode.nextNode)
-		return
+		return list.headNode.nextNode
 	}
 
-	var slow *Node = list.headNode
-	var fast *Node = list.headNode.nextNode
-
+	slow := list.headNode
+	fast := list.headNode.nextNode
 	for fast != nil {
 		fast = fast.nextNode
 		if fast != nil {
@@ -24,7 +21,7 @@ func (list *LinkedList) middleOfLinkedList() {
 		}
 		slow = slow.nextNode
 	}
-	fmt.Println("middle elment of linked list: ", slow.property)
+	return slow
 }
 
 //Link: https://leetcode.com/problems/linked-list-cycle/
