@@ -260,3 +260,29 @@ func queueUsingLinkedList() {
 	fmt.Println(" isEmpty : ", q.IsEmpty())
 	q.PrintQueue()
 }
+
+/*Link:
+created odd, even and even head
+Idea: the idea is to attach the even head to odd last node's next*/
+func oddEvenList(head *ListNode) *ListNode {
+	if head != nil {
+
+		odd := head
+		even := head.Next
+		evenHead := even
+
+		for even != nil && even.Next != nil {
+
+			//put ven next in odd's next and increament odd
+			odd.Next = even.Next
+			odd = odd.Next
+			//put odd's next to even list and increament event
+			even.Next = odd.Next
+			even = even.Next
+		}
+		//attach the  evenHead to odd's last node next
+		odd.Next = evenHead
+	}
+	//return head
+	return head
+}
