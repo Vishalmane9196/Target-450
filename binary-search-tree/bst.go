@@ -426,3 +426,21 @@ func (r *Res) dfs(node *Node) bool {
 
 	return r.dfs(node.Left) || r.dfs(node.Right)
 }
+
+// Link: https://leetcode.com/problems/range-sum-of-bst/
+func traverse(root *Node, low int, high int, sum *int) {
+	if root == nil {
+		return
+	}
+	if root.Val <= high && root.Val >= low {
+		*sum += root.Val
+	}
+	traverse(root.Right, low, high, sum)
+	traverse(root.Left, low, high, sum)
+}
+
+func rangeSumBST(root *Node, low int, high int) int {
+	sum := 0
+	traverse(root, low, high, &sum)
+	return sum
+}
