@@ -1122,3 +1122,30 @@ func countNodes(root *Node) int {
 	}
 	return res
 }
+
+// Link: https://leetcode.com/problems/leaf-similar-trees/
+func leafSimilar(root1 *TreeNode, root2 *TreeNode) bool {
+	s1, s2 := []int{}, []int{}
+	dfs(root1, &s1)
+	dfs(root2, &s2)
+	if len(s1) != len(s2) {
+		return false
+	}
+	for i := range s1 {
+		if s1[i] != s2[i] {
+			return false
+		}
+	}
+	return true
+}
+
+func dfs(root *TreeNode, s *[]int) {
+	if root == nil {
+		return
+	}
+	if root.Left == nil && root.Right == nil {
+		*s = append(*s, root.Val)
+	}
+	dfs(root.Left, s)
+	dfs(root.Right, s)
+}
