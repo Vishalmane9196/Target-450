@@ -1149,3 +1149,46 @@ func dfs(root *TreeNode, s *[]int) {
 	dfs(root.Left, s)
 	dfs(root.Right, s)
 }
+
+// Link: https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/
+func maxAncestorDiff(root *TreeNode) int {
+	res := 0
+	helper(root, &res, root.Val, root.Val)
+	return res
+}
+
+func helper(cur *TreeNode, res *int, mn, mx int) {
+	if cur == nil {
+		return
+	}
+	currentMax := max(abs(cur.Val-mn), abs(cur.Val-mx))
+	*res = max(*res, currentMax)
+	currentMin := min(mn, cur.Val)
+	cuurentMax := max(mx, cur.Val)
+	helper(cur.Left, res, currentMin, cuurentMax)
+	helper(cur.Right, res, currentMin, cuurentMax)
+}
+
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+
+	return y
+}
+
+func min(x, y int) int {
+	if x < y {
+		return x
+	}
+
+	return y
+}
+
+func abs(x int) int {
+	if x > 0 {
+		return x
+	}
+
+	return -x
+}
