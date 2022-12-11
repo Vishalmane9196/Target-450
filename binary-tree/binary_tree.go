@@ -640,13 +640,6 @@ func find(root *Node) int {
 	return temp
 }
 
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
 // Link: https://leetcode.com/problems/same-tree/
 func isSameTree(p *Node, q *Node) bool {
 
