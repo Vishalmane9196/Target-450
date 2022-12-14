@@ -80,3 +80,21 @@ func c(f func(int) int) func(int) int {
 	}
 	return d
 }
+
+// Link: https://leetcode.com/problems/house-robber/
+func rob(nums []int) int {
+	rob1, rob2 := 0, 0
+	for i := 0; i < len(nums); i++ {
+		temp := maxi(nums[i]+rob1, rob2)
+		rob1 = rob2
+		rob2 = temp
+	}
+	return rob2
+}
+
+func maxi(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
