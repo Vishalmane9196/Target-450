@@ -98,3 +98,24 @@ func maxi(a, b int) int {
 	}
 	return b
 }
+
+// Link: https://leetcode.com/problems/longest-common-subsequence/
+func longestCommonSubsequence(text1 string, text2 string) int {
+	l1 := len(text1)
+	l2 := len(text2)
+	dp := make([][]int, l1+1)
+	for i, _ := range dp {
+		dp[i] = make([]int, l2+1)
+	}
+	for i := 0; i < l1; i++ {
+		for j := 0; j < l2; j++ {
+			if text1[i] == text2[j] {
+				dp[i+1][j+1] = dp[i][j] + 1
+			} else {
+				dp[i+1][j+1] = maxi(dp[i][j+1], dp[i+1][j])
+			}
+		}
+	}
+
+	return dp[l1][l2]
+}

@@ -14,8 +14,13 @@ func main() {
 	// res := jobScheduling(startTime, endTime, profit)
 	// fmt.Printf("jobScheduling  : %v\n", res)
 
-	nums := []int{2, 7, 9, 3, 1}
-	res := rob(nums)
-	fmt.Printf("max amount that can be looted is : %v\n", res)
+	// nums := []int{2, 7, 9, 3, 1}
+	// res := rob(nums)
+	// fmt.Printf("max amount that can be looted is : %v\n", res)
+
+	text1 := "abcde"
+	text2 := "ace"
+	res := longestCommonSubsequence(text1, text2)
+	fmt.Printf("longestCommonSubsequence : %v\n", res)
 
 }
