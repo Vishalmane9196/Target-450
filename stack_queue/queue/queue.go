@@ -5,6 +5,7 @@ import (
 	"math"
 )
 
+// [Leetcode-232]
 // Link: https://leetcode.com/problems/implement-queue-using-stacks/
 type MyQueue struct {
 	s1    []int
