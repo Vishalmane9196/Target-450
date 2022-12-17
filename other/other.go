@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"strconv"
 )
@@ -186,4 +187,49 @@ func climbStairs(n int) int {
 		dp[i] = dp[i-1] + dp[i-2]
 	}
 	return dp[n]
+}
+
+/*
+tokens = ["2","1","+","3","*"]
+Link: https://leetcode.com/problems/evaluate-reverse-polish-notation/
+*/
+func evalRPN(tokens []string) int {
+
+	var stack []int
+
+	for _, v := range tokens {
+		switch v {
+		case "+":
+			num1 := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			num2 := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			stack = append(stack, num1+num2)
+		case "-":
+			num1 := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			num2 := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			stack = append(stack, num1-num2)
+		case "*":
+			num1 := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			num2 := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			stack = append(stack, num1*num2)
+		case "/":
+			num1 := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			num2 := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			stack = append(stack, num1/num2)
+		default:
+			num, err := strconv.Atoi(v)
+			if err != nil {
+				fmt.Println("string to int conversion error")
+			}
+			stack = append(stack, num)
+		}
+	}
+	return stack[len(stack)-1]
 }
