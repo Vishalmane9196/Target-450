@@ -118,13 +118,18 @@ func main() {
 	// res := nextGreaterElementCount(nums)
 	// fmt.Println("nextGreaterElementCount   :  ", res)
 
-	obj := StockSpannerConstructor()
-	price := []int{100, 80, 60, 70, 60, 75, 85}
-	res := make([]int, 0)
+	// obj := StockSpannerConstructor()
+	// price := []int{100, 80, 60, 70, 60, 75, 85}
+	// res := make([]int, 0)
 
-	for i := range price {
-		param_1 := obj.Next(price[i])
-		res = append(res, param_1)
-	}
-	fmt.Println("nextGreaterElementCount   :  ", res)
+	// for i := range price {
+	// 	param_1 := obj.Next(price[i])
+	// 	res = append(res, param_1)
+	// }
+	// fmt.Println("nextGreaterElementCount   :  ", res)
+
+	temperatures := []int{73, 74, 75, 71, 69, 72, 76, 73}
+	res := dailyTemperatures(temperatures)
+	fmt.Println("dailyTemperatures   :  ", res)
+
 }

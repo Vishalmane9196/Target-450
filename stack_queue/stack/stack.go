@@ -915,3 +915,29 @@ func (this *StockSpanner) Next(price int) int {
 	*s = append(*s, [2]int{price, cur})
 	return cur
 }
+
+// Link: https://leetcode.com/problems/daily-temperatures/
+type Temperatures struct {
+	temp int
+	day  int
+}
+
+func dailyTemperatures(temperatures []int) []int {
+	stack := make([]Temperatures, 0)
+	result := make([]int, len(temperatures))
+
+	for i := len(temperatures) - 1; i >= 0; i-- {
+
+		for len(stack) != 0 && temperatures[i] >= stack[len(stack)-1].temp {
+			stack = stack[:len(stack)-1]
+		}
+		if len(stack) != 0 && temperatures[i] < stack[len(stack)-1].temp {
+			result[i] = stack[len(stack)-1].day - i
+		}
+		stack = append(stack, Temperatures{
+			temp: temperatures[i],
+			day:  i,
+		})
+	}
+	return result
+}
