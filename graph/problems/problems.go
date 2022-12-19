@@ -86,3 +86,50 @@ func nearestExit(maze [][]byte, entrance []int) int {
 	}
 	return -1
 }
+
+//Link: https://leetcode.com/problems/find-if-path-exists-in-graph/
+type adjList struct {
+	Val        int
+	neighbours []int
+	visited    bool
+}
+
+func validPath(n int, edges [][]int, start int, end int) bool {
+
+	//Adjacency list
+	//var graph map[int]*Vertex
+	var graph = make(map[int]*adjList)
+	for i := 0; i < n; i++ {
+		graph[i] = &adjList{Val: i}
+	}
+
+	for _, edge := range edges {
+		e1, e2 := edge[0], edge[1]
+		graph[e1].neighbours = append(graph[e1].neighbours, e2)
+		graph[e2].neighbours = append(graph[e2].neighbours, e1)
+	}
+	// start from start vertex
+	node, ok := graph[start]
+	if !ok {
+		return false
+	}
+	node.visited = true
+	return dfs(node.Val, graph, end)
+}
+
+func dfs(node int, graph map[int]*adjList, end int) bool {
+	if node == end {
+		return true
+	}
+
+	for _, d := range graph[node].neighbours {
+		if !graph[d].visited {
+			graph[d].visited = true
+			result := dfs(d, graph, end)
+			if result {
+				return true
+			}
+		}
+	}
+	return false
+}
