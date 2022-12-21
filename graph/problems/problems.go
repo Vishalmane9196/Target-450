@@ -133,3 +133,44 @@ func dfs(node int, graph map[int]*adjList, end int) bool {
 	}
 	return false
 }
+
+//Link: https://leetcode.com/problems/possible-bipartition/
+func possibleBipartition(N int, dislikes [][]int) bool {
+	graph := map[int][]int{}
+	color := map[int]int{}
+	for _, edge := range dislikes {
+		n1, n2 := edge[0], edge[1]
+		graph[n1] = append(graph[n1], n2)
+		graph[n2] = append(graph[n2], n1)
+		color[n1] = -1
+		color[n2] = -1
+	}
+
+	for u, _ := range graph {
+		if color[u] == -1 {
+			if !bfs(graph, color, u) {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+func bfs(graph map[int][]int, color map[int]int, src int) bool {
+	queue := []int{} //implementing with slices
+	color[src] = 0
+	queue = append(queue, src)
+	for len(queue) > 0 {
+		src := queue[0]
+		queue = queue[1:]
+		for _, neigh := range graph[src] {
+			if color[neigh] == color[src] {
+				return false
+			} else if color[neigh] == -1 {
+				color[neigh] = 1 - color[src]
+				queue = append(queue, neigh)
+			}
+		}
+	}
+	return true
+}
